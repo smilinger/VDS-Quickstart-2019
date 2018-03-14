@@ -78,18 +78,20 @@ function InitializeWindow
 			
 			#	initialize the context for Drawings or presentation files as these have Vault Option settings
 			$global:mGFN4Special = $Prop["_GenerateFileNumber4SpecialFiles"].Value
+					
 			if ($global:mGFN4Special -eq $true)
 			{
 				$dsWindow.FindName("GFN4Special").IsChecked = $true # this checkbox is used by the XAML dialog styles, to enable / disable or show / hide controls
 			}
-			$mGFN4STypes = ("IDW", "DWG", "IPN") #to compare that the current new file is one of the special files the option applies to
-			if ($mGFN4STypes -contains $Prop["_FileExt"].Value) {
-				$global:mIsGFN4 = $true
-				$dsWindow.FindName("IsGFN4Type").IsChecked = $true
-				If ($global:mIsGFN4-eq $true -and $global:mGFN4Special -eq $false) #IDW/DWG, IPN - Don't generate new document number
+			$mInvDocuFileTypes = (".IDW", ".DWG", ".IPN") #to compare that the current new file is one of the special files the option applies to
+			if ($mInvDocuFileTypes -contains $Prop["_FileExt"].Value) {
+				$global:mIsInvDocumentationFile = $true
+				$dsWindow.FindName("chkBxIsInvDocuFileType").IsChecked = $true
+				If ($global:mIsInvDocumentationFile-eq $true -and $global:mGFN4Special -eq $false) #IDW/DWG, IPN - Don't generate new document number
 				{ 
 					$dsWindow.FindName("BreadCrumb").IsEnabled = $false
 					$dsWindow.FindName("GroupFolder").Visibility = "Collapsed"
+					$dsWindow.FindName("expShortCutPane").Visibility = "Collapsed"
 				}
 				Else {$dsWindow.FindName("BreadCrumb").IsEnabled = $true} #IDW/DWG, IPN - Generate new document number
 			}
@@ -342,7 +344,7 @@ function GetNumSchms
 		if (-Not $Prop["_EditMode"].Value)
         {
             #region quickstart - there is the use case that we don't need a number: IDW/DWG, IPN and Option Generate new file number = off
-			If ($global:mIsGFN4-eq $true -and $global:mGFN4Special -eq $false) { return}
+			If ($global:mIsInvDocumentationFile-eq $true -and $global:mGFN4Special -eq $false) { return}
 			#endregion quickstart
 
 			[System.Collections.ArrayList]$numSchems = @($vault.DocumentService.GetNumberingSchemesByType('Activated'))
@@ -472,7 +474,7 @@ function mReadShortCuts {
 		$m_Vault = $VaultConnection.Vault
 		$m_AllFiles = @()
 		$m_FiltFiles = @()
-		$m_Path = $env:APPDATA + '\Autodesk\VaultCommon\Servers\Services_Security_1_6_2017\'
+		$m_Path = $env:APPDATA + '\Autodesk\VaultCommon\Servers\Services_Security_1_16_2018\'
 		$m_AllFiles += Get-ChildItem -Path $m_Path -Filter 'Shortcuts.xml' -Recurse
 		$m_AllFiles | ForEach-Object {
 			if ($_.FullName -like "*"+$m_Server + "*" -and $_.FullName -like "*"+$m_Vault + "*") 
@@ -504,7 +506,7 @@ function mReadShortCuts {
 				}
 			}
 		}
-		#$dsDiag.Trace("... returning Shortcuts: $mScNames")
+		$dsDiag.Trace("... returning Shortcuts: $mScNames")
 		return $mScNames
 	}
 }
@@ -578,7 +580,7 @@ function mAddShortCutByName([STRING] $mScName)
 		$m_File = $env:TEMP + "\Folder2019.xml"
 		if (Test-Path $m_File)
 		{
-			#$dsDiag.Trace(">>-- Started to read Folder2017.xml...")
+			#$dsDiag.Trace(">>-- Started to read Folder2019.xml...")
 			$global:m_XML = New-Object XML
 			$global:m_XML.Load($m_File)
 		}
@@ -615,7 +617,7 @@ function mAddShortCutByName([STRING] $mScName)
 	}
 	catch 
 	{
-		$dsDiag.Trace("..problem encountered addeding ShortCut <<")
+		$dsDiag.Trace("..problem encountered adding ShortCut <<")
 		return $false
 	}
 }

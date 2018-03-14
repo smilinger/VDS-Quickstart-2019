@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dataStandard.UI">
+      <HintPath>C:\ProgramData\Autodesk\Inventor 2019\Addins\Data Standard\dataStandard.UI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />

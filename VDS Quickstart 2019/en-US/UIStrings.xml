@@ -135,6 +135,7 @@
   <UIString ID="GEN-TITLE-DES2">Drawing Subtitle</UIString>
   <UIString ID="Title">Drawing Title</UIString>
   <UIString ID="Subject">Drawing Subtitle</UIString>
+  <UIString ID="GEN-TITLE-WT">Mass</UIString>
   <!--Inventor custom iProperties Displaynames for dynamic properties-->
   <!--use to change display name for localization or user friendly naming-->
   <!--<UIString ID="aim_description1">Description</UIString>-->

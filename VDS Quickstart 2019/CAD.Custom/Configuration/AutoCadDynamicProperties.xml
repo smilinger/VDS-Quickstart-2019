@@ -15,11 +15,13 @@
     <DynamicProperty>Material</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
     <DynamicProperty>Weight</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Format</DynamicProperty>
     <DynamicProperty>Scale</DynamicProperty>
     <DynamicProperty>Sheet</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
     <DynamicProperty>Project Type</DynamicProperty>
+    
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Factory Layout">
     <DynamicProperty>Title</DynamicProperty>

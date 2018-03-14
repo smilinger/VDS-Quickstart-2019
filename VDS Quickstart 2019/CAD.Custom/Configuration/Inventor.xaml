@@ -376,7 +376,7 @@
                 <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
             <CheckBox x:Name="GFN4Special" Grid.Column="1" IsEnabled="False" Height="26" VerticalAlignment="Top" Width="26" HorizontalAlignment="Left" Visibility="Collapsed"/>
-            <CheckBox x:Name="IsGFN4Type" Grid.Column="1" VerticalAlignment="Top" IsEnabled="False" Width="26" Height="26" Margin="20,0,0,0" HorizontalAlignment="Left" Visibility="Collapsed"/>
+            <CheckBox x:Name="chkBxIsInvDocuFileType" Grid.Column="1" VerticalAlignment="Top" IsEnabled="False" Width="26" Height="26" Margin="20,0,0,0" HorizontalAlignment="Left" Visibility="Collapsed"/>
             <Button Command="{Binding CloseWindowCommand, ElementName=InventorWindow}"
                     IsEnabled="{Binding Properties.IsValid}" Grid.Column="2"
                     Width="80" HorizontalAlignment="Right" VerticalAlignment="Center"
