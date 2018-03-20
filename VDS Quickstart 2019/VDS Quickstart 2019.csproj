@@ -35,8 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autodesk.Connectivity.WebServices">
+      <HintPath>C:\Program Files (x86)\Autodesk\Autodesk Vault 2019 SDK\bin\x64\Autodesk.Connectivity.WebServices.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Common">
+      <HintPath>C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="CreateObject">
+      <HintPath>C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\CreateObject.dll</HintPath>
+    </Reference>
     <Reference Include="dataStandard.UI">
-      <HintPath>C:\ProgramData\Autodesk\Inventor 2019\Addins\Data Standard\dataStandard.UI.dll</HintPath>
+      <HintPath>.\dataStandard.UI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
