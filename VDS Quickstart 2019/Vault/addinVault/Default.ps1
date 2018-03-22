@@ -211,6 +211,7 @@ function OnTabContextChanged
 	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "CAD BOM.xaml")
 	{
 		$fileMasterId = $vaultContext.SelectedObject.Id
+		$dsDiag.Inspector()
 		$file = $vault.DocumentService.GetLatestFileByMasterId($fileMasterId)
 		$bom = @(GetFileBOM($file.id))
 		$dsWindow.FindName("bomList").ItemsSource = $bom

@@ -232,4 +232,17 @@
     <DynamicProperty>Scale</DynamicProperty>
     <DynamicProperty>Sheet</DynamicProperty>
   </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Folder" Type="Folder">
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>FLCwsID</DynamicProperty>
+    <DynamicProperty>FLCdmsID</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Task" Type="CustomObject">
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Ident Number</DynamicProperty>
+    <DynamicProperty>Date Start</DynamicProperty>
+    <DynamicProperty>Date End</DynamicProperty>
+  </DynamicPropertiesCategory>
 </DynamicProperties>
