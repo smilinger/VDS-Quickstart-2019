@@ -10,7 +10,11 @@
 #=============================================================================#
 #endregion
 
-# Version Info - VDS Quickstart Extension 2019.0.5
+#region - version history
+# Version Info - VDS Quickstart Extension 2019.0.0
+# new function ADSK.GroupMemberOf() 
+
+#endregion
 
 #retrieve property value given by displayname from folder (ID)
 function mGetFolderPropValue ([Int64] $mFldID, [STRING] $mDispName)
@@ -234,4 +238,21 @@ function Adsk.CreateTCItemLink ([Long]$ItemId)
 
     $TCLink = $serverUri.Scheme + "://" + $Server + "/AutodeskTC/" + $Server + "/" + $vaultName + "/#/Entity/Details?id=m" + "$PersID" + "&itemtype=Item"
     return $TCLink
+}
+
+#function to check that the current user is member of a named group; returns true or false
+function Adsk.GroupMemberOf([STRING]$mGroupName)
+{
+	$mGroupInfo = New-Object Autodesk.Connectivity.WebServices.GroupInfo
+	$mGroup = $vault.AdminService.GetGroupByName($mGroupName)
+	$mGroupInfo = $vault.AdminService.GetGroupInfoByGroupId($mGroup.Id)
+
+	foreach ($user in $mGroupInfo.Users)
+	{
+		if($vault.AdminService.SecurityHeader.UserId -eq $user.Id)
+		{				
+			return $true
+		}
+	}
+	return $false
 }

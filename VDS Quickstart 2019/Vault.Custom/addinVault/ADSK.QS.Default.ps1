@@ -156,6 +156,12 @@ function InitializeWindow
 				#endregion
 			}
 		}
+		"ActivateSchedTaskWindow"
+		{
+			ADSK.QS.ReadSchedTasks
+			$dsWindow.FindName("dataGrdSchedTasks").add_SelectionChanged({ ADSK.QS.TaskSelectionChanged})
+		}
+
 	}
 }
 

@@ -12,6 +12,12 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
 -->
 <mymenu>
   <MenuItem>
+    <!--Activate Scheduled Task-->
+    <ActivateSchedTask Label = "$UIString[ADSK-ActivateSchedTask-00]" Description = "$UIString[ADSK-ActivateSchedTask-00]" Hint = "$UIString[ADSK-ActivateSchedTask-00]"
+     PSFile = "ADSK.QS.ActivateSchedTask.ps1" Image="Vault.ico" ToolbarPaintStyle = "TextAndGlyph"
+     MultiSelectEnabled = "false"/>
+    <!--Activate Scheduled Task-->
+    
     <!--ReserveNumbers Menu item start-->
     <ReserveNumbers Label = "$UIString[ADSK-RSRVNUMBERS_MNU20]" Description = "$UIString[ADSK-RSRVNUMBERS_MNU20]" Hint = "$UIString[ADSK-RSRVNUMBERS_MNU20]"
       PSFile = "ADSK.QS.ReserveNumbers.ps1" Image="ReserveNumbers.ico" ToolbarPaintStyle = "TextAndGlyph"
@@ -90,6 +96,9 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
       <Item Name="ShowLog"></Item>
       <Item Name="ReserveNumbers"></Item>
     </ToolsMenu>
+    <ActionsMenu Label="myMenu" DeployAsPullDown="False" Location="ActionsMenu">
+      <Item Name="ActivateSchedTask"></Item>
+    </ActionsMenu>
     <HelpMenu Label="myMenu" DeployAsPullDown="False" Location="HelpMenu">
       <Item Name="AboutDialog"></Item>
       <Item Name="showCustomHelp"></Item>

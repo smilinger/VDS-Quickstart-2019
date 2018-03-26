@@ -98,9 +98,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.ActivateSchedTaskAsJob.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.Default.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.FileBOM.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ReserveFileNumber.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ActivateSchedTask.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateCustomObject.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateFile.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateFolder.ps1" />
@@ -597,6 +599,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vault.Custom\Configuration\Task\ADSK.QS.CUSTENT.Datasheet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vault.Custom\Configuration\ADSK.QS.ActivateSchedTask.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -71,13 +71,13 @@
   <UIString ID="LBL68">Autor</UIString>
   <UIString ID="LBL69">Betreff</UIString>
   <UIString ID="LBL70">Schlüsselwörter</UIString>
-  <UIString ID="LBL71">Speichern unter (Typ)</UIString>
+  <UIString ID="LBL71">Speichern unter (Dateityp)</UIString>
   <UIString ID="LBL72">Kopie speichern unter</UIString>
   <UIString ID="LBL73">Allgemeine Eigenschaften</UIString>
   <UIString ID="LBL74">Optionen für ausgewähltes Dateiformat festlegen</UIString>
   <UIString ID="LBL75">Material</UIString>
   <UIString ID="LBL76">Bestandsnummer</UIString>
-  <UIString ID="LBL77">Kein</UIString>
+  <UIString ID="LBL77">Keine</UIString>
   <UIString ID="BTN1">OK</UIString>
   <UIString ID="BTN2">Abbrechen</UIString>
   <UIString ID="BTN3">Optionen</UIString>
@@ -129,17 +129,18 @@
   <UIString ID="VAL8">Zulässiger Höchstwert ist {0}</UIString>
   <UIString ID="VAL9">Prüfung wegen Standardregel fehlgeschlagen</UIString>
   <UIString ID="VAL10">Eingabezeichenfolge hatte falsches Format</UIString>
-  <UIString ID="VAL11">Benutzerdefinierte Überprüfung fehlgeschlagen.</UIString>
-  <UIString ID="VAL12">Eine Datei mit diesem Namen ist bereits unter diesem Pfad in Vault vorhanden. Wählen Sie einen anderen Namen.</UIString>
-  <UIString ID="VAL13">Eine Datei mit diesem Namen ist bereits unter einem anderen Pfad in Vault vorhanden. Wählen Sie einen anderen Namen.</UIString>
   <!--AutoCAD title block attributes / file properties for dynamic properties-->
   <!--use to change display name for localization or user friendly naming-->
-  <UIString ID="GEN-TITLE-DES1">Schriftfeld</UIString>
+  <UIString ID="GEN-TITLE-DES1">Zeichnung-Titel</UIString>
   <UIString ID="GEN-TITLE-DES2">Zeichnungs-Untertitel</UIString>
+  <UIString ID="Titel">Zeichnung-Titel</UIString>
+  <UIString ID="Thema">Zeichnungs-Untertitel</UIString>
   <!--Inventor custom iProperties Displaynames for dynamic properties-->
   <!--use to change display name for localization or user friendly naming-->
-  <!--<UIString ID="aim_description1">Description</UIString>-->
-  
+  <!--<UIString ID="aim_description1">Beschreibung Kurztext</UIString>-->
+
+  <!--Inventor custom iProperties Displaynames for dynamic properties-->
+
   <!--Vault Categories-->
   <UIString ID="CAT1">Konstruktion</UIString>
   <UIString ID="CAT2">Büro</UIString>
@@ -147,6 +148,109 @@
   <UIString ID="CAT4">Basis</UIString>
   <UIString ID="CAT5">Ordner</UIString>
   <UIString ID="CAT6">Projekt</UIString>
-  <!--Strings used in tooltips-->
+
   <UIString ID="TLT1">Lokaler Pfad</UIString>
+
+  <!--Quickstart Multilang Strings Start-->
+
+  <!--Quickstart Category Names (additional ones not in default)-->
+  <UIString ID="MSDCE_CAT00">Zeichnung Inventor</UIString>
+  <UIString ID="MSDCE_CAT01">Zeichnung AutoCAD</UIString>
+  <UIString ID="MSDCE_CAT02">3D Komponenten</UIString>
+  <!--<UIString ID="MSDCE_CAT03"></UIString>-->
+  <UIString ID="MSDCE_CAT04">Electrical Zeichnung</UIString>
+  <UIString ID="MSDCE_CAT05">Electrical Projekt</UIString>
+  <UIString ID="MSDCE_CAT06">AutoCAD Plansatz</UIString>
+  <UIString ID="MSDCE_CAT07">AutoCAD Plansatz Zeichnung</UIString>
+  <!--<UIString ID="MSDCE_CAT08"></UIString>
+      <UIString ID="MSDCE_CAT09"></UIString>
+      <UIString ID="MSDCE_CAT10"></UIString>
+      <UIString ID="MSDCE_CAT11"></UIString>-->
+  <!--Quickstart Category Names-->
+
+  <!--Quickstart CAD-BOM-->
+  <UIString ID="MSDCE_CAD-BOM01">Achtung - Baugruppe enthält virtuelle Komponenten! Diese werden in CAD-BOM Sichten gefiltert. Zur Auswertung virtueller Komponenten sollten sie Artikel Stückliste zuweisen.</UIString>
+  <UIString ID="MSDCE_CAD-BOM02">Achtung - Gewählte Komponente enthält keine CAD-BOM Daten.</UIString>
+  <!--Quickstart CAD-BOM end-->
+
+  <!--Quickstart Inventor Dialog-->
+  <UIString ID="MSDCE_MSG00">Modellansicht fehlt! Sie verwenden die Vault Option, dass IPN/IDW/DWG identisch zum Modell benannt und abgelegt werden. Fügen sie entweder ein Model hinzu, oder ändern sie die Vault Option "Dateinummern für IPN/IDW/DWG generieren".</UIString>
+  <!--Quickstart Inventor Dialog end-->
+
+  <!--Quickstart Custom Object Names-->
+  <UIString ID="MSDCE_CO01">Organisation</UIString>
+  <UIString ID="MSDCE_CO02">Person</UIString>
+  <UIString ID="MSDCE_CO03">Aufgabe</UIString>
+  <UIString ID="MSDCE_CO04">Versand</UIString>
+  <!--Quickstart Custom Object Context Menu Items-->
+  <UIString ID="MSDCE_MNU01">Neue Aufgabe...</UIString>
+  <UIString ID="MSDCE_MNU02">Neue Aufgabe erstellen</UIString>
+  <UIString ID="MSDCE_MNU04">Aufgabe bearbeiten...</UIString>
+  <UIString ID="MSDCE_MNU05">Vorhandene Aufgabe bearbeiten</UIString>
+  <!--Organisation-->
+  <UIString ID="MSDCE_MNU07">Neue Organisation...</UIString>
+  <UIString ID="MSDCE_MNU08">Neue Organisation erstellen</UIString>
+  <UIString ID="MSDCE_MNU09">Organisation bearbeiten...</UIString>
+  <UIString ID="MSDCE_MNU10">Vorhandene Organisation bearbeiten</UIString>
+  <!--Person-->
+  <UIString ID="MSDCE_MNU11">Neue Person...</UIString>
+  <UIString ID="MSDCE_MNU12">Neue Person erstellen</UIString>
+  <UIString ID="MSDCE_MNU13">Person bearbeiten...</UIString>
+  <UIString ID="MSDCE_MNU14">Vorhandene Person bearbeiten</UIString>
+  <!--Transmittal-->
+  <UIString ID="MSDCE_MNU15">Neue Sendung...</UIString>
+  <UIString ID="MSDCE_MNU16">Neue Sendung erstellen</UIString>
+  <UIString ID="MSDCE_MNU17">Sendung bearbeiten...</UIString>
+  <UIString ID="MSDCE_MNU18">Vorhandene Sendung bearbeiten</UIString>
+
+  <!--Quickstart Help And Documentation start-->
+  <UIString ID="MSDCE_BTN1">Hilfe</UIString>
+  <UIString ID="MSDCE_MNU19">Vault Quickstart Dokumentation</UIString>
+  <UIString ID="MSDCE_MSG02">Hilfeseite nicht gefunden!</UIString>
+  <!--Quickstart Help And Documentation end-->
+
+  <!--Quickstart ShortCut Pane-->
+  <UIString ID="MSDCE_LBL88">Verknüpfungen</UIString>
+  <UIString ID="MSDCE_BTN2">Aktivieren</UIString>
+  <UIString ID="MSDCE_BTN3">Löschen</UIString>
+  <UIString ID="MSDCE_TT20">Verknüpfung erstellen</UIString>
+  <UIString ID="MSDCE_TT23">Aktivieren / Löschen mit Rechtsklick</UIString>
+  <!--Quickstart ShortCut Pane end-->
+
+  <!--Quickstart Multitab Dialogs-->
+  <UIString ID="MSDCE_MultiTab_01">Eigenschaften</UIString>
+  <!--Quickstart Multitab Dialogs end-->
+
+  <!--Quickstart Multilang Strings End-->
+
+  <!--Reserve Numbers Snippet Start-->
+  <UIString ID="ADSK-RSRVNUMBERS_MNU20">Nummern reservieren...</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_LBL105">Anzahl Nummern</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_LBL106">Erzeugte Nummern</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_MSG03">Wie wird das Werkzeug verwendet?</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_MSG04">Wählen Sie ein Nummernschema.</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_MSG05">Geben Sie die Anzahl der erforderlichen Nummern an.</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_MSG06">Starten sie mit Ausführen.</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_MSG07">Alle erzeugten Nummern stehen unmittelbar in der Windows Zwischenablage zur Verfügung.</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_TT32">Fügen Sie das Ergebnis mit Strg-V am Zielort ein.</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_TT33">Erzeugt Nummern und kopiert diese in die Zwischenablage.</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_BTN7">Ausführen</UIString>
+  <UIString ID="ADSK-RSRVNUMBERS_BTN8">Beenden</UIString>
+  <!--Reserve Numbers Snippet end-->
+
+  <!--Activate Scheduled Task-->
+  <UIString ID="ADSK-ActivateSchedTask-00">Terminierte Aufgabe aktivieren</UIString>
+  <UIString ID="ADSK-ActivateSchedTask-01">Wählen Sie alle Aufgaben aus, die als Job aktiviert werden sollen.</UIString>
+  <UIString ID="ADSK-ActivateSchedTask-02">Drücken Sie die Schaltfläche 'Aktivieren'</UIString>
+  <UIString ID="ADSK-ActivateSchedTask-03">Auswahl Aktivieren</UIString>
+  <UIString ID="ADSK-ActivateSchedTask-04">Schliessen</UIString>
+  <UIString ID="ADSK-ActivateSchedTask-05">Überträgt Server Aufgabe in Job Warteschleife.</UIString>
+  <!--Activate Scheduled Task-->
+
+  <!--QuickstartExtensions functions library-->
+  <UIString ID="ADSK-MsgBoxTitle">"Vault Quickstart Client"</UIString>
+  <UIString ID="ADSK-GroupMemberOf-00">Der angemeldete Benutzer ist nicht berechtigt diesen Befehl zu verwenden.</UIString>
+  <!--QuickstartExtensions functions library End-->
+  
+  
 </UIStrings>
