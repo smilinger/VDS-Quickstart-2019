@@ -295,14 +295,14 @@
                     <Label x:Name="lblComments" Content="{Binding UIString[LBL7], FallbackValue=Comments}" Grid.Row="9" Height="Auto" Grid.RowSpan="2" BorderThickness="1" />
                     <TextBox Grid.Row="9" Text="{Binding Prop[_XLTN_COMMENTS].Value}" x:Name="Comments" Grid.Column="1" VerticalScrollBarVisibility="Auto" MinHeight="50" MaxHeight="50" TextWrapping="Wrap" AcceptsReturn="True" Padding="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" Height="Auto" Grid.RowSpan="2" BorderThickness="0,1,1,1" MaxWidth="220" HorizontalScrollBarVisibility="Auto" />
                 </Grid>
-                <DataGrid Grid.Column="1" x:Name="DSDynCatPropGrid" MaxHeight="350"
+                <DataGrid Grid.Column="1" x:Name="DSDynCatPropGrid" MaxHeight="500"
                   ItemsSource="{Binding DynamicProperties}"
                   ToolTip="{Binding UIString[LBL63], FallbackValue='Category Properties'}"
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
                   ScrollViewer.CanContentScroll="True"
                   HorizontalGridLinesBrush="WhiteSmoke"
-                  VerticalGridLinesBrush="WhiteSmoke" BorderBrush="Gray" MaxWidth="380"
+                  VerticalGridLinesBrush="WhiteSmoke" BorderBrush="Gray" MaxWidth="450"
                   Margin="5,0,0,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Name}" CellStyle="{StaticResource DynamicDataGridLabelStyle}"
