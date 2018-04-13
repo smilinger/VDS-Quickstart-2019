@@ -100,6 +100,7 @@
     <AppDesigner Include="Properties\" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ActivateSchedTaskAsJob.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.Default.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.DerivationTree.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.FileBOM.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ReserveFileNumber.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ActivateSchedTask.ps1" />
@@ -109,6 +110,10 @@
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.EditCustomObject.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.EditFile.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.EditFolder.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToInvSibling.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToReplacedBy.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToSelectedFile.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToSourceFile.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ReserveNumbers.ps1" />
     <None Include="Vault.Custom\addinVault\QuickstartExtension.ps1" />
     <None Include="Vault\addinVault\AssociatedFiles.ps1" />
@@ -566,6 +571,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Vault.Custom\Configuration\ADSK.QS.InvSiblings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Vault.Custom\Configuration\ADSK.QS.ReserveNumbers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -575,6 +584,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vault.Custom\Configuration\File\ADSK.QS.CAD BOM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vault.Custom\Configuration\File\ADSK.QS.DerivationTree.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
