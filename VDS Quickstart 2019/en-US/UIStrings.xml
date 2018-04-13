@@ -252,4 +252,48 @@
   <UIString ID="ADSK-MsgBoxTitle">"Vault Quickstart Client"</UIString>
   <UIString ID="ADSK-GroupMemberOf-00">Logged in user is not allowed to run this command</UIString>
   <!--QuickstartExtensions functions library End-->
+
+  <!--GoToSourceFile-GoToReplacement Snippet Start-->
+  <UIString ID="ADSK-GoToNavigation_MNU00">File-Navigation</UIString>
+  <UIString ID="ADSK-GoToNavigation_MNU01">Go to source</UIString>
+  <UIString ID="ADSK-GoToNavigation_MNU02">Go to replacement</UIString>
+  <UIString ID="ADSK-GoToNavigation_MNU03">Go to selection (structure tab)</UIString>
+  <UIString ID="ADSK-GoToNavigation_Prop01">Source File</UIString>
+  <UIString ID="ADSK-GoToNavigation_Prop02">Replacement for</UIString>
+  <UIString ID="ADSK-GoToNavigation_MSG00">Property '{0}' is empty or doesn't exist.</UIString>
+  <UIString ID="ADSK-GoToNavigation_MSG01">Designated file '{0}' in property '{1}' not found.</UIString>
+  <!--GoToSourceFile-GoToReplacement Snippet Start-->
+
+  <!--GoToInvSibling-->
+  <UIString ID="ADSK-GoToInvSibl_LBL00">Search Inventor Sibling </UIString>
+  <UIString ID="ADSK-GoToInvSibl_BTN00">Go To</UIString>
+  <UIString ID="ADSK-GoToInvSibl_MNU00">Search Sibling (Inventor)</UIString>
+  <UIString ID="ADSK-GoToInvSibl_MSG00">Search result is limited to page size {0}; Total number of files found: {1}</UIString>
+  <UIString ID="ADSK-GoToInvSibl_MSG01">No Sibling Found!</UIString>
+  <!--GoToInvSibling End-->
+
+  <!--Derivation Tree-->
+  <UIString ID="DerivationTree_00">Derivation Tree</UIString>
+  <UIString ID="DerivationTree_01">Source File Versions/Revisions</UIString>
+  <UIString ID="DerivationTree_02">Lists all file versions/revisions of the copied source</UIString>
+  <UIString ID="DerivationTree_03">Parallel-File(s) - All Versions/Revisions</UIString>
+  <UIString ID="DerivationTree_04">Lists all file versions/revisions also copied from the same source file</UIString>
+  <UIString ID="DerivationTree_05">Derivation(s) - All Versions/Revisions</UIString>
+  <UIString ID="DerivationTree_06">Lists all file versions/revisions copied from the selected file</UIString>
+  <UIString ID="DerivationTree_07">State (Historical)</UIString>
+  <UIString ID="DerivationTree_08">Original Create Date</UIString>
+  <UIString ID="DerivationTree_09">Latest Version</UIString>
+  <UIString ID="DerivationTree_10">Latest Released Revision</UIString>
+  <UIString ID="DerivationTree_11">Version Comment</UIString>
+  <UIString ID="DerivationTree_12">Copy File Name to Clipboard</UIString>
+  <UIString ID="DerivationTree_13">Could not find source file</UIString>
+  <UIString ID="DerivationTree_14">Could not find parallel copied files</UIString>
+  <UIString ID="DerivationTree_15">Could not find any copy of the selected file</UIString>
+  <UIString ID="DerivationTree_16">Search result is limited to page size {0}; Total number of files found: {1}</UIString>
+  <UIString ID="DerivationTree_17">Update View</UIString>
+  <UIString ID="DerivationTree_18">Auto Update View</UIString>
+  <UIString ID="DerivationTree_19">Run all searches to fill each branch</UIString>
+  <UIString ID="DerivationTree_20">Updates view on selection changed. Note - Delayed response depending on vault and paging size!</UIString>
+  <!--Derivation Tree end-->
+
 </UIStrings>

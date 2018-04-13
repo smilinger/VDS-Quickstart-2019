@@ -218,6 +218,48 @@ function OnTabContextChanged
 		$assocFiles = @(GetAssociatedFiles $itemids $([System.IO.Path]::GetDirectoryName($VaultContext.UserControl.XamlFile)))
 		$dsWindow.FindName("AssoicatedFiles").ItemsSource = $assocFiles
 	}
+	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "ChangeOrder" -and $xamlFile -eq "ADSK.QS.EcoUpdate.xaml")
+	{
+		$number=$vaultContext.SelectedObject.Label
+		$mECO = $vault.ChangeOrderService.GetChangeOrderByNumber($number)
+		$Global:EcoId = $mECO.Id
+		#check the availability and ACL to the current user; enable/disable Edit command button
+
+		[System.Reflection.Assembly]::LoadFrom('C:\Program Files (x86)\Autodesk\Autodesk Vault 2019 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.Vault.dll')
+		$mIEntCO = New-Object Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities.ChangeOrder($VaultConnection, $mECO )
+		
+		#$mIEntCO2 = $mIEntCO.Clone()
+		#$mEqual = $mIEntCO2.Equals($mIEntCO)
+
+		$EcoAvailableForEdit = $false
+		Try {
+			$vault.ChangeOrderService.EditChangeOrder($mECO.Id)
+			$EcoAvailableForEdit = $true
+		}
+		Catch {
+			$EcoAvailableForEdit = $false
+		}
+		If($EcoAvailableForEdit -eq $true)
+		{
+			$dsWindow.FindName("EditECO").IsEnabled = $true
+		}
+		Else{$dsWindow.FindName("EditECO").IsEnabled = $false}
+	}
+
+	#region derivation tree
+	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "ADSK.QS.DerivationTree.xaml")
+	{
+		if($dsWindow.FindName("chkAutoUpdate").IsChecked)
+		{
+			mDerivationTreeUpdateView #$vaultContext.SelectedObject.Id
+			$dsWindow.FindName("btnUpdate").IsEnabled = $false
+		}
+		if($dsWindow.FindName("chkAutoUpdate").IsChecked -eq $false)
+		{ 
+			mDerivationTreeResetView
+		}
+	}
+	#endregion derivation tree
 }
 
 function GetNewCustomObjectName

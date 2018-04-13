@@ -251,6 +251,48 @@
   <UIString ID="ADSK-MsgBoxTitle">"Vault Quickstart Client"</UIString>
   <UIString ID="ADSK-GroupMemberOf-00">Der angemeldete Benutzer ist nicht berechtigt diesen Befehl zu verwenden.</UIString>
   <!--QuickstartExtensions functions library End-->
+
+  <!--GoToNavigation Snippet Start-->
+  <UIString ID="ADSK-GoToNavigation_MNU00">Datei-Navigation</UIString>
+  <UIString ID="ADSK-GoToNavigation_MNU01">Gehe zu Ursprung</UIString>
+  <UIString ID="ADSK-GoToNavigation_MNU02">Gehe zu Nachfolger</UIString>
+  <UIString ID="ADSK-GoToNavigation_MNU03">Gehe zur Auswahl (Struktur-Register)</UIString>
+  <UIString ID="ADSK-GoToNavigation_Prop01">Entstanden aus</UIString>
+  <UIString ID="ADSK-GoToNavigation_Prop02">Ersetzt durch</UIString>
+  <UIString ID="ADSK-GoToNavigation_MSG00">Eigenschaft '{0}' ist entweder nicht vorhanden oder leer.</UIString>
+  <UIString ID="ADSK-GoToNavigation_MSG01">Angegebene Datei '{0}' im Feld '{1}' konnte nicht gefunden werden.</UIString>
+  <!--GoToNavigation Snippet Start-->
+
+  <!--GoToInvSibling-->
+  <UIString ID="ADSK-GoToInvSibl_LBL00">Suche Inventor Geschwister </UIString>
+  <UIString ID="ADSK-GoToInvSibl_BTN00">Gehe zu</UIString>
+  <UIString ID="ADSK-GoToInvSibl_MNU00">Suche Geschwister (Inventor)</UIString>
+  <UIString ID="ADSK-GoToInvSibl_MSG00">Suchergebnis ist auf Seitengröße {0} begrenzt; insgesamt wurden {1} Dateien gefunden.</UIString>
+  <UIString ID="ADSK-GoToInvSibl_MSG01">Es wurde keine Schwester-Datei gefunden!</UIString>
+  <!--GoToInvSibling End-->
   
+  <!--Derivation Tree-->
+  <UIString ID="DerivationTree_00">Ableitungsstruktur</UIString>
+  <UIString ID="DerivationTree_01">Quelldatei - alle Versionen/Revisionen</UIString>
+  <UIString ID="DerivationTree_02">Führt alle Versionen/Revisionen der Quelldatei auf</UIString>
+  <UIString ID="DerivationTree_03">Parallel-Dateie(e) - alle Versionen/Revisionen</UIString>
+  <UIString ID="DerivationTree_04">Führt alle Versionen/Revisionen weiterer Kopien der Quelldatei auf</UIString>
+  <UIString ID="DerivationTree_05">Ableitung(en) - Versionen/Revisionen</UIString>
+  <UIString ID="DerivationTree_06">Führt alle Datei Versionen/Revisionen auf, die von gewählter Datei ausgehend kopiert wurden</UIString>
+  <UIString ID="DerivationTree_07">Status (Historisch)</UIString>
+  <UIString ID="DerivationTree_08">Ersterstellung</UIString>
+  <UIString ID="DerivationTree_09">Letzte Version</UIString>
+  <UIString ID="DerivationTree_10">Neueste freigegeben Revision</UIString>
+  <UIString ID="DerivationTree_11">Versionskommentar</UIString>
+  <UIString ID="DerivationTree_12">Dateiname in Zwischenablage kopieren</UIString>
+  <UIString ID="DerivationTree_13">Es konnte keine Quelldatei ermittelt werden.</UIString>
+  <UIString ID="DerivationTree_14">Es konnten keine Parallel-Kopien ermittelt werden.</UIString>
+  <UIString ID="DerivationTree_15">Es wurden keine Kopien der gewählten Datei ermittelt.</UIString>
+  <UIString ID="DerivationTree_16">Anzeige auf Seitengröße {0} begrenzt; Gesamtanzahl ermittelter Dateiversionen: {1}</UIString>
+  <UIString ID="DerivationTree_17">Ansicht Aktualisieren</UIString>
+  <UIString ID="DerivationTree_18">Ansicht automatisch aktualisieren</UIString>
+  <UIString ID="DerivationTree_19">Startet alle Sucheanfragen, um Ansicht zu füllen</UIString>
+  <UIString ID="DerivationTree_20">Ansicht wird über Datei-Selektion aktualisiert. - Achtung: Zeitbedarf variiert nach Tresor- und Anzeigegröße!</UIString>
+  <!--Derivation Tree end-->
   
 </UIStrings>

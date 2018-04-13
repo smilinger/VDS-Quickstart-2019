@@ -230,7 +230,7 @@
                     <TextBox Text="{Binding Prop[_XLTN_CREATED BY].Value}" Grid.Column="1" Grid.Row="6" IsReadOnly="True"
                     BorderThickness="0,1,1,1" IsTabStop="False" Height="Auto" />
                 </Grid>
-                <DataGrid Grid.Column="1" x:Name="DSDynCatPropGrid" MaxHeight="500"
+                <DataGrid Grid.Column="1" x:Name="DSDynCatPropGrid"
                 ItemsSource="{Binding DynamicProperties}"
                 ToolTip="{Binding UIString[LBL63], FallbackValue=Category Properties}"
                 AutoGenerateColumns="False"
@@ -238,7 +238,7 @@
                 ScrollViewer.CanContentScroll="True"
                 HorizontalGridLinesBrush="WhiteSmoke"
                 VerticalGridLinesBrush="WhiteSmoke" BorderBrush="Gray" MaxWidth="450"
-                Margin="5,0,0,0">
+                Margin="5,0,0,0" MaxHeight="500">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Name}" CellStyle="{StaticResource DynamicDataGridLabelStyle}"
                         MinWidth="140" Width="Auto" IsReadOnly="True">

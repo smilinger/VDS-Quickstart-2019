@@ -218,6 +218,7 @@
     <DynamicProperty>Ident Number</DynamicProperty>
     <DynamicProperty>Project Number01</DynamicProperty>
     <DynamicProperty>Project Number</DynamicProperty>
+    <DynamicProperty>Project Title</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Drawing AutoCAD" Type="FILE">
     <DynamicProperty>Title</DynamicProperty>
