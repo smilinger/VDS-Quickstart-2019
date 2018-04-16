@@ -83,6 +83,7 @@
     </EmbeddedResource>
     <None Include="CAD.Custom\addins\ADSK.QS.breadCrumb.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.Default.ps1" />
+    <None Include="CAD.Custom\addins\Adsk.QS.FileNameValidation.ps1" />
     <None Include="CAD.Custom\Configuration\AutoCAD-Mechanical\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\Inventor.cfg" />

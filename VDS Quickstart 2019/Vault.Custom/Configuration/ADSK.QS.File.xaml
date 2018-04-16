@@ -76,6 +76,28 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="IsHitTestVisible" Value="False" />
         </Style>
+        <Style x:Key="DynamicDataGridBtnCellStyle" TargetType="{x:Type DataGridCell}">
+            <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Width" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Name}" Value="MyPropName">
+                    <Setter Property="IsHitTestVisible" Value="True" />
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Button Content="{Binding DataContext.UIString[], FallbackValue=. . ., RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                    Command="{Binding DataContext.PsCmd[], RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" HorizontalAlignment="Right"
+                                    ToolTip="{Binding DataContext.UIString[], FallbackValue='No ToolTip set', RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                    Grid.Column="1" Padding="5,1" Background="#FFDDDDDD" MinWidth="20"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="Margin" Value="0,0,0,0" />
             <Setter Property="Height" Value="24" />
@@ -196,7 +218,7 @@
     <WPF:MainWindow.InputBindings>
         <KeyBinding Key="F1" Command="{Binding PsCmd[mHelp(500)]}"/>
     </WPF:MainWindow.InputBindings>
-    <TabControl Background="#FFE5E5E5">
+    <TabControl Background="#FFE5E5E5" MaxWidth="1200">
         <TabItem  Name="tabProperties" Header="{Binding UIString[MSDCE_MultiTab_01], FallbackValue=Properties}">
             <Grid x:Name="grdMain" Margin="5" >
                 <Grid.RowDefinitions>
@@ -315,7 +337,7 @@
                                 </DataTemplate>
                             </DataGridTextColumn.HeaderTemplate>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding Value}" MinWidth="300" MaxWidth="400"
+                        <DataGridTextColumn Binding="{Binding Value}" MinWidth="300" Width="*"
                                     CellStyle="{StaticResource DynamicDataGridCellStyle}" IsReadOnly="True">
                             <DataGridTextColumn.HeaderTemplate>
                                 <DataTemplate>
@@ -324,6 +346,7 @@
                                 </DataTemplate>
                             </DataGridTextColumn.HeaderTemplate>
                         </DataGridTextColumn>
+                        <DataGridTextColumn CellStyle="{StaticResource DynamicDataGridBtnCellStyle}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Expander x:Name="expFilePath" Grid.ColumnSpan="2" Header="{Binding UIString[LBL6], FallbackValue='File Name'}" Grid.Row="1"

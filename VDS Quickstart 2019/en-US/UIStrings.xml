@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <UIStrings LanguageCode="en-US">
   <!--Labels used in XAMLs-->
   <UIString ID="LBL1">Folder</UIString>
@@ -129,6 +130,9 @@
   <UIString ID="VAL8">Maximum value allowed is {0}</UIString>
   <UIString ID="VAL9">Validation failed due to a Data Standard rule</UIString>
   <UIString ID="VAL10">Input string was not in correct format</UIString>
+  <UIString ID="VAL11">Custom validation failed.</UIString>
+  <UIString ID="VAL12">A file with this name already exists in Vault at this path. Please choose another name.</UIString>
+  <UIString ID="VAL13">A file with this name already exists in Vault at another path. Please choose another name.</UIString>
   <!--AutoCAD title block attributes / file properties for dynamic properties-->
   <!--use to change display name for localization or user friendly naming-->
   <UIString ID="GEN-TITLE-DES1">Drawing Title</UIString>
@@ -141,7 +145,8 @@
   <!--<UIString ID="aim_description1">Description</UIString>-->
 
   <!--Inventor custom iProperties Displaynames for dynamic properties-->
-
+  <UIString ID="Part Type name">Sub-Type</UIString>
+  
   <!--Vault Categories-->
   <UIString ID="CAT1">Engineering</UIString>
   <UIString ID="CAT2">Office</UIString>
@@ -163,10 +168,12 @@
   <UIString ID="MSDCE_CAT05">Electrical Project</UIString>
   <UIString ID="MSDCE_CAT06">Sheet Set</UIString>
   <UIString ID="MSDCE_CAT07">Sheet Set Drawing</UIString>
-  <!--<UIString ID="MSDCE_CAT08"></UIString>
-      <UIString ID="MSDCE_CAT09"></UIString>
-      <UIString ID="MSDCE_CAT10"></UIString>
-      <UIString ID="MSDCE_CAT11"></UIString>-->
+  <UIString ID="MSDCE_CAT08">Part</UIString>
+  <UIString ID="MSDCE_CAT09">Sheet Metal Part</UIString>
+  <UIString ID="MSDCE_CAT10">Assembly</UIString>
+  <UIString ID="MSDCE_CAT11">Weldment Assembly</UIString>
+  <UIString ID="MSDCE_CAT12">Substitute</UIString>
+  <UIString ID="MSDCE_CAT13">Presentation</UIString>
   <!--Quickstart Category Names-->
 
   <!--Quickstart CAD-BOM-->
@@ -221,7 +228,7 @@
   <!--Quickstart Multitab Dialogs-->
   <UIString ID="MSDCE_MultiTab_01">Properties</UIString>
   <!--Quickstart Multitab Dialogs end-->
-  
+
   <!--Quickstart Multilang Strings End-->
 
   <!--Reserve Numbers Snippet-->
@@ -247,7 +254,7 @@
   <UIString ID="ADSK-ActivateSchedTask-04">Close</UIString>
   <UIString ID="ADSK-ActivateSchedTask-05">Put selected Server Task to Job Queue</UIString>
   <!--Activate Scheduled Task-->
-  
+
   <!--QuickstartExtensions functions library-->
   <UIString ID="ADSK-MsgBoxTitle">"Vault Quickstart Client"</UIString>
   <UIString ID="ADSK-GroupMemberOf-00">Logged in user is not allowed to run this command</UIString>
@@ -295,5 +302,4 @@
   <UIString ID="DerivationTree_19">Run all searches to fill each branch</UIString>
   <UIString ID="DerivationTree_20">Updates view on selection changed. Note - Delayed response depending on vault and paging size!</UIString>
   <!--Derivation Tree end-->
-
 </UIStrings>

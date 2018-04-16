@@ -1,15 +1,14 @@
-﻿#=============================================================================#
-# PowerShell script sample for Vault Data Standard                            #
-#			 Autodesk Vault - Quickstart 2019  								  #
-# This sample is based on VDS 2018 RTM and adds functionality and rules       #
-# All additions are marked with 'region Quickstart' - 'endregion'			  #
-#                                                                             #
-# Copyright (c) Autodesk - All rights reserved.                               #
-#                                                                             #
-# THIS SCRIPT/CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER   #
-# EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES #
-# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.  #
-#=============================================================================#
+﻿#=============================================================================
+# PowerShell script sample for Vault Data Standard                            
+#			 Autodesk Vault - Quickstart 2019  								  
+# This sample is based on VDS 2018/2019 RTM and adds functionality and rules    
+#                                                                             
+# Copyright (c) Autodesk - All rights reserved.                               
+#                                                                             
+# THIS SCRIPT/CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER   
+# EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.  
+#=============================================================================
 
 function InitializeWindow
 {
@@ -17,65 +16,21 @@ function InitializeWindow
 	#$dsDiag.Clear()
 
 	#begin rules applying commonly
-    $dsWindow.Title = SetWindowTitle		
-    if ($Prop["_CreateMode"].Value)
-    {		
-		if (-not $Prop["_SaveCopyAsMode"].Value)
-		{
-			#region Quickstart comment out default
-				#$Prop["_Category"].add_PropertyChanged({
-				#	if ($_.PropertyName -eq "Value")
-				#	{
-				#		$Prop["_NumSchm"].Value = $Prop["_Category"].Value
-				#	}	
-				#})
-				#$Prop["_Category"].Value = $UIString["CAT1"] # quickstart activates different categories for Inventor models, drawings and AutoCAD drawings
-			#endregion
-        }
-		else
-        {
-            $Prop["_NumSchm"].Value = "None"
-        }
-        $mappedRootPath = $Prop["_VaultVirtualPath"].Value + $Prop["_WorkspacePath"].Value
-    	$mappedRootPath = $mappedRootPath -replace "\\", "/" -replace "//", "/"
-        if ($mappedRootPath -eq '')
-        {
-            $mappedRootPath = '$'
-        }
-
-		#region quickstart
-			$Global:CAx_Root = $mappedRootPath #we need the path for the run time of the dialog
-    	#endregion
-
-		try
-		{
-			$rootFolder = $vault.DocumentService.GetFolderByPath($mappedRootPath)
-    		$root = New-Object PSObject -Property @{ Name = $rootFolder.Name; ID=$rootFolder.Id }
-			$global:expandBreadCrumb = $false
-    		AddCombo -data $root
-			$paths = $Prop["_SuggestedVaultPath"].Value.Split('\\',[System.StringSplitOptions]::RemoveEmptyEntries)
-		}
-		catch [System.Exception]
-		{		
-			[System.Windows.MessageBox]::Show("Your Inventor IPJ settings don't match the Vault environment you are logged into. Ensure that the IPJ file and Inventor Workspace set in the IPJ exist in Vault.","Vault MFG Quickstart")
-		}		
-
-		#region Quickstart
-			If(!$paths){ $paths = mReadLastUsedFolder}
-			mActivateBreadCrumbCmbs $paths		
-		#endregion
-    }
-
+    $dsWindow.Title = SetWindowTitle
+	InitializeFileNameValidation
+	#InitializeCategory #Quickstart differentiates for Inventor and AutoCAD
+    #InitializeNumSchm #Quickstart differentiates for Inventor and AutoCAD
+	InitializeBreadCrumb
 	#end rules applying commonly
+
 	$mWindowName = $dsWindow.Name
 	switch($mWindowName)
 	{
 		"InventorWindow"
 		{
-			#region Quickstart
 			#	there are some custom functions to enhance functionality:
 			[System.Reflection.Assembly]::LoadFrom($Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard" + '\Vault.Custom\addinVault\QuickstartUtilityLibrary.dll')
-			
+
 			#	initialize the context for Drawings or presentation files as these have Vault Option settings
 			$global:mGFN4Special = $Prop["_GenerateFileNumber4SpecialFiles"].Value
 					
@@ -103,15 +58,11 @@ function InitializeWindow
 				{
 					$Prop["Part Number"].Value = "" #reset the part number for new files as Inventor writes the file name (no extension) as a default.
 					#$dsDiag.Trace(">> CreateMode Section executes...")
-					# set the category: Quickstart = "3D components" for model files and "Inventor Drawing" for IDW/DWG
-
-					$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]}
-					IF ($mCatName) { $Prop["_Category"].Value = $UIString["MSDCE_CAT02"]}
-						# in case the current vault is not quickstart, but a plain MFG default configuration
-					Else {
-						$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
-						IF ($mCatName) { $Prop["_Category"].Value = $UIString["CAT1"]}
-					}
+					# set the category: VDS Quickstart 2019 supports extended category differentiation for 3D components
+					InitializeInventorCategory
+					InitializeInventorNumSchm
+					$_temp = $Prop["_Category"].Value
+					$dsDiag.Inspect("_temp")
 
 					#region FDU Support --------------------------------------------------------------------------
 					
@@ -196,15 +147,6 @@ function InitializeWindow
 							$Prop["Title"].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Title")
 							$Prop["Description"].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Description")
 							$Prop["Part Number"].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Part Number") 
-							
-							# Quickstart sets the category to eliminate the manual step of selection
-							$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT00"]}
-							IF ($mCatName) { $Prop["_Category"].Value = $UIString["MSDCE_CAT00"]}
-							Else # in case the current vault is not quickstart, but a plain MFG default configuration
-							{
-								$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
-								IF ($mCatName) { $Prop["_Category"].Value = $UIString["CAT1"]}
-							}
 						}
 
 						if ($Prop["_FileExt"].Value -eq "ipn") 
@@ -253,7 +195,7 @@ function InitializeWindow
 
 				}
 			} #end switch Create / Edit Mode
-			#endregion Quickstart
+
 		}
 		"AutoCADWindow"
 		{
@@ -337,6 +279,120 @@ function SetWindowTitle
 	return $windowTitle
 }
 
+function InitializeInventorNumSchm
+{
+	if ($Prop["_SaveCopyAsMode"].Value -eq $true)
+    {
+        $Prop["_NumSchm"].Value = $UIString["LBL77"]
+    }
+}
+
+function InitializeInventorCategory
+{
+	$mDocType = $Document.DocumentType
+	$mDocSubType = $Document.SubType #differentiate part/sheet metal part and assembly/weldment assembly
+	switch ($mDocType)
+	{
+		'12291' #assembly
+		{ 
+			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT10"]} #assembly, available in Quickstart Advanced, e.g. INV-Samples Vault
+			IF ($mCatName) 
+			{ 
+				$Prop["_Category"].Value = $UIString["MSDCE_CAT10"]
+			}
+			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]}
+			IF ($mCatName) 
+			{ 
+				$Prop["_Category"].Value = $UIString["MSDCE_CAT02"] #3D Component, Quickstart, e.g. MFG-2019-PRO-EN
+			}
+			Else 
+			{
+				$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+				IF ($mCatName) 
+				{ 
+					$Prop["_Category"].Value = $UIString["CAT1"]
+				}
+			}
+			If($mDocSubType -eq "{28EC8354-9024-440F-A8A2-0E0E55D635B0}") #weldment assembly
+			{
+				$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT11"]} # weldment assembly
+				IF ($mCatName) 
+				{ 
+					$Prop["_Category"].Value = $UIString["MSDCE_CAT10"]
+				}
+			} 
+		}
+		'12290' #part
+		{
+			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT08"]} #Part, available in Quickstart Advanced, e.g. INV-Samples Vault
+			IF ($mCatName) 
+			{ 
+				$Prop["_Category"].Value = $UIString["MSDCE_CAT08"]
+			}
+			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]}
+			IF ($mCatName) 
+			{ 
+				$Prop["_Category"].Value = $UIString["MSDCE_CAT02"] #3D Component, Quickstart, e.g. MFG-2019-PRO-EN
+			}
+			Else 
+			{
+				$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+				IF ($mCatName) 
+				{ 
+					$Prop["_Category"].Value = $UIString["CAT1"]
+				}
+			}
+			If($mDocSubType -eq "{9C464203-9BAE-11D3-8BAD-0060B0CE6BB4}") 
+			{
+				$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT09"]} #sheet metal part, available in Quickstart Advanced, e.g. INV-Samples Vault
+				IF ($mCatName) 
+				{ 
+					$Prop["_Category"].Value = $UIString["MSDCE_CAT09"]
+				}
+			}
+			If($mDocSubType -eq "{4D29B490-49B2-11D0-93C3-7E0706000000}") 
+			{
+				$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT12"]} #substitute, available in Quickstart Advanced, e.g. INV-Samples Vault
+				IF ($mCatName) 
+				{ 
+					$Prop["_Category"].Value = $UIString["MSDCE_CAT12"]
+				}
+			}			
+		}
+		'12292' #drawing
+		{
+			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT00"]}
+			IF ($mCatName) { $Prop["_Category"].Value = $UIString["MSDCE_CAT00"]}
+			Else # in case the current vault is not quickstart, but a plain MFG default configuration
+			{
+				$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+				IF ($mCatName) { $Prop["_Category"].Value = $UIString["CAT1"]}
+			}
+		}
+		'12293' #presentation
+		{
+			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT13"]} #presentation, available in Quickstart Advanced, e.g. INV-Samples Vault
+			IF ($mCatName) 
+			{ 
+				$Prop["_Category"].Value = $UIString["MSDCE_CAT13"]
+			}
+			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]} #3D Component, Quickstart, e.g. MFG-2019-PRO-EN
+			IF ($mCatName) 
+			{ 
+				$Prop["_Category"].Value = $UIString["MSDCE_CAT02"]
+			}
+			Else 
+			{
+				$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+				IF ($mCatName) 
+				{ 
+					$Prop["_Category"].Value = $UIString["CAT1"]
+				}
+			}
+		}
+	} #DocType Switch
+}
+
 function GetNumSchms
 {
 	try
@@ -411,10 +467,30 @@ function OnPostCloseDialog
 					mWriteLastUsedFolder
 				}
 
+			#new 2019 QS
+			if($Prop["_SaveCopyAsMode"].Value -eq $true)
+			{
+				#remove file extentions if used in validation for preview new file name
+				$Global:OnPostAction = $true
+				$newFileName = @()
+				$newFileName += ($Prop["DocNumber"].Value.Split("."))
+				If($newFileName.Count -gt 1) 
+				{
+					$newExt = $newFileName[$newFileName.Count-1]
+					$Prop["DocNumber"].Value = $Prop["DocNumber"].Value.Replace("." + $newExt, "")
+				}
+				Else 
+				{ 
+					$Prop["DocNumber"].Value = $newFileName[0]
+				}
+			}#end _SaveCopyAsMode
+
 				if ($Prop["_CreateMode"].Value -and !$Prop["Part Number"].Value) #we empty the part number on initialize: if there is no other function to provide part numbers we should apply the Inventor default
 				{
 					$Prop["Part Number"].Value = $Prop["DocNumber"].Value
 				}
+
+			
 			#endregion
 		}
 		"AutoCADWindow"
@@ -639,86 +715,6 @@ function mRemoveShortCutByName ([STRING] $mScName)
 	catch 
 	{
 		return $false
-	}
-}
-
-function mReadLastUsedFolder {
-	#------------- The last used project folder is stored in a XML
-	$m_File = $env:TEMP + "\Folder2019.xml"
-	if (Test-Path $m_File)
-	{
-		#$dsDiag.Trace(">>-- Started to read Folder2019.xml...")
-		$global:m_XML = New-Object XML
-		$global:m_XML.Load($m_File)
-		If($dsWindow.Name -eq "InventorWindow") { $m_xmlNode = $global:m_XML.Folder.get_Item("LastUsedFolderInv")}
-		If($dsWindow.Name -eq "AutoCADWindow") { $m_xmlNode = $global:m_XML.Folder.get_Item("LastUsedFolderAcad")}
-		$m_Attributes = $m_xmlNode.Attributes
-		$m_PathNames = $null
-		[System.Collections.ArrayList]$m_PathNames = @()
-		foreach ($_Attrib in $m_Attributes)
-		{
-			if($_Attrib.Value -ne "") 
-			{
-				$m_PathNames += $_Attrib.Value
-			}
-			Else { break; }	
-		}
-		if ($m_PathNames.Count -eq 1) { $m_PathNames += "."}
-		#$dsDiag.Trace(" about to return $m_PathNames, read from $m_Attributes ")
-		return $m_PathNames
-		#$dsDiag.Trace("........Reading XML succeeded <<")
-	}
-}
-
-function mWriteLastUsedFolder 
-{
-	#$dsDiag.Trace(">> Save project info...")
-	$m_File = $env:TEMP + "\Folder2019.xml"
-	if (Test-Path $m_File)
-	{
-		try
-		{
-			#$dsDiag.Trace(">> Save project info...")
-			$m_XML = New-Object XML 
-			$m_XML.Load($m_File)
-			If($dsWindow.Name -eq "InventorWindow") { $m_xmlNode = $m_XML.Folder.get_Item("LastUsedFolderInv")}
-			If($dsWindow.Name -eq "AutoCADWindow") { $m_xmlNode = $m_XML.Folder.get_Item("LastUsedFolderAcad")}
-			$m_Attributes = $m_xmlNode.Attributes
-			$m_Attributes.RemoveAll()
-			$breadCrumb = $dsWindow.FindName("BreadCrumb")
-			foreach ($cmb in $breadCrumb.Children) 
-			{
-				if (!($cmb.SelectedItem.Name -eq "") -and !($cmb.SelectedItem.Name -eq "."))
-				{
-					$m_AttribKey = $cmb.Name
-					$m_AttribVal = $cmb.SelectedItem.Name
-					$m_xmlNode.SetAttribute($m_AttribKey,$m_AttribVal)
-				}	
-			}
-			$m_XML.Save($Env:temp + '\Folder2019.xml')
-			#$dsDiag.Trace("..saved last used project/folder <<")
-		} #end try
-		catch [System.Exception]
-		{		
-			[System.Windows.MessageBox]::Show($error)
-		}
-	}
-}
-
-function mActivateBreadCrumbCmbs ($paths)
-{
-	try
-	{	
-		$global:expandBreadCrumb = $false
-		for($i=0;$i -lt $paths.Count;$i++)
-			{
-				$cmb = $dsWindow.FindName("cmbBreadCrumb_"+$i)
-				if ($cmb -ne $null) { $cmb.SelectedValue = $paths[$i] }
-			}
-	} #end try
-	catch [System.Exception]
-	{		
-		[System.Windows.MessageBox]::Show($error, "Quickstart-Activate Folder Selection")
 	}
 }
 

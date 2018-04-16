@@ -1,15 +1,15 @@
 ﻿
 #=============================================================================#
-# PowerShell script sample for Vault Data Standard                            #
-#			 Autodesk Vault - Quickstart 2019  								  #
-# This sample is based on VDS 2018 RTM and adds functionality and rules       #
-# All additions are marked with 'region Quickstart' - 'endregion'			  #
-#                                                                             #
-# Copyright (c) Autodesk - All rights reserved.                               #
-#                                                                             #
-# THIS SCRIPT/CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER   #
-# EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES #
-# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.  #
+# PowerShell script sample for Vault Data Standard                            
+#			 Autodesk Vault - Quickstart 2019  								  
+# This sample is based on VDS 2018 RTM and adds functionality and rules       
+# All additions are marked with 'region Quickstart' - 'endregion'			  
+#                                                                             
+# Copyright (c) Autodesk - All rights reserved.                               
+#                                                                             
+# THIS SCRIPT/CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER   
+# EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.  
 #=============================================================================#
 
 #this function will be called to check if the Ok button can be enabled
@@ -64,7 +64,8 @@ function ValidateFolderName
 {
 	if($Prop["_FolderName"].Value -or !$dsWindow.FindName("DSNumSchmsCtrl").NumSchmFieldsEmpty)
 	{
-		return $true;
+		$myValResult = mFldrNameValidation
+		return $myValResult
 	}
 	return $false;
 }
@@ -78,6 +79,56 @@ function ValidateCustomObjectName
 	return $false;
 }
 
+function mFldrNameValidation
+{
+	$rootFolder = $vault.DocumentService.GetFolderByPath($Prop["_FolderPath"].Value)
+	$mFldExist = mFindFolder $Prop["_FolderName"].Value $rootFolder
+
+	If($mFldExist)
+	{
+		$dsWindow.FindName("FOLDERNAME").ToolTip = "Foldername exists, select a new unique one."
+		$dsWindow.FindName("FOLDERNAME").BorderBrush = "Red"
+		$dsWindow.FindName("FOLDERNAME").BorderThickness = "1,1,1,1"
+		$dsWindow.FindName("FOLDERNAME").Background = "#FFFFDADA"
+		return $false
+	}
+	Else
+	{
+		$dsWindow.FindName("FOLDERNAME").ToolTip = "Foldername is valid, press OK to create."
+		$dsWindow.FindName("FOLDERNAME").BorderBrush = "#FFABADB3" #the default color
+		$dsWindow.FindName("FOLDERNAME").BorderThickness = "0,1,1,0" #the default border top, right
+		$dsWindow.FindName("FOLDERNAME").Background = "#FFFFFFFF"
+		return $true
+	}
+}
+
+function mFindFolder($FolderName, $rootFolder)
+{
+	$FolderPropDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("FLDR")
+    $FolderNamePropDef = $FolderPropDefs | where {$_.SysName -eq "Name"}
+    $srchCond = New-Object 'Autodesk.Connectivity.WebServices.SrchCond'
+    $srchCond.PropDefId = $FolderNamePropDef.Id
+    $srchCond.PropTyp = "SingleProperty"
+    $srchCond.SrchOper = 3 #is equal
+    $srchCond.SrchRule = "Must"
+    $srchCond.SrchTxt = $FolderName
+
+    $bookmark = ""
+    $status = $null
+    $totalResults = @()
+    while ($status -eq $null -or $totalResults.Count -lt $status.TotalHits)
+    {
+        $results = $vault.DocumentService.FindFoldersBySearchConditions(@($srchCond),$null, @($rootFolder.Id), $false, [ref]$bookmark, [ref]$status)
+
+        if ($results -ne $null)
+        {
+            $totalResults += $results
+        }
+        else {break}
+    }
+    return $totalResults;
+}
+
 function InitializeTabWindow
 {
 	#$dsDiag.ShowLog()
@@ -85,7 +136,7 @@ function InitializeTabWindow
 }
 
 function InitializeWindow
-{	
+{	      
 	#begin rules applying commonly
 	$Prop["_Category"].add_PropertyChanged({
         if ($_.PropertyName -eq "Value")
@@ -203,7 +254,7 @@ function OnTabContextChanged
 {
 	$xamlFile = [System.IO.Path]::GetFileName($VaultContext.UserControl.XamlFile)
 	
-	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "CAD BOM.xaml")
+	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "ADSK.QS.CAD BOM.xaml")
 	{
 		$fileMasterId = $vaultContext.SelectedObject.Id
 		$file = $vault.DocumentService.GetLatestFileByMasterId($fileMasterId)
