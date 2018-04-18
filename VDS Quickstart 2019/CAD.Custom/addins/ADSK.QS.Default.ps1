@@ -12,22 +12,20 @@
 
 function InitializeWindow
 {
-	#$dsDiag.ShowLog()
-	#$dsDiag.Clear()
-
-	#begin rules applying commonly
+	#region rules applying commonly
     $dsWindow.Title = SetWindowTitle
 	InitializeFileNameValidation
 	#InitializeCategory #Quickstart differentiates for Inventor and AutoCAD
-    #InitializeNumSchm #Quickstart differentiates for Inventor and AutoCAD
-	InitializeBreadCrumb
-	#end rules applying commonly
+	#InitializeNumSchm #Quickstart differentiates for Inventor and AutoCAD
+	#InitializeBreadCrumb #Quickstart differentiates Inventor, Inventor C&H, T&P, FG, DA dialogs
+	#endregion rules applying commonly
 
 	$mWindowName = $dsWindow.Name
 	switch($mWindowName)
 	{
 		"InventorWindow"
 		{
+			InitializeBreadCrumb
 			#	there are some custom functions to enhance functionality:
 			[System.Reflection.Assembly]::LoadFrom($Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard" + '\Vault.Custom\addinVault\QuickstartUtilityLibrary.dll')
 
@@ -61,8 +59,6 @@ function InitializeWindow
 					# set the category: VDS Quickstart 2019 supports extended category differentiation for 3D components
 					InitializeInventorCategory
 					InitializeInventorNumSchm
-					$_temp = $Prop["_Category"].Value
-					$dsDiag.Inspect("_temp")
 
 					#region FDU Support --------------------------------------------------------------------------
 					
@@ -199,8 +195,7 @@ function InitializeWindow
 		}
 		"AutoCADWindow"
 		{
-			#rules applying for AutoCAD
-			#region Quickstart
+			InitializeBreadCrumb
 			switch ($Prop["_CreateMode"].Value) 
 			{
 				$true 
@@ -243,14 +238,13 @@ function InitializeWindow
 function AddinLoaded
 {
 	#Executed when DataStandard is loaded in Inventor/AutoCAD
-	#region Quickstart
 		$m_File = $env:TEMP + "\Folder2019.xml"
 		if (!(Test-Path $m_File)){
 			$source = $Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\Folder2019.xml"
 			Copy-Item $source $env:TEMP\Folder2019.xml
 		}
-	#endregion quickstart
 }
+
 function AddinUnloaded
 {
 	#Executed when DataStandard is unloaded in Inventor/AutoCAD
@@ -258,25 +252,48 @@ function AddinUnloaded
 
 function SetWindowTitle
 {
-	if ($Prop["_CreateMode"].Value)
-    {
-		if ($Prop["_CopyMode"].Value)
-		{
-			$windowTitle = "$($UIString["LBL60"]) - $($Prop["_OriginalFileName"].Value)"
-		}
-		elseif ($Prop["_SaveCopyAsMode"].Value)
-		{
-			$windowTitle = "$($UIString["LBL72"]) - $($Prop["_OriginalFileName"].Value)"
-		}else
-		{
-			$windowTitle = "$($UIString["LBL24"]) - $($Prop["_OriginalFileName"].Value)"
-		}
-	}
-	else
-	{
-		$windowTitle = "$($UIString["LBL25"]) - $($Prop["_FileName"].Value)"
-	}
-	return $windowTitle
+	$mWindowName = $dsWindow.Name
+    switch($mWindowName)
+ 	{
+  		"InventorFrameWindow"
+  		{
+   			$windowTitle = $UIString["LBL54"]
+  		}
+  		"InventorDesignAcceleratorWindow"
+  		{
+   			$windowTitle = $UIString["LBL50"]
+  		}
+  		"InventorPipingWindow"
+  		{
+   			$windowTitle = $UIString["LBL39"]
+  		}
+  		"InventorHarnessWindow"
+  		{
+   			$windowTitle = $UIString["LBL44"]
+  		}
+  		default #applies to InventorWindow and AutoCADWindow
+  		{
+   			if ($Prop["_CreateMode"].Value)
+   			{
+    			if ($Prop["_CopyMode"].Value)
+    			{
+     				$windowTitle = "$($UIString["LBL60"]) - $($Prop["_OriginalFileName"].Value)"
+    			}
+    			elseif ($Prop["_SaveCopyAsMode"].Value)
+    			{
+     				$windowTitle = "$($UIString["LBL72"]) - $($Prop["_OriginalFileName"].Value)"
+    			}else
+    			{
+     				$windowTitle = "$($UIString["LBL24"]) - $($Prop["_OriginalFileName"].Value)"
+    			}
+   			}
+   			else
+   			{
+    			$windowTitle = "$($UIString["LBL25"]) - $($Prop["_FileName"].Value)"
+   			} 
+  		}
+ 	}
+  	return $windowTitle
 }
 
 function InitializeInventorNumSchm
@@ -285,6 +302,14 @@ function InitializeInventorNumSchm
     {
         $Prop["_NumSchm"].Value = $UIString["LBL77"]
     }
+	if($Prop["_Category"].Value -eq $UIString["MSDCE_CAT12"]) #Substitutes, as reference parts should not retrieve individual new number
+	{
+		$Prop["_NumSchm"].Value = $UIString["LBL77"]
+	}
+	if($dsWindow.Name -eq "InventorFrameWindow")
+	{
+		$Prop["_NumSchm"].Value = $UIString["LBL77"]
+	}
 }
 
 function InitializeInventorCategory
@@ -350,7 +375,7 @@ function InitializeInventorCategory
 					$Prop["_Category"].Value = $UIString["MSDCE_CAT09"]
 				}
 			}
-			If($mDocSubType -eq "{4D29B490-49B2-11D0-93C3-7E0706000000}") 
+			If($Document.IsSubstitutePart -eq $true) 
 			{
 				$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT12"]} #substitute, available in Quickstart Advanced, e.g. INV-Samples Vault
 				IF ($mCatName) 
@@ -399,46 +424,40 @@ function GetNumSchms
 	{
 		if (-Not $Prop["_EditMode"].Value)
         {
-            #region quickstart - there is the use case that we don't need a number: IDW/DWG, IPN and Option Generate new file number = off
-			If ($global:mIsInvDocumentationFile-eq $true -and $global:mGFN4Special -eq $false) { return}
-			#endregion quickstart
-
-			[System.Collections.ArrayList]$numSchems = @($vault.DocumentService.GetNumberingSchemesByType('Activated'))
-            if ($numSchems.Count -gt 1 -and !($Prop["_SaveCopyAsMode"].Value -eq $true)) #second condition added by Quickstart
-			#if ($numSchems.Count -gt 1)
-			{
-				#region Quickstart FDU Support----------------
-					$_FilteredNumSchems = @()
-					$_temp = $numSchems | Where { $_.IsDflt -eq $true}
-					$_FilteredNumSchems += ($_temp)
-					if ($Prop["_NumSchm"].Value) { $Prop["_NumSchm"].Value = $_FilteredNumSchems[0].Name} #note - functional dialogs don't have the property _NumSchm, therefore we conditionally set the value
-					$dsWindow.FindName("NumSchms").IsEnabled = $true
-					$noneNumSchm = New-Object 'Autodesk.Connectivity.WebServices.NumSchm'
-					$noneNumSchm.Name = $UIString["LBL77"]
-					$_FilteredNumSchems += $noneNumSchm
-					return $_FilteredNumSchems
-				#endregion Quickstart FDU Support ------------
-			}
-			if ($numSchems.Count -eq 1 -and !($Prop["_SaveCopyAsMode"].Value -eq $true)) 
+            #quickstart - there is the use case that we don't need a number: IDW/DWG, IPN and Option Generate new file number = off
+			If ($global:mIsInvDocumentationFile-eq $true -and $global:mGFN4Special -eq $false) 
 			{ 
-				return $numSchems 
+				return
 			}
-            if ($Prop["_SaveCopyAsMode"].Value)
-            {
-                #region Quickstart
-					$_FilteredNumSchems = @()
-					$_temp = $numSchems | Where { $_.IsDflt -eq $true}
-					$_FilteredNumSchems += ($_temp)
-					$Prop["_NumSchm"].Value = $_FilteredNumSchems[0].Name
-					$dsWindow.FindName("NumSchms").IsEnabled = $true
-					$noneNumSchm = New-Object 'Autodesk.Connectivity.WebServices.NumSchm'
-					$noneNumSchm.Name = $UIString["LBL77"]
-					$_FilteredNumSchems += $noneNumSchm
-					return $_FilteredNumSchems
-				#end Quickstart
-            }    
-            #return $numSchems #quickstart returns filtered numbering schemes before
+			[System.Collections.ArrayList]$numSchems = @($vault.DocumentService.GetNumberingSchemesByType('Activated'))
+			$_FilteredNumSchems = @()
+			$_temp = $numSchems | Where { $_.IsDflt -eq $true}
+			$_FilteredNumSchems += ($_temp)
+			if ($Prop["_NumSchm"].Value) { $Prop["_NumSchm"].Value = $_FilteredNumSchems[0].Name} #note - functional dialogs don't have the property _NumSchm, therefore we conditionally set the value
+			$dsWindow.FindName("NumSchms").IsEnabled = $true
+			$noneNumSchm = New-Object 'Autodesk.Connectivity.WebServices.NumSchm'
+			$noneNumSchm.Name = $UIString["LBL77"] # None 
+			$_FilteredNumSchems += $noneNumSchm
 
+			#reverse order for these cases; none is added latest; reverse the list, if None is pre-set to index = 0
+
+			If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Assembly*" -and $Prop["_FileExt"].Value -eq ".iam") #you might find better criteria based on then numbering scheme
+			{
+				$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
+				return $_FilteredNumSchems
+			}
+			If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Part*" -and $Prop["_FileExt"].Value -eq ".ipt") #you might find better criteria based on then numbering scheme
+			{
+				$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
+				return $_FilteredNumSchems
+			}
+			If($dsWindow.Name-eq "InventorFrameWindow")
+			{ 
+				#$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
+				return $_FilteredNumSchems
+			}
+	
+			return $_FilteredNumSchems
         }
 	}
 	catch [System.Exception]
@@ -461,16 +480,13 @@ function OnPostCloseDialog
 	{
 		"InventorWindow"
 		{
-			#region Quickstart
 				if (!($Prop["_CopyMode"].Value -and !$Prop["_GenerateFileNumber4SpecialFiles"].Value -and @("DWG","IDW","IPN") -contains $Prop["_FileExt"].Value))
 				{
 					mWriteLastUsedFolder
 				}
-
-			#new 2019 QS
+			#new 2019 QS, remove file extentions if used in validation for preview new file name
 			if($Prop["_SaveCopyAsMode"].Value -eq $true)
 			{
-				#remove file extentions if used in validation for preview new file name
 				$Global:OnPostAction = $true
 				$newFileName = @()
 				$newFileName += ($Prop["DocNumber"].Value.Split("."))
@@ -489,25 +505,20 @@ function OnPostCloseDialog
 				{
 					$Prop["Part Number"].Value = $Prop["DocNumber"].Value
 				}
-
-			
-			#endregion
 		}
+
 		"AutoCADWindow"
 		{
-			#region Quickstart
-				mWriteLastUsedFolder
-			#endregion
+			mWriteLastUsedFolder
 		}
 		default
 		{
-			#rules applying commonly
+			#rules applying for windows non specified
 		}
-	}
+	} #switch Window Name
 	
 }
 
-#region quickstart
 function mHelp ([Int] $mHContext) {
 	try
 	{
@@ -717,5 +728,3 @@ function mRemoveShortCutByName ([STRING] $mScName)
 		return $false
 	}
 }
-
-#endregion

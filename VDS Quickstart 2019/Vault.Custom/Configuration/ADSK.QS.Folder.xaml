@@ -258,7 +258,7 @@
                 HeadersVisibility="Column"
                 ScrollViewer.CanContentScroll="True"
                 HorizontalGridLinesBrush="WhiteSmoke"
-                VerticalGridLinesBrush="WhiteSmoke" BorderBrush="Gray" MaxWidth="450"
+                VerticalGridLinesBrush="WhiteSmoke" BorderBrush="Gray" MaxWidth="500"
                 Margin="5,0,0,0" MaxHeight="500">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Name}" CellStyle="{StaticResource DynamicDataGridLabelStyle}"

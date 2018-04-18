@@ -1,1 +1,26 @@
-[{"Server":"win-99hibfvg5l3","Vault":"INV-Samples","EntityDefinitions":[{"dispNameField":"Organisation","dispNamePluralField":"Organisations","idField":1,"nameField":"c4ead94e-a533-4109-b85b-f868180991c5"},{"dispNameField":"Person","dispNamePluralField":"Persons","idField":2,"nameField":"bf822d09-f797-4591-9664-d355ef01f36b"},{"dispNameField":"Task","dispNamePluralField":"Tasks","idField":3,"nameField":"28ff95dd-0148-446a-8244-6936f6cea754"}]},{"Server":"win-99hibfvg5l3","Vault":"OTX-2019-ConfigSamples","EntityDefinitions":[{"dispNameField":"Organisation","dispNamePluralField":"Organisations","idField":1,"nameField":"25737496-b00d-4f2f-a898-2c7df05250d6"},{"dispNameField":"Person","dispNamePluralField":"Persons","idField":2,"nameField":"12cae4e9-17b3-4fea-9056-280df23db04a"},{"dispNameField":"Task","dispNamePluralField":"Tasks","idField":3,"nameField":"719b8d3e-9472-440b-8177-266cd3b833fc"},{"dispNameField":"Transmittal","dispNamePluralField":"Transmittals","idField":4,"nameField":"b6b15212-6de3-413c-b70b-411cde694984"},{"dispNameField":"Change Request","dispNamePluralField":"Change Requests","idField":5,"nameField":"395e6304-6a49-4363-842c-3b791bffda09"}]},{"Server":"win-99hibfvg5l3","Vault":"SD124422-AU2017","EntityDefinitions":[{"dispNameField":"Class","dispNamePluralField":"Classes","idField":1,"nameField":"8cfe1bbe-1847-4c38-8328-a24ceda61a35"}]},{"Server":"10.49.84.32","Vault":"INV-Samples","EntityDefinitions":[{"dispNameField":"Organisation","dispNamePluralField":"Organisations","idField":1,"nameField":"c4ead94e-a533-4109-b85b-f868180991c5"},{"dispNameField":"Person","dispNamePluralField":"Persons","idField":2,"nameField":"bf822d09-f797-4591-9664-d355ef01f36b"},{"dispNameField":"Task","dispNamePluralField":"Tasks","idField":3,"nameField":"28ff95dd-0148-446a-8244-6936f6cea754"}]},{"Server":"192.168.85.139","Vault":"SD124422-AU2017","EntityDefinitions":[{"dispNameField":"Class","dispNamePluralField":"Classes","idField":1,"nameField":"8cfe1bbe-1847-4c38-8328-a24ceda61a35"}]},{"Server":"192.168.85.139","Vault":"OTX-2019-ConfigSamples","EntityDefinitions":[{"dispNameField":"Organisation","dispNamePluralField":"Organisations","idField":1,"nameField":"25737496-b00d-4f2f-a898-2c7df05250d6"},{"dispNameField":"Person","dispNamePluralField":"Persons","idField":2,"nameField":"12cae4e9-17b3-4fea-9056-280df23db04a"},{"dispNameField":"Task","dispNamePluralField":"Tasks","idField":3,"nameField":"719b8d3e-9472-440b-8177-266cd3b833fc"},{"dispNameField":"Transmittal","dispNamePluralField":"Transmittals","idField":4,"nameField":"b6b15212-6de3-413c-b70b-411cde694984"},{"dispNameField":"Change Request","dispNamePluralField":"Change Requests","idField":5,"nameField":"395e6304-6a49-4363-842c-3b791bffda09"}]},{"Server":"win-99hibfvg5l3","Vault":"MFG-2019-PRO-EN","EntityDefinitions":[{"dispNameField":"Organisation","dispNamePluralField":"Organisations","idField":1,"nameField":"c4ead94e-a533-4109-b85b-f868180991c5"},{"dispNameField":"Person","dispNamePluralField":"Persons","idField":2,"nameField":"bf822d09-f797-4591-9664-d355ef01f36b"},{"dispNameField":"Task","dispNamePluralField":"Tasks","idField":3,"nameField":"28ff95dd-0148-446a-8244-6936f6cea754"}]},{"Server":"win-99hibfvg5l3","Vault":"FDS-2019-PRO-EN","EntityDefinitions":[{"dispNameField":"Factory Asset","dispNamePluralField":"Factory Asset","idField":1,"nameField":"ef995987-3b6e-4765-b830-c1f27272222c"},{"dispNameField":"Factory Layout","dispNamePluralField":"Factory Layout","idField":2,"nameField":"d7077a53-535c-497c-b97c-56b407d826cf"}]},{"Server":"192.168.85.139","Vault":"FDS-2019-PRO-EN","EntityDefinitions":[{"dispNameField":"Factory Asset","dispNamePluralField":"Factory Asset","idField":1,"nameField":"ef995987-3b6e-4765-b830-c1f27272222c"},{"dispNameField":"Factory Layout","dispNamePluralField":"Factory Layout","idField":2,"nameField":"d7077a53-535c-497c-b97c-56b407d826cf"}]},{"Server":"192.168.85.139","Vault":"INV-Samples","EntityDefinitions":[{"dispNameField":"Organisation","dispNamePluralField":"Organisations","idField":1,"nameField":"c4ead94e-a533-4109-b85b-f868180991c5"},{"dispNameField":"Person","dispNamePluralField":"Persons","idField":2,"nameField":"bf822d09-f797-4591-9664-d355ef01f36b"},{"dispNameField":"Task","dispNamePluralField":"Tasks","idField":3,"nameField":"28ff95dd-0148-446a-8244-6936f6cea754"}]},{"Server":"localhost","Vault":"INV-Samples","EntityDefinitions":[{"dispNameField":"Organisation","dispNamePluralField":"Organisations","idField":1,"nameField":"c4ead94e-a533-4109-b85b-f868180991c5"},{"dispNameField":"Person","dispNamePluralField":"Persons","idField":2,"nameField":"bf822d09-f797-4591-9664-d355ef01f36b"},{"dispNameField":"Task","dispNamePluralField":"Tasks","idField":3,"nameField":"28ff95dd-0148-446a-8244-6936f6cea754"}]}]
+[
+  {
+    "Server": "win-99hibfvg5l3",
+    "Vault": "INV-Samples",
+    "EntityDefinitions": [
+      {
+        "dispNameField": "Organisation",
+        "dispNamePluralField": "Organisations",
+        "idField": 1,
+        "nameField": "c4ead94e-a533-4109-b85b-f868180991c5"
+      },
+      {
+        "dispNameField": "Person",
+        "dispNamePluralField": "Persons",
+        "idField": 2,
+        "nameField": "bf822d09-f797-4591-9664-d355ef01f36b"
+      },
+      {
+        "dispNameField": "Task",
+        "dispNamePluralField": "Tasks",
+        "idField": 3,
+        "nameField": "28ff95dd-0148-446a-8244-6936f6cea754"
+      }
+    ]
+  }
+]

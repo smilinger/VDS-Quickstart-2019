@@ -19,12 +19,18 @@
 				})
 			}
 
-
             $Prop["DocNumber"].CustomValidation = { FileNameCustomValidation } #overrides any validation if set; the type is Scriptblock {} containing functions or direct calls; results will drive the "ValidProperties/Invalid"
 		}
         elseif($dsWindow.Name -eq 'AutoCADWindow')
 		{
-		    $Prop["GEN-TITLE-DWG"].CustomValidation = { FileNameCustomValidation }
+		    if($Prop["GEN-TITLE-DWG"].Value)
+			{
+				$Prop["GEN-TITLE-DWG"].CustomValidation = { FileNameCustomValidation }
+			}
+			Else
+			{
+				$Prop["DocNumber"].CustomValidation = { FileNameCustomValidation }
+			}
 		}                
     }
 }
@@ -48,8 +54,6 @@ function FileNameCustomValidation
 	
 	if($Prop["_SaveCopyAsMode"].Value -eq $true) #validate the preview file name 
 	{
-		#$_temp = $Prop["DocNumber"].Value
-		#$dsDiag.Trace("PreviewExport File Validation $_temp")
 		$rootFolder = GetVaultRootFolder
 		$fullFileName = [System.IO.Path]::Combine($Prop["_FilePath"].Value, $Prop["DocNumber"].Value)
 		if ([System.IO.File]::Exists($fullFileName))

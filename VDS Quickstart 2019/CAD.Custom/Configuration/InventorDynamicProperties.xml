@@ -62,7 +62,7 @@
     <DynamicProperty>Project Type</DynamicProperty>
     <DynamicProperty>Checked By</DynamicProperty>
     <DynamicProperty>LastUpdatedWith</DynamicProperty>
-    <DynamicProperty>Part Type name</DynamicProperty>
+    <DynamicProperty Hidden="True">Part Type name</DynamicProperty>
     <DynamicProperty>G_L</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
@@ -100,7 +100,7 @@
     <DynamicProperty>Dimensions</DynamicProperty>
     <DynamicProperty>LastUpdatedWith</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
-    <DynamicProperty>Part Type name</DynamicProperty>
+    <DynamicProperty Hidden="True">Part Type name</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Sheet Metal Part" Type="File">
     <DynamicProperty>Title</DynamicProperty>
@@ -132,6 +132,10 @@
     <DynamicProperty>Company</DynamicProperty>
     <DynamicProperty>Project Type</DynamicProperty>
     <DynamicProperty>Checked By</DynamicProperty>
+    <DynamicProperty>LastUpdatedWith</DynamicProperty>
+    <DynamicProperty>Part Type name</DynamicProperty>
+    <DynamicProperty>G_L</DynamicProperty>
+    <DynamicProperty>Dimensions</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Engineering">
     <DynamicProperty>Title</DynamicProperty>
@@ -212,5 +216,14 @@
     <DynamicProperty>Project</DynamicProperty>
     <DynamicProperty>Project Type</DynamicProperty>
     <DynamicProperty Hidden="True">Project Number</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Substitute">
+    <DynamicProperty>LastUpdatedWith</DynamicProperty>
+    <DynamicProperty>Dimensions</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty>Part Type name</DynamicProperty>
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicsProperties>

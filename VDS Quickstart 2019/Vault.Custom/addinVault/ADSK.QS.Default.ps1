@@ -2,8 +2,7 @@
 #=============================================================================#
 # PowerShell script sample for Vault Data Standard                            
 #			 Autodesk Vault - Quickstart 2019  								  
-# This sample is based on VDS 2018 RTM and adds functionality and rules       
-# All additions are marked with 'region Quickstart' - 'endregion'			  
+# This sample is based on VDS 2018 RTM and adds functionality and rules		  
 #                                                                             
 # Copyright (c) Autodesk - All rights reserved.                               
 #                                                                             
@@ -77,56 +76,6 @@ function ValidateCustomObjectName
 		return $true;
 	}
 	return $false;
-}
-
-function mFldrNameValidation
-{
-	$rootFolder = $vault.DocumentService.GetFolderByPath($Prop["_FolderPath"].Value)
-	$mFldExist = mFindFolder $Prop["_FolderName"].Value $rootFolder
-
-	If($mFldExist)
-	{
-		$dsWindow.FindName("FOLDERNAME").ToolTip = "Foldername exists, select a new unique one."
-		$dsWindow.FindName("FOLDERNAME").BorderBrush = "Red"
-		$dsWindow.FindName("FOLDERNAME").BorderThickness = "1,1,1,1"
-		$dsWindow.FindName("FOLDERNAME").Background = "#FFFFDADA"
-		return $false
-	}
-	Else
-	{
-		$dsWindow.FindName("FOLDERNAME").ToolTip = "Foldername is valid, press OK to create."
-		$dsWindow.FindName("FOLDERNAME").BorderBrush = "#FFABADB3" #the default color
-		$dsWindow.FindName("FOLDERNAME").BorderThickness = "0,1,1,0" #the default border top, right
-		$dsWindow.FindName("FOLDERNAME").Background = "#FFFFFFFF"
-		return $true
-	}
-}
-
-function mFindFolder($FolderName, $rootFolder)
-{
-	$FolderPropDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("FLDR")
-    $FolderNamePropDef = $FolderPropDefs | where {$_.SysName -eq "Name"}
-    $srchCond = New-Object 'Autodesk.Connectivity.WebServices.SrchCond'
-    $srchCond.PropDefId = $FolderNamePropDef.Id
-    $srchCond.PropTyp = "SingleProperty"
-    $srchCond.SrchOper = 3 #is equal
-    $srchCond.SrchRule = "Must"
-    $srchCond.SrchTxt = $FolderName
-
-    $bookmark = ""
-    $status = $null
-    $totalResults = @()
-    while ($status -eq $null -or $totalResults.Count -lt $status.TotalHits)
-    {
-        $results = $vault.DocumentService.FindFoldersBySearchConditions(@($srchCond),$null, @($rootFolder.Id), $false, [ref]$bookmark, [ref]$status)
-
-        if ($results -ne $null)
-        {
-            $totalResults += $results
-        }
-        else {break}
-    }
-    return $totalResults;
 }
 
 function InitializeTabWindow
@@ -220,7 +169,7 @@ function SetWindowTitle($newFile, $editFile, $name)
 {
 	if ($Prop["_CreateMode"].Value)
     {
-		$windowTitle = ($newFile)
+		$windowTitle = $newFile
 	}
 	elseif ($Prop["_EditMode"].Value)
 	{
@@ -567,7 +516,7 @@ function ItemDescription
     }
 }
 
-#region Quickstart 
+ 
 function m_TemplateChanged {
 	#$dsDiag.Trace(">> Template Changed ...")
 	$mContext = $dsWindow.DataContext
@@ -667,4 +616,52 @@ function mResetTemplates
 	$dsWindow.FindName("TemplateCB").ItemsSource = $dsWindow.DataContext.Templates
 }
 
-#endregion quickstart
+function mFldrNameValidation
+{
+	$rootFolder = $vault.DocumentService.GetFolderByPath($Prop["_FolderPath"].Value)
+	$mFldExist = mFindFolder $Prop["_FolderName"].Value $rootFolder
+
+	If($mFldExist)
+	{
+		$dsWindow.FindName("FOLDERNAME").ToolTip = "Foldername exists, select a new unique one."
+		$dsWindow.FindName("FOLDERNAME").BorderBrush = "Red"
+		$dsWindow.FindName("FOLDERNAME").BorderThickness = "1,1,1,1"
+		$dsWindow.FindName("FOLDERNAME").Background = "#FFFFDADA"
+		return $false
+	}
+	Else
+	{
+		$dsWindow.FindName("FOLDERNAME").ToolTip = "Foldername is valid, press OK to create."
+		$dsWindow.FindName("FOLDERNAME").BorderBrush = "#FFABADB3" #the default color
+		$dsWindow.FindName("FOLDERNAME").BorderThickness = "0,1,1,0" #the default border top, right
+		$dsWindow.FindName("FOLDERNAME").Background = "#FFFFFFFF"
+		return $true
+	}
+}
+
+function mFindFolder($FolderName, $rootFolder)
+{
+	$FolderPropDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("FLDR")
+    $FolderNamePropDef = $FolderPropDefs | where {$_.SysName -eq "Name"}
+    $srchCond = New-Object 'Autodesk.Connectivity.WebServices.SrchCond'
+    $srchCond.PropDefId = $FolderNamePropDef.Id
+    $srchCond.PropTyp = "SingleProperty"
+    $srchCond.SrchOper = 3 #is equal
+    $srchCond.SrchRule = "Must"
+    $srchCond.SrchTxt = $FolderName
+
+    $bookmark = ""
+    $status = $null
+    $totalResults = @()
+    while ($status -eq $null -or $totalResults.Count -lt $status.TotalHits)
+    {
+        $results = $vault.DocumentService.FindFoldersBySearchConditions(@($srchCond),$null, @($rootFolder.Id), $false, [ref]$bookmark, [ref]$status)
+
+        if ($results -ne $null)
+        {
+            $totalResults += $results
+        }
+        else {break}
+    }
+    return $totalResults;
+}
