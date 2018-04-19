@@ -17,6 +17,9 @@
 				$dsWindow.FindName("FILENAME").add_TextChanged({
 					mPreviewExportFileName
 				})
+				$Prop["Folder"].add_PropertyChanged({
+					mPreviewExportFileName
+				})
 			}
 
             $Prop["DocNumber"].CustomValidation = { FileNameCustomValidation } #overrides any validation if set; the type is Scriptblock {} containing functions or direct calls; results will drive the "ValidProperties/Invalid"
