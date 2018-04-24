@@ -102,7 +102,9 @@
     <None Include="Vault.Custom\addinVault\ADSK.QS.ActivateSchedTaskAsJob.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.Default.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.DerivationTree.ps1" />
+    <None Include="Vault.Custom\addinVault\Adsk.QS.EcoEdit.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.FileBOM.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.ItemEdit.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ReserveFileNumber.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ActivateSchedTask.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateCustomObject.ps1" />
@@ -115,6 +117,7 @@
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToReplacedBy.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToSelectedFile.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToSourceFile.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.InvInsertCopy.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ReserveNumbers.ps1" />
     <None Include="Vault.Custom\addinVault\QuickstartExtension.ps1" />
     <None Include="Vault\addinVault\AssociatedFiles.ps1" />

@@ -32,6 +32,9 @@
     <DynamicProperty>Checked By</DynamicProperty>
     <DynamicProperty>Application Version</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
+    <DynamicProperty>FLCwsID</DynamicProperty>
+    <DynamicProperty>FLCdmsID</DynamicProperty>
+    <DynamicProperty>Replacement for</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Part" Type="File">
     <DynamicProperty>Title</DynamicProperty>

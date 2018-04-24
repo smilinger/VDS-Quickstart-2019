@@ -218,32 +218,19 @@ function OnTabContextChanged
 		$assocFiles = @(GetAssociatedFiles $itemids $([System.IO.Path]::GetDirectoryName($VaultContext.UserControl.XamlFile)))
 		$dsWindow.FindName("AssoicatedFiles").ItemsSource = $assocFiles
 	}
-	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "ChangeOrder" -and $xamlFile -eq "ADSK.QS.EcoUpdate.xaml")
+	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "ItemMaster" -and $xamlFile -eq "ADSK.QS.ItemEdit.xaml")
+	{
+		$items = $vault.ItemService.GetItemsByIds(@($vaultContext.SelectedObject.Id))
+		$item = $items[0]
+		$itemids = @($item.Id)
+		$mItemEditable = mItemEditable($itemids) #note - checks the current state to activate buttons, but this might change over time; therefore the state is local
+	}
+	
+	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "ChangeOrder" -and $xamlFile -eq "ADSK.QS.EcoEdit.xaml")
 	{
 		$number=$vaultContext.SelectedObject.Label
 		$mECO = $vault.ChangeOrderService.GetChangeOrderByNumber($number)
-		$Global:EcoId = $mECO.Id
-		#check the availability and ACL to the current user; enable/disable Edit command button
-
-		[System.Reflection.Assembly]::LoadFrom('C:\Program Files (x86)\Autodesk\Autodesk Vault 2019 SDK\bin\x64\Autodesk.DataManagement.Client.Framework.Vault.dll')
-		$mIEntCO = New-Object Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities.ChangeOrder($VaultConnection, $mECO )
-		
-		#$mIEntCO2 = $mIEntCO.Clone()
-		#$mEqual = $mIEntCO2.Equals($mIEntCO)
-
-		$EcoAvailableForEdit = $false
-		Try {
-			$vault.ChangeOrderService.EditChangeOrder($mECO.Id)
-			$EcoAvailableForEdit = $true
-		}
-		Catch {
-			$EcoAvailableForEdit = $false
-		}
-		If($EcoAvailableForEdit -eq $true)
-		{
-			$dsWindow.FindName("EditECO").IsEnabled = $true
-		}
-		Else{$dsWindow.FindName("EditECO").IsEnabled = $false}
+		$mEcoEditable = mEcoEditable($mECO.Id) #note - checks the current state to activate buttons, but this might change over time; therefore the state is local
 	}
 
 	#region derivation tree

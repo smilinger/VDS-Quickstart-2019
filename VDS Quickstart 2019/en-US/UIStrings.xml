@@ -302,4 +302,9 @@
   <UIString ID="DerivationTree_19">Run all searches to fill each branch</UIString>
   <UIString ID="DerivationTree_20">Updates view on selection changed. Note - Delayed response depending on vault and paging size!</UIString>
   <!--Derivation Tree end-->
+
+  <!--Insert CAD Copy-->
+  <UIString ID="ADSK-InsertInvCopy_00">Insert CAD: Component Copy</UIString>
+  <!--Insert CAD Copy-->
+  
 </UIStrings>

@@ -12,6 +12,12 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
 -->
 <mymenu>
   <MenuItem>
+    <!--Insert CAD Copy-->
+    <mInsertInvCompCopy Label = "$UIString[ADSK-InsertInvCopy_00]" Description = "$UIString[ADSK-InsertInvCopy_00]" Hint = "$UIString[ADSK-InsertInvCopy_00]"
+      PSFile = "ADSK.QS.InvInsertCopy.ps1" Image="PlaceFromVault.ico" ToolbarPaintStyle = "TextAndGlyph" NavigationTypes="File"
+      MultiSelectEnabled = "false" />
+    <!--Insert CAD Copy-->
+    
     <!--Activate Scheduled Task-->
     <ActivateSchedTask Label = "$UIString[ADSK-ActivateSchedTask-00]" Description = "$UIString[ADSK-ActivateSchedTask-00]" Hint = "$UIString[ADSK-ActivateSchedTask-00]"
      PSFile = "ADSK.QS.ActivateSchedTask.ps1" Image="Vault.ico" ToolbarPaintStyle = "TextAndGlyph"
@@ -109,6 +115,7 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
     <FileContext Label="myMenu" DeployAsPullDown="False" Location="FileContextMenu">
       <Item Name="NewFile"></Item>
       <Item Name="EditFile"></Item>
+      <Item Name="mInsertInvCompCopy"></Item>
     </FileContext>
     <FolderContex Label="myMenu" DeployAsPullDown="False" Location="FolderContextMenu">
       <Item Name="NewFile"></Item>
