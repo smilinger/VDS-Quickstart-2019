@@ -222,6 +222,7 @@
     <DynamicProperty>Project Number01</DynamicProperty>
     <DynamicProperty>Project Number</DynamicProperty>
     <DynamicProperty>Project Title</DynamicProperty>
+    <DynamicProperty>Project</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Drawing AutoCAD" Type="FILE">
     <DynamicProperty>Title</DynamicProperty>

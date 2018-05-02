@@ -11,7 +11,7 @@
 #endregion
 
 #region - version history
-# Version Infor - VDS Quickstart Extension 2019.1.0
+# Version Info - VDS Quickstart Extension 2019.1.0
 	# new function mSearchCustentOfCat([String]$mCatDispName)
 	# new function mSearchItemOfCat([String]$mCatDispName)
 

@@ -184,6 +184,16 @@
   <!--Quickstart Inventor Dialog-->
   <UIString ID="MSDCE_MSG00">Missing Model View! Your system is set to save IPN/IDW/DWG depending on model's name and location. Either add a model or change the Vault option to generate numbers for IPN/IDW/DWG.</UIString>
   <!--Quickstart Inventor Dialog end-->
+  
+  <!--Quickstart Functional Dialogs (FG, DA, TP, CH)-->
+  <UIString ID="MSDCE_BOMType_00">Phantom</UIString>
+  <UIString ID="MSDCE_BOMType_01">Phantom-Assembly</UIString>
+  <UIString ID="MSDCE_BOMType_02">Phantom-Part</UIString>
+  <UIString ID="MSDCE_BOMType_03">Reference</UIString>
+  <UIString ID="MSDCE_BOMType_04">Framegenerator-Skeleton-Reference</UIString>
+  <UIString ID="MSDCE_FrameMember_01">Profile Bar</UIString>
+  <UIString ID="MSDCE_TubePipe_01">Tube and Pipe</UIString>
+  <!--Quickstart Functional Dialogs (FG, DA, TP, CH) end-->
 
   <!--Quickstart Custom Object Names-->
   <UIString ID="MSDCE_CO01">Organisation</UIString>
@@ -306,5 +316,14 @@
   <!--Insert CAD Copy-->
   <UIString ID="ADSK-InsertInvCopy_00">Insert CAD: Component Copy</UIString>
   <!--Insert CAD Copy-->
+  
+  <!--Cascading Organisation/Person selection & link creation-->
+  <UIString ID="Adsk.Org.Pers.Link_00">Contact</UIString>
+  <UIString ID="Adsk.Org.Pers.Link_01">Contacts</UIString>
+  <UIString ID="Adsk.Org.Pers.Link_02">Primary</UIString>
+  <UIString ID="Adsk.Org.Pers.Link_03">Create Link</UIString>
+  <UIString ID="Adsk.Org.Pers.Link_04">Enable to create links to any selected item on project creation.</UIString>
+  <UIString ID="Adsk.Org.Pers.Link_05">Select customer name from "Organisation" Workspace. Optionally select contact name also. Only persona linked to organisations are listed as contact name.</UIString>
+  <!--Cascading Organisation/Person selection & link creation END-->
   
 </UIStrings>

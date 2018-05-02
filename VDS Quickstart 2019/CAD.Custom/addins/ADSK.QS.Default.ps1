@@ -193,6 +193,22 @@ function InitializeWindow
 			} #end switch Create / Edit Mode
 
 		}
+		"InventorFrameWindow"
+		  {
+		   mInitializeFGContext
+		  }
+		"InventorDesignAcceleratorWindow"
+		  {
+		   mInitializeDAContext
+		  }
+		"InventorPipingWindow"
+		  {
+		   mInitializeTPContext
+		  }
+		"InventorHarnessWindow"
+		  {
+		   mInitializeCHContext
+		  }
 		"AutoCADWindow"
 		{
 			InitializeBreadCrumb
@@ -228,7 +244,7 @@ function InitializeWindow
 		}
 		default
 		{
-			#rules applying for other windows, e.g. FG, DA, TP and CH functional dialogs; SaveCopyAs dialog
+			#rules applying for other windows not listed before
 		}
 	} #end switch windows
 	$global:expandBreadCrumb = $true
@@ -431,8 +447,8 @@ function GetNumSchms
 			}
 			[System.Collections.ArrayList]$numSchems = @($vault.DocumentService.GetNumberingSchemesByType('Activated'))
 			$_FilteredNumSchems = @()
-			$_temp = $numSchems | Where { $_.IsDflt -eq $true}
-			$_FilteredNumSchems += ($_temp)
+			$_Default = $numSchems | Where { $_.IsDflt -eq $true}
+			$_FilteredNumSchems += ($_Default)
 			if ($Prop["_NumSchm"].Value) { $Prop["_NumSchm"].Value = $_FilteredNumSchems[0].Name} #note - functional dialogs don't have the property _NumSchm, therefore we conditionally set the value
 			$dsWindow.FindName("NumSchms").IsEnabled = $true
 			$noneNumSchm = New-Object 'Autodesk.Connectivity.WebServices.NumSchm'
@@ -453,8 +469,23 @@ function GetNumSchms
 			}
 			If($dsWindow.Name-eq "InventorFrameWindow")
 			{ 
-				#$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
-				return $_FilteredNumSchems
+				#None is not supported by multi-select dialogs
+				return $_Default
+			}
+			If($dsWindow.Name-eq "InventorHarnessWindow")
+			{ 
+				#None is not supported by multi-select dialogs
+				return $_Default
+			}
+			If($dsWindow.Name-eq "InventorPipingWindow")
+			{ 
+				#None is not supported by multi-select dialogs
+				return $_Default
+			}
+			If($dsWindow.Name-eq "InventorDesignAcceleratorWindow")
+			{ 
+				#None is not supported by multi-select dialogs
+				return $_Default
 			}
 	
 			return $_FilteredNumSchems
@@ -728,3 +759,129 @@ function mRemoveShortCutByName ([STRING] $mScName)
 		return $false
 	}
 }
+
+#region functional dialogs
+#FrameDocuments[], FrameMemberDocuments[] and SkeletonDocuments[]
+function mInitializeFGContext {
+	#$dsDiag.Trace(">> Init. DataContext for Frame Window")
+	$mFrmDocs = @()
+	$mFrmDocs = $dsWindow.DataContext.FrameDocuments
+	$mFrmDocs | ForEach-Object {
+		#$dsDiag.Trace(">> Frame Assy $mC")
+		$mFrmDcProps = $_.Properties.Properties
+		$mProp = $mFrmDcProps | Where-Object { $_.Name -eq "Title"}
+		$mProp.Value = $UIString["LBL55"]
+		$mProp = $mFrmDcProps | Where-Object { $_.Name -eq "Description"}
+		$mProp.Value = $UIString["MSDCE_BOMType_01"]
+		#$dsDiag.Trace("Frames Assy end <<") 
+	}
+	 $mSkltnDocs = @()
+	 $mSkltnDocs = $dsWindow.DataContext.SkeletonDocuments
+	 $mSkltnDocs | ForEach-Object {
+		#$dsDiag.Trace(">> Skeleton Assy $mC")
+		$mSkltnDcProps = $_.Properties.Properties
+		$mProp = $mSkltnDcProps | Where-Object { $_.Name -eq "Title"}
+		$mProp.Value = $UIString["LBL56"]
+		$mProp = $mSkltnDcProps | Where-Object { $_.Name -eq "Description"}
+		$mProp.Value = $UIString["MSDCE_BOMType_04"]
+		#$dsDiag.Trace("Skeleton end <<") 
+	 }
+	 $mFrmMmbrDocs = @()
+	 $mFrmMmbrDocs = $dsWindow.DataContext.FrameMemberDocuments
+	 $mFrmMmbrDocs | ForEach-Object {
+		#$dsDiag.Trace(">> FrameMember Assy $mC")
+		$mFrmMmbrDcProps = $_.Properties.Properties
+		$mProp = $mFrmMmbrDcProps | Where-Object { $_.Name -eq "Title"}
+		$mProp.Value = $UIString["MSDCE_FrameMember_01"]
+		#$dsDiag.Trace("FrameMembers $mC end <<") 
+	 }
+	#$dsDiag.Trace("end DataContext for Frame Window<<")
+}
+
+function mInitializeDAContext {
+	#$dsDiag.Trace(">> Init DataContext for DA Window")
+	$mDsgnAccAssys = @() 
+	$mDsgnAccAssys = $dsWindow.DataContext.DesignAcceleratorAssemblies
+	$mDsgnAccAssys | ForEach-Object {
+	#$dsDiag.Trace(">> DA Assy $mC")
+		$mDsgnAccAssyProps = $_.Properties.Properties
+		$mTitleProp = $mDsgnAccAssyProps | Where-Object { $_.Name -eq "Title"}
+		$mPartNumProp = $mDsgnAccAssyProps | Where-Object { $_.Name -eq "Part Number"}
+		$mTitleProp.Value = $UIString["MSDCE_BOMType_01"]
+		$mPartNumProp.Value = "" #delete the value to get the new number
+		$mProp = $mDsgnAccAssyProps | Where-Object { $_.Name -eq "Description"}
+		$mProp.Value = $UIString["MSDCE_BOMType_01"] + " " + $mPartNumProp.Value
+		#$dsDiag.Trace("DA Assy $mC end <<")
+	}
+	 $mDsgnAccParts = $dsWindow.DataContext.DesignAcceleratorParts
+	 $mDsgnAccParts | ForEach-Object {
+		#$dsDiag.Trace(">> DA component $mC")
+		$mDsgnAccProps = $_.Properties.Properties
+		$mTitleProp = $mDsgnAccProps | Where-Object { $_.Name -eq "Title"}
+		$mPartNumProp = $mDsgnAccProps | Where-Object { $_.Name -eq "Part Number"}
+		$mTitleProp.Value = $mPartNumProp.Value
+		$mPartNumProp.Value = "" #delete the value to get the new number
+		$mProp = $mDsgnAccProps | Where-Object { $_.Name -eq "Description"}
+		$mProp.Value = $mTitleProp.Value
+		#$dsDiag.Trace("DA Component $mC end <<")
+	 }
+ #$dsDiag.Trace("DataContext for DA Window end <<")
+}
+
+function mInitializeTPContext {
+$mRunAssys = @()
+$mRunAssys = $dsWindow.DataContext.RunAssemblies
+$mRunAssys | ForEach-Object {
+		$mRunAssyProps = $_.Properties.Properties
+		$mTitleProp = $mRunAssyProps | Where-Object { $_.Name -eq "Title"} 
+		$mTitleProp.Value = $UIString["LBL41"]
+		$mPartNumProp = $mRunAssyProps | Where-Object { $_.Name -eq "Part Number"}
+		$mPartNumProp.Value = "" #delete the value to get the new number
+		$mProp = $mRunAssyProps | Where-Object { $_.Name -eq "Description"}
+		$mProp.Value = $UIString["MSDCE_BOMType_01"] + " " + $UIString["MSDCE_TubePipe_01"]
+	 }
+	$mRouteParts = @()
+	$mRouteParts = $dsWindow.DataContext.RouteParts
+	$mRouteParts | ForEach-Object {
+		$mRouteProps = $_.Properties.Properties
+		$mTitleProp = $mRouteProps | Where-Object { $_.Name -eq "Title"}
+		$mTitleProp.Value = $UIString["LBL42"]
+		$mPartNumProp = $mRouteProps | Where-Object { $_.Name -eq "Part Number"}
+		$mPartNumProp.Value = "" #delete the value to get the new number
+		$mProp = $mRouteProps | Where-Object { $_.Name -eq "Description"}
+		$mProp.Value = $UIString["MSDCE_BOMType_00"] + " " + $UIString["LBL42"]
+	 }
+	$mRunComponents = @()
+	$mRunComponents = $dsWindow.DataContext.RunComponents
+	$mRunComponents | ForEach-Object {
+		$mRunCompProps = $_.Properties.Properties
+		$mTitleProp = $mRunCompProps | Where-Object { $_.Name -eq "Title"}
+		$m_StockProp = $mRunCompProps | Where-Object { $_.Name -eq "Stock Number"}
+		$mTitleProp.Value = $UIString["LBL43"]
+		$mPartNumProp = $mRunCompProps | Where-Object { $_.Name -eq "Part Number"}
+		$m_PL = $mRunCompProps | Where-Object { $_.Name -eq "PL"}
+		$mPartNumProp.Value = $m_StockProp.Value + " - " + $m_PL.Value
+	 }
+}
+
+function mInitializeCHContext {
+	$mHrnsAssys = @()
+	$mHrnsAssys = $dsWindow.DataContext.HarnessAssemblies
+	$mHrnsAssys | ForEach-Object {
+		$mHrnsAssyProps = $_.Properties.Properties
+		$mTitleProp = $mHrnsAssyProps | Where-Object { $_.Name -eq "Title"}
+		$mTitleProp.Value = $UIString["LBL45"]
+		$mProp = $mHrnsAssyProps | Where-Object { $_.Name -eq "Description"}
+		$mProp.Value = $UIString["MSDCE_BOMType_00"] + " " + $UIString["LBL45"]
+	}
+	$mHrnsParts = @()
+	$mHrnsParts = $dsWindow.DataContext.HarnessParts
+	$mHrnsParts | ForEach-Object {
+		$mHrnsPrtProps = $_.Properties.Properties
+		$mTitleProp = $mHrnsPrtProps | Where-Object { $_.Name -eq "Title"}
+		$mTitleProp.Value = $UIString["LBL47"]
+		$mProp = $mHrnsPrtProps | Where-Object { $_.Name -eq "Description"}
+		$mProp.Value = $UIString["MSDCE_BOMType_00"] + " " + $UIString["LBL47"]
+		 }
+}
+#endregion functional dialogs
