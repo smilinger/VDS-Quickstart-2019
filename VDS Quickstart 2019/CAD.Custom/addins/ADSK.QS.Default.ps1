@@ -136,7 +136,7 @@ function InitializeWindow
 					# but don't do this, if the copy mode is active
 					if ($Prop["_CopyMode"].Value -eq $false) 
 					{	
-						if (($Prop["_FileExt"].Value -eq "idw") -or ($Prop["_FileExt"].Value -eq "dwg" )) 
+						if (($Prop["_FileExt"].Value -eq ".IDW") -or ($Prop["_FileExt"].Value -eq ".DWG" )) 
 						{
 							$_mInvHelpers = New-Object QuickstartUtilityLibrary.InvHelpers #NEW 2019 hand over the parent inventor application, to ensure the correct instance
 							$_ModelFullFileName = $_mInvHelpers.m_GetMainViewModelPath($Application)#NEW 2019 hand over the parent inventor application, to ensure the correct instance
@@ -145,7 +145,7 @@ function InitializeWindow
 							$Prop["Part Number"].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Part Number") 
 						}
 
-						if ($Prop["_FileExt"].Value -eq "ipn") 
+						if ($Prop["_FileExt"].Value -eq ".IPN") 
 						{
 							$_mInvHelpers = New-Object QuickstartUtilityLibrary.InvHelpers #NEW 2019 hand over the parent inventor application, to ensure the correct instance
 							$_ModelFullFileName = $_mInvHelpers.m_GetMainViewModelPath($Application)#NEW 2019 hand over the parent inventor application, to ensure the correct instance
@@ -175,7 +175,7 @@ function InitializeWindow
 						}
 					} # end of copy mode = false check
 
-					if ($Prop["_CopyMode"].Value -and @("DWG","IDW","IPN") -contains $Prop["_FileExt"].Value)
+					if ($Prop["_CopyMode"].Value -and @(".DWG",".IDW",".IPN") -contains $Prop["_FileExt"].Value)
 					{
 						$Prop["DocNumber"].Value = $Prop["DocNumber"].Value.TrimStart($UIString["CFG2"])
 					}
@@ -511,7 +511,7 @@ function OnPostCloseDialog
 	{
 		"InventorWindow"
 		{
-				if (!($Prop["_CopyMode"].Value -and !$Prop["_GenerateFileNumber4SpecialFiles"].Value -and @("DWG","IDW","IPN") -contains $Prop["_FileExt"].Value))
+				if (!($Prop["_CopyMode"].Value -and !$Prop["_GenerateFileNumber4SpecialFiles"].Value -and @(".DWG",".IDW",".IPN") -contains $Prop["_FileExt"].Value))
 				{
 					mWriteLastUsedFolder
 				}
