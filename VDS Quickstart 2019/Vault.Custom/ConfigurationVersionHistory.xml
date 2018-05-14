@@ -1,45 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
-  <ConfigInfo Name="VDS Quickstart MSDCE" Version="2019.2.1">
+  <ConfigInfo Name="VDS Quickstart OTX 2019 Sample Configuration" Version="OTX2019Config.1">
     <ConfigHistoryInfo>
       <Fixes>
-        <!--de-DE only: renamed Menu definition command site object Sendung -> Versand-->
-        <!--.\AutoCAD-Mechanical\AutoCAD.XAML added missing tab control-->
+        <!--InitialCopyValue removed from Inventor.cfg; 2019 solved OriginalFileName issue for drawings and hands over model copy name-->
+        <!--updated _FileExt selections to ".IDW" or ".DWG" or ".IPN" (2019 requires . being included-->
       </Fixes>
-    </ConfigHistoryInfo>
-  </ConfigInfo>
-  <ConfigInfo Name="VDS Quickstart MSDCE" Version="2019.2.0">
-    <ConfigHistoryInfo>
-      <Fixes>
-        <!--FDU 2019 built 22.02.xx and newer allow to dynamically skip the VDS dialog for 2D-3D sync workflows. FDU section updated accordingly-->
-        <!--Renamed customized default script files applying pattern "ADSK.QS.*.ps1"-->
-      </Fixes>
-    </ConfigHistoryInfo>
-  </ConfigInfo>
-  <ConfigInfo Name="VDS Quickstart MSDCE" Version="2019.1.0">
-    <ConfigHistoryInfo>
-      <NewFeatures>
-        <!--Added workaround AKN to support Frame Member Change command-->
-      </NewFeatures>
-      <Fixes>
-        <!--Renamed Default_QS-Extensions.ps1 to QuickstartExtension2019.0.2.ps1 to reflect versioning and QS as master source-->
-      </Fixes>
-      <Enhancements>
-        <!--Introduced CAD.Custom and Vault.Custom Subfolder Structure to split default and custom configuration files-->
-      </Enhancements>
-    </ConfigHistoryInfo>
-  </ConfigInfo>
-  <ConfigInfo Name="VDS Quickstart MSDCE" Version="2019.1.1">
-    <ConfigHistoryInfo>
-      <NewFeatures>
-        <!--Updated QuickstartExtensions.ps1 2019.0.4 shares function to read UIStrings and PropertyTranslations for menu command scripts, e.g. create folder etc..-->
-      </NewFeatures>
-      <Fixes>
-        <!--Custom Workspace Tabs for Organisation, Person, Transmittal added (removed since Quickstart 2017)-->
-      </Fixes>
-      <Enhancements>
-        <!--Vault Dialogs add tab control to allow copy'n paste integration of additional modules, e.g. item tab, terms catalog, folder links...-->
-      </Enhancements>
     </ConfigHistoryInfo>
   </ConfigInfo>
 </Configuration>
