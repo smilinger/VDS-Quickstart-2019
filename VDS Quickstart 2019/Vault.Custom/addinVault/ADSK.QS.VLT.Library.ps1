@@ -11,6 +11,9 @@
 #endregion
 
 #region - version history
+# Version Info - VDS Quickstart Vault Library 2019.1.0
+	# new name, aligned to Quickstart naming convention and added CAD extension library
+
 # Version Info - VDS Quickstart Extension 2019.1.0
 	# new function mSearchCustentOfCat([String]$mCatDispName)
 	# new function mSearchItemOfCat([String]$mCatDispName)

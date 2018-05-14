@@ -83,8 +83,9 @@
     </EmbeddedResource>
     <None Include="Autodesk Vault Data Standard - Code Samples.pptx" />
     <None Include="CAD.Custom\addins\ADSK.QS.breadCrumb.ps1" />
+    <None Include="CAD.Custom\addins\ADSK.QS.CAD.Library.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.Default.ps1" />
-    <None Include="CAD.Custom\addins\Adsk.QS.FileNameValidation.ps1" />
+    <None Include="CAD.Custom\addins\ADSK.QS.FileNameValidation.ps1" />
     <None Include="CAD.Custom\Configuration\AutoCAD-Mechanical\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\Inventor.cfg" />
@@ -107,6 +108,7 @@
     <None Include="Vault.Custom\addinVault\ADSK.QS.FileBOM.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ItemEdit.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ReserveFileNumber.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.VLT.Library.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ActivateSchedTask.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateCustomObject.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateFile.ps1" />
@@ -120,7 +122,6 @@
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToSourceFile.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.InvInsertCopy.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ReserveNumbers.ps1" />
-    <None Include="Vault.Custom\addinVault\QuickstartExtension.ps1" />
     <None Include="Vault\addinVault\AssociatedFiles.ps1" />
     <None Include="Vault\addinVault\Default.ps1" />
     <None Include="Vault\addinVault\FileBOM.ps1" />

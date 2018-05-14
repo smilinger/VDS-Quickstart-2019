@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
+  <ConfigInfo Name="VDS Quickstart OTX 2019 Sample Configuration" Version="OTX2019Config.2">
+    <ConfigHistoryInfo>
+      <Changes>
+        <!--Script Library QuickstartExtension.ps1 renamed to ADSK.QS.VLT.Library.ps1-->
+        <!--Script Library ADSK.QS.CAD.Library.ps1 added for common functions to be used in CAD apps-->
+      </Changes>
+      <Fixes>
+      </Fixes>
+    </ConfigHistoryInfo>
+  </ConfigInfo>
+
   <ConfigInfo Name="VDS Quickstart OTX 2019 Sample Configuration" Version="OTX2019Config.1">
     <ConfigHistoryInfo>
       <Fixes>
