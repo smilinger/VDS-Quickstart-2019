@@ -34,6 +34,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autodesk.Connectivity.WebServices">
       <HintPath>C:\Program Files (x86)\Autodesk\Autodesk Vault 2019 SDK\bin\x64\Autodesk.Connectivity.WebServices.dll</HintPath>
@@ -46,7 +66,7 @@
       <HintPath>C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\CreateObject.dll</HintPath>
     </Reference>
     <Reference Include="dataStandard.UI">
-      <HintPath>.\dataStandard.UI.dll</HintPath>
+      <HintPath>C:\ProgramData\Autodesk\Inventor 2019\Addins\Data Standard\dataStandard.UI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -242,7 +262,6 @@
     <Resource Include="CAD.Custom\Configuration\AutoCAD-Mechanical\AutoCadDynamicProperties.xml" />
     <Resource Include="CAD.Custom\Configuration\AutoCadDynamicProperties.xml" />
     <Resource Include="CAD.Custom\Configuration\InventorDynamicProperties.xml" />
-    <Content Include="dataStandard.UI.dll" />
     <Content Include="HelpFiles\C.1GeneralInformation.html" />
     <Content Include="HelpFiles\C.2.10Legacydata.html" />
     <Content Include="HelpFiles\C.2.11FrameGenerator.html" />
