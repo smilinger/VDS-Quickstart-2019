@@ -137,8 +137,12 @@
   <!--use to change display name for localization or user friendly naming-->
   <UIString ID="GEN-TITLE-DES1">Drawing Title</UIString>
   <UIString ID="GEN-TITLE-DES2">Drawing Subtitle</UIString>
-  <UIString ID="Title">Drawing Title</UIString>
-  <UIString ID="Subject">Drawing Subtitle</UIString>
+  <UIString ID="GEN-TITLE-NR">Drawing Number</UIString>
+  <UIString ID="GEN-TITLE-MAT1">Material</UIString>
+  <UIString ID="GEN-TITLE-MAT2">Material/Dimensions</UIString>
+  <UIString ID="GEN-TITLE-SIZ">Size/Format</UIString>
+  <UIString ID="GEN-TITLE-SHEET">Sheet</UIString>
+  <UIString ID="GEN-TITLE-SCA">Scale</UIString>
   <UIString ID="GEN-TITLE-WT">Mass</UIString>
   <!--Inventor custom iProperties Displaynames for dynamic properties-->
   <!--use to change display name for localization or user friendly naming-->

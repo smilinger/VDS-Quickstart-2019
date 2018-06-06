@@ -8,16 +8,22 @@
     <DynamicProperty>Comments</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Drawing AutoCAD">
-    <DynamicProperty>DocNumber</DynamicProperty>
     <DynamicProperty>Drawing Title</DynamicProperty>
+    <DynamicProperty>Drawing Subtitle</DynamicProperty>
+    <DynamicProperty>Drawing Number</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Material/Dimensions</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
+    <DynamicProperty>Size/Format</DynamicProperty>
+    <DynamicProperty>Sheet</DynamicProperty>
+    <DynamicProperty>Scale</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Factory Layout">
+    <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Dimensions</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
-    <DynamicProperty>Weight</DynamicProperty>
-    <DynamicProperty>Format</DynamicProperty>
-    <DynamicProperty>Scale</DynamicProperty>
-    <DynamicProperty>Sheet</DynamicProperty>
-    <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty>Project</DynamicProperty>
+    <DynamicProperty>Project Type</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicsProperties>
