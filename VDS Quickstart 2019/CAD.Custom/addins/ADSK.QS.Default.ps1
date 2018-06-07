@@ -541,6 +541,18 @@ function OnPostCloseDialog
 		"AutoCADWindow"
 		{
 			mWriteLastUsedFolder
+			#use document number for part number if not filled yet; cover ACM and Vanilla property configuration
+			If ($Prop["_CreateMode"].Value)
+			{
+				If ($Prop["GEN-TITLE-DWG"] -and $Prop["GEN-TITLE-NR"].Value -eq "")
+					{
+						$Prop["GEN-TITLE-NR"].Value = $Prop["GEN-TITLE-DWG"].Value
+					}
+				If ($Prop["DocNumber"] -and $Prop["Part Number"].Value -eq "")
+					{
+						$Prop["Part Number"].Value = $Prop["DocNumber"].Value
+					}
+			}
 		}
 		default
 		{
