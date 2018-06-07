@@ -553,6 +553,7 @@ function OnPostCloseDialog
 						$Prop["Part Number"].Value = $Prop["DocNumber"].Value
 					}
 			}
+			
 		}
 		default
 		{
