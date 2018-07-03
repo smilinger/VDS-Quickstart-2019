@@ -136,6 +136,7 @@
     <DynamicProperty>Part Type name</DynamicProperty>
     <DynamicProperty>G_L</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Engineering">
     <DynamicProperty>Title</DynamicProperty>

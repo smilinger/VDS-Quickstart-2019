@@ -63,8 +63,12 @@ function ValidateFolderName
 {
 	if($Prop["_FolderName"].Value -or !$dsWindow.FindName("DSNumSchmsCtrl").NumSchmFieldsEmpty)
 	{
-		$myValResult = mFldrNameValidation
-		return $myValResult
+		if($Prop["_CreateMode"])
+		{
+			$myValResult = mFldrNameValidation
+			return $myValResult
+		}
+		return $true
 	}
 	return $false;
 }

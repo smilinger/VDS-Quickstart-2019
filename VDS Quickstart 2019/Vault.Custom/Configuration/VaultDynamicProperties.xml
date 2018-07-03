@@ -66,6 +66,9 @@
     <DynamicProperty>Company</DynamicProperty>
     <DynamicProperty>Project Type</DynamicProperty>
     <DynamicProperty>Checked By</DynamicProperty>
+    <DynamicProperty>Application Version</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
+    <DynamicProperty>Sub-Type</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Assembly" Type="File">
     <DynamicProperty>Title</DynamicProperty>
@@ -236,6 +239,7 @@
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Scale</DynamicProperty>
     <DynamicProperty>Sheet</DynamicProperty>
+    <DynamicProperty>DWG Type</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Folder" Type="Folder">
     <DynamicProperty>Title</DynamicProperty>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <UIStrings LanguageCode="en-US">
   <!--Labels used in XAMLs-->
   <UIString ID="LBL1">Folder</UIString>

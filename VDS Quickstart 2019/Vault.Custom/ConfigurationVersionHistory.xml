@@ -5,6 +5,9 @@
       <Changes>
         <!--Script Library QuickstartExtension.ps1 renamed to ADSK.QS.VLT.Library.ps1-->
         <!--Script Library ADSK.QS.CAD.Library.ps1 added for common functions to be used in CAD apps-->
+        <!--Updated AutoCAD configuration according new Help Documentation "AutoCAD VDS Property Mapping"-->
+        <!--Corrected ValidateFolder to run in CreateMode only-->
+        <!--Added UIString table for de-DE-->
       </Changes>
       <Fixes>
       </Fixes>
