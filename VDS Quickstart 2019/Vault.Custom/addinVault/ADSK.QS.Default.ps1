@@ -190,6 +190,14 @@ function OnLogOn
 {
 	#Executed when User logs on Vault
 	#$vaultUsername can be used to get the username, which is used in Vault on login
+	$mVaultVersion = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Autodesk\Vault Workgroup\24.0\VWG-2440:407\").ProductVersion.Split(".")
+	If(-not $mVaultVersion) { $mVaultVersion = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Autodesk\Vault Professional\24.0\VPRO-2440:407\").ProductVersion.Split(".")}
+	If(-not $mVaultVersion) { $mVaultVersion = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Autodesk\Vault Office\24.0\VOFF-2440:407\").ProductVersion.Split(".")}
+
+	If($mVaultVersion[0] -ne "24" -or $mVaultVersion[1] -lt "1" )
+	{
+		[System.Windows.MessageBox]::Show("This machine's Vault Data Standard configuration requires Vault Client 2019 Update 1 or newer installed; contact your system administrator.", "Vault Quickstart Client Configuration")
+	}
 }
 function OnLogOff
 {

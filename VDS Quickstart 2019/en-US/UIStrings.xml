@@ -132,6 +132,7 @@
   <UIString ID="VAL11">Custom validation failed.</UIString>
   <UIString ID="VAL12">A file with this name already exists in Vault at this path. Please choose another name.</UIString>
   <UIString ID="VAL13">A file with this name already exists in Vault at another path. Please choose another name.</UIString>
+  <UIString ID="VAL14">A file with this name already exists in Vault at this path and is checked out by another user.</UIString>
   <!--AutoCAD title block attributes / file properties for dynamic properties-->
   <!--use to change display name for localization or user friendly naming-->
   <UIString ID="GEN-TITLE-DES1">Drawing Title</UIString>
@@ -139,7 +140,8 @@
   <UIString ID="GEN-TITLE-NR">Part Number</UIString>
   <UIString ID="GEN-TITLE-MAT1">Material</UIString>
   <UIString ID="GEN-TITLE-MAT2">Material/Dimensions</UIString>
-  <UIString ID="GEN-TITLE-SIZ">Size/Format</UIString>
+  <UIString ID="GEN-TITLE-SIZ">Size/Format</UIString  <UIString ID="VAL14">A file with this name already exists in Vault at this path and is checked out by another user.</UIString>
+
   <UIString ID="GEN-TITLE-SHEET">Sheet</UIString>
   <UIString ID="GEN-TITLE-SCA">Scale</UIString>
   <UIString ID="GEN-TITLE-WT">Mass</UIString>

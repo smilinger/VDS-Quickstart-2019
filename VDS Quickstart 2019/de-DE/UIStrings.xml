@@ -132,6 +132,7 @@
   <UIString ID="VAL11">Benutzerdefinierte Überprüfung fehlgeschlagen.</UIString>
   <UIString ID="VAL12">Eine Datei mit diesem Namen ist bereits unter diesem Pfad in Vault vorhanden. Wählen Sie einen anderen Namen.</UIString>
   <UIString ID="VAL13">Eine Datei mit diesem Namen ist bereits unter einem anderen Pfad in Vault vorhanden. Wählen Sie einen anderen Namen.</UIString>
+  <UIString ID="VAL14">Eine Datei mit diesem Namen ist in diesem Pfad bereits in Vault vorhanden und von einem anderen Benutzer ausgecheckt.</UIString>
   <!--AutoCAD title block attributes / file properties for dynamic properties-->
   <!--use to change display name for localization or user friendly naming-->
   <UIString ID="GEN-TITLE-DES1">Titel</UIString>
