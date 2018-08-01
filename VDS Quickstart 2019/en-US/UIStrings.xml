@@ -135,8 +135,8 @@
   <UIString ID="VAL14">A file with this name already exists in Vault at this path and is checked out by another user.</UIString>
   <!--AutoCAD title block attributes / file properties for dynamic properties-->
   <!--use to change display name for localization or user friendly naming-->
-  <UIString ID="GEN-TITLE-DES1">Drawing Title</UIString>
-  <UIString ID="GEN-TITLE-DES2">Drawing Subtitle</UIString>
+  <UIString ID="GEN-TITLE-DES1">Title</UIString>
+  <UIString ID="GEN-TITLE-DES2">Description</UIString>
   <UIString ID="GEN-TITLE-NR">Part Number</UIString>
   <UIString ID="GEN-TITLE-MAT1">Material</UIString>
   <UIString ID="GEN-TITLE-MAT2">Material/Dimensions</UIString>

@@ -12,9 +12,13 @@
 
 function InitializeWindow
 {
+	
+        $dsDiag.ShowLog()
+        $dsDiag.Clear()
+      
 	#region rules applying commonly
     $dsWindow.Title = SetWindowTitle
-	InitializeFileNameValidation
+	#InitializeFileNameValidation #Quickstart initializes at latest to avoid multiple events by UI changes
 	#InitializeCategory #Quickstart differentiates for Inventor and AutoCAD
 	#InitializeNumSchm #Quickstart differentiates for Inventor and AutoCAD
 	#InitializeBreadCrumb #Quickstart differentiates Inventor, Inventor C&H, T&P, FG, DA dialogs
@@ -259,7 +263,11 @@ function InitializeWindow
 			#rules applying for other windows not listed before
 		}
 	} #end switch windows
+	
 	$global:expandBreadCrumb = $true
+	
+	InitializeFileNameValidation #do this at the end of all other event initializations
+	
 	#$dsDiag.Trace("... Initialize window end <<")
 }#end InitializeWindow
 
@@ -535,22 +543,6 @@ function OnPostCloseDialog
 				{
 					mWriteLastUsedFolder
 				}
-			#new 2019 QS, remove file extentions if used in validation for preview new file name
-			if($Prop["_SaveCopyAsMode"].Value -eq $true)
-			{
-				$Global:OnPostAction = $true
-				$newFileName = @()
-				$newFileName += ($Prop["DocNumber"].Value.Split("."))
-				If($newFileName.Count -gt 1) 
-				{
-					$newExt = $newFileName[$newFileName.Count-1]
-					$Prop["DocNumber"].Value = $Prop["DocNumber"].Value.Replace("." + $newExt, "")
-				}
-				Else 
-				{ 
-					$Prop["DocNumber"].Value = $newFileName[0]
-				}
-			}#end _SaveCopyAsMode
 
 				if ($Prop["_CreateMode"].Value -and !$Prop["Part Number"].Value) #we empty the part number on initialize: if there is no other function to provide part numbers we should apply the Inventor default
 				{
@@ -572,8 +564,7 @@ function OnPostCloseDialog
 					{
 						$Prop["Part Number"].Value = $Prop["DocNumber"].Value
 					}
-			}
-			
+			}	
 		}
 		default
 		{

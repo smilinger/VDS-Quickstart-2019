@@ -105,7 +105,7 @@
     <None Include="CAD.Custom\addins\ADSK.QS.breadCrumb.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.CAD.Library.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.Default.ps1" />
-    <None Include="CAD.Custom\Configuration\AutoCAD-Mechanical\AutoCAD.cfg" />
+    <None Include="CAD.Custom\Configuration\AutoCAD-Vanilla\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\Inventor.cfg" />
     <None Include="CAD\addins\breadCrumb.ps1" />
@@ -146,6 +146,17 @@
     <None Include="Vault\addinVault\Menus\ShowLog.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Vault.Custom\cancel.ico" />
+    <Resource Include="Vault.Custom\GoToReplacedBy.ico" />
+    <Resource Include="Vault.Custom\GoToSelectedFile.ico" />
+    <Resource Include="Vault.Custom\GoToSource.ico" />
+    <Resource Include="Vault.Custom\ok.ico" />
+    <Resource Include="Vault.Custom\ok_.ico" />
+    <Resource Include="Vault.Custom\PlaceFromVault.ico" />
+    <Resource Include="Vault.Custom\plus.ico" />
+    <Resource Include="Vault.Custom\plus_disabled.ico" />
+    <Resource Include="Vault.Custom\plus_disabled2.ico" />
+    <Resource Include="Vault.Custom\search.ico" />
     <Resource Include="Vault.Custom\About.ico" />
     <Content Include="Vault.Custom\addinVault\QuickstartUtilityLibrary.dll" />
     <Resource Include="Vault.Custom\Claim-add.ico" />
@@ -248,7 +259,6 @@
     <Resource Include="en-US\UIStrings.xml" />
     <Resource Include="de-DE\PropertyTranslations.xml" />
     <Resource Include="de-DE\UIStrings.xml" />
-    <Resource Include="CAD.Custom\Configuration\AutoCAD-Mechanical\AutoCadDynamicProperties.xml" />
     <Resource Include="CAD.Custom\Configuration\AutoCadDynamicProperties.xml" />
     <Resource Include="CAD.Custom\Configuration\InventorDynamicProperties.xml" />
     <Content Include="HelpFiles\C.1GeneralInformation.html" />
@@ -505,7 +515,7 @@
     <Content Include="HelpFiles\Vault.html" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CAD.Custom\Configuration\AutoCAD-Mechanical\AutoCAD.xaml">
+    <Page Include="CAD.Custom\Configuration\AutoCAD-Vanilla\AutoCAD.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
