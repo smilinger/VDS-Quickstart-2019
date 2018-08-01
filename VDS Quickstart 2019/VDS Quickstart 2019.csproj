@@ -101,7 +101,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Autodesk Vault Data Standard - Code Samples.pptx" />
     <None Include="CAD.Custom\addins\ADSK.QS.breadCrumb.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.CAD.Library.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.Default.ps1" />
@@ -151,11 +150,9 @@
     <Resource Include="Vault.Custom\GoToSelectedFile.ico" />
     <Resource Include="Vault.Custom\GoToSource.ico" />
     <Resource Include="Vault.Custom\ok.ico" />
-    <Resource Include="Vault.Custom\ok_.ico" />
     <Resource Include="Vault.Custom\PlaceFromVault.ico" />
     <Resource Include="Vault.Custom\plus.ico" />
     <Resource Include="Vault.Custom\plus_disabled.ico" />
-    <Resource Include="Vault.Custom\plus_disabled2.ico" />
     <Resource Include="Vault.Custom\search.ico" />
     <Resource Include="Vault.Custom\About.ico" />
     <Content Include="Vault.Custom\addinVault\QuickstartUtilityLibrary.dll" />
@@ -595,10 +592,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vault.Custom\Configuration\ADSK.QS.InvSiblings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Vault.Custom\Configuration\ADSK.QS.ReserveNumbers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -608,10 +601,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vault.Custom\Configuration\File\ADSK.QS.CAD BOM.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vault.Custom\Configuration\File\ADSK.QS.DerivationTree.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -636,10 +625,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vault.Custom\Configuration\Task\ADSK.QS.CUSTENT.Datasheet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Vault.Custom\Configuration\ADSK.QS.ActivateSchedTask.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
