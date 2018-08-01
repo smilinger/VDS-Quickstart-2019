@@ -59,6 +59,12 @@ function InitializeWindow
 					# set the category: VDS Quickstart 2019 supports extended category differentiation for 3D components
 					InitializeInventorCategory
 					InitializeInventorNumSchm
+					If($dsWindow.FindName("lstBoxShortCuts"))
+					{
+						$dsWindow.FindName("lstBoxShortCuts").add_SelectionChanged({
+							mScClick
+						})
+					}
 
 					#region FDU Support --------------------------------------------------------------------------
 					
@@ -180,7 +186,6 @@ function InitializeWindow
 						$Prop["DocNumber"].Value = $Prop["DocNumber"].Value.TrimStart($UIString["CFG2"])
 					}
 					
-					#} #end of copymode = true
 				}
 				$false # EditMode = True
 				{
@@ -237,6 +242,13 @@ function InitializeWindow
 						$Prop["_Category"].Value = "Factory Layout"
 					}
 					#endregion FDU Support ---------------
+
+					If($dsWindow.FindName("lstBoxShortCuts"))
+					{
+						$dsWindow.FindName("lstBoxShortCuts").add_SelectionChanged({
+							mScClick
+						})
+					}
 				}
 			}
 
@@ -254,11 +266,19 @@ function InitializeWindow
 function AddinLoaded
 {
 	#Executed when DataStandard is loaded in Inventor/AutoCAD
-		$m_File = $env:TEMP + "\Folder2019.xml"
-		if (!(Test-Path $m_File)){
-			$source = $Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\Folder2019.xml"
-			Copy-Item $source $env:TEMP\Folder2019.xml
-		}
+	$m_File = $env:TEMP + "\Folder2019.xml"
+	if (!(Test-Path $m_File)){
+		$source = $Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\Folder2019.xml"
+		Copy-Item $source $env:TEMP\Folder2019.xml
+	}
+	#check Vault Client Version to match this configuration requirements; note - Office Client registers as WG or PRO 
+	$mVaultVersion = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Autodesk\Vault Workgroup\24.0\VWG-2440:407\").ProductVersion.Split(".")
+	If(-not $mVaultVersion) { $mVaultVersion = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Autodesk\Vault Professional\24.0\VPRO-2440:407\").ProductVersion.Split(".")}
+
+	If($mVaultVersion[0] -ne "24" -or $mVaultVersion[1] -lt "1" )
+	{
+		[System.Windows.MessageBox]::Show("This machine's Vault Data Standard configuration requires Vault Client 2019 Update 1 or newer installed; contact your system administrator.", "Vault Quickstart Client Configuration")
+	}
 }
 
 function AddinUnloaded
@@ -621,7 +641,6 @@ function mReadShortCuts {
 			$m_ScAll = $m_ScXML.Shortcuts.Shortcut
 			#the shortcuts need to get filtered by type of document.folder and path information related to CAD workspace
 			$global:m_ScCAD = @{}
-			$mScNames = @()
 			#$dsDiag.Trace("... Filtering Shortcuts...")
 			$m_ScAll | ForEach-Object { 
 				if (($_.NavigationContextType -eq "Connectivity.Explorer.Document.DocFolder") -and ($_.NavigationContext.URI -like "*"+$global:CAx_Root + "/*"))
@@ -629,7 +648,6 @@ function mReadShortCuts {
 					try
 					{
 						$_t = $global:m_ScCAD.Add($_.Name, $_.NavigationContext.URI)
-						$mScNames += $_.Name
 					}
 					catch {
 						$dsDiag.Trace("... ERROR Filtering Shortcuts...")
@@ -637,8 +655,8 @@ function mReadShortCuts {
 				}
 			}
 		}
-		$dsDiag.Trace("... returning Shortcuts: $mScNames")
-		return $mScNames
+		$dsDiag.Trace("... returning Shortcuts")
+		return $global:m_ScCAD
 	}
 }
 

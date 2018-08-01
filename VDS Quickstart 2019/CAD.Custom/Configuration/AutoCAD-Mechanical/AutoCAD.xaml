@@ -234,6 +234,14 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="btnNewScStyle" TargetType="{x:Type Image}">
+            <Setter Property="Source" Value="C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\Plus_disabled.ico"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsEnabled, ElementName=btnNewSc}" Value="True">
+                    <Setter Property="Source" Value="C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\Plus.ico"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </WPF:DSWindow.Resources>
     <WPF:DSWindow.InputBindings>
         <KeyBinding Key="F1" Command="{Binding PsCmd[mHelp(200)]}"/>
@@ -387,39 +395,42 @@
             <Button x:Name="btnHelp" Content="{Binding UIString[MSDCE_BTN1], FallbackValue=Help}" 
                     Command="{Binding PsCmd[mHelp(200)]}" ToolTip="F1" Height="24" />
         </Grid>
-        <Expander x:Name="expShortCutPane" Header="" Grid.RowSpan="5" ExpandDirection="Left" IsExpanded="True"
-        	Style="{StaticResource ProjectFavorites}" ToolTip="{Binding UIString[MSDCE_TT24]}" Background="#FFF0F0F0">
-            <Grid Background="#FFF0F0F0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label Content="{Binding UIString[MSDCE_LBL88], FallbackValue=Shortcuts}" Grid.ColumnSpan="4" BorderThickness="1"/>
-                <TextBox x:Name="txtNewShortCut" Grid.Row="1" ToolTip="{Binding UIString[MSDCE_TT20]}" BorderThickness="1" />
-                <Button x:Name="btnNewSc" Content="ü" Grid.Column="1" Grid.Row="1" Width="24" Height="24" FontFamily="Wingdings"
-                        FontSize="14" Foreground="#FF2FAE09" VerticalContentAlignment="Bottom" Margin="2" FontWeight="Bold" Cursor="Hand"
-                        ToolTipService.ShowOnDisabled="True" ToolTip="{Binding UIString[MSDCE_TT20]}"
-                        Style="{StaticResource btnScEnabled}"
-                        Command="{Binding PsCmd[mAddSc]}"/>
-                <ListBox x:Name="lstBoxShortCuts" Grid.Row="2" MinWidth="180" Margin="0" ToolTip="{Binding UIString[MSDCE_TT23]}" ItemsSource="{Binding PsList[mReadShortCuts]}" MaxWidth="300" MaxHeight="500" Grid.ColumnSpan="2">
-                    <ListBox.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="{Binding UIString[MSDCE_BTN2], FallbackValue=Activate}" Command="{Binding PsCmd[mScClick]}"/>
-                            <MenuItem Header="{Binding UIString[MSDCE_BTN3], FallbackValue=Activate}" Command="{Binding PsCmd[mRemoveSc]}"/>
-                        </ContextMenu>
-                    </ListBox.ContextMenu>
-                </ListBox>
-                <Border BorderBrush="#FFABADB3" Grid.Row="3"
-                	Visibility="{Binding CopyMode, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.ColumnSpan="2" MaxWidth="250" MaxHeight="250" Margin="0,5,0,0" BorderThickness="0">
-                    <Image Source="{Binding Prop[Thumbnail].Value}" Margin="0" Stretch="UniformToFill" />
-                </Border>
-            </Grid>
+        <Expander x:Name="expShortCutPane" Header="" ExpandDirection="Left" IsExpanded="True"
+                Style="{StaticResource ProjectFavorites}" ToolTip="{Binding UIString[MSDCE_TT24]}" Background="#FFF0F0F0" Grid.RowSpan="5">
+            <GroupBox x:Name="GroupShortcuts" Header="{Binding UIString[MSDCE_LBL88], FallbackValue=Shortcuts}" BorderThickness="0">
+                <Grid Background="#FFF0F0F0" Width="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="txtNewShortCut1" Grid.Row="0" ToolTip="{Binding UIString[MSDCE_TT20]}" BorderThickness="1" />
+                    <Button x:Name="btnNewSc1" Grid.Column="1" Grid.Row="0" Width="24" Height="24" FontFamily="Wingdings"
+                            FontSize="14" Foreground="#FF2FAE09" VerticalContentAlignment="Bottom" Margin="2,2,0,2" FontWeight="Bold" Cursor="Hand"
+                            ToolTipService.ShowOnDisabled="True" ToolTip="{Binding UIString[MSDCE_TT20]}"
+                            Style="{StaticResource btnScEnabled}"
+                            Command="{Binding PsCmd[mAddSc]}">
+                        <Image x:Name="btnNewScImg" Style="{StaticResource btnNewScStyle}"/>
+                    </Button>
+                    <ListBox x:Name="lstBoxShortCuts1" Grid.Row="1" MinWidth="180" Margin="0" ItemsSource="{Binding PsVal[mReadShortCuts]}" ToolTip="{Binding UIString[MSDCE_TT23]}"  
+                            MaxWidth="300" MaxHeight="500" Grid.ColumnSpan="2" DisplayMemberPath="Key" SelectedValuePath="Key">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="{Binding UIString[MSDCE_BTN3], FallbackValue=Activate}" Command="{Binding PsCmd[mRemoveSc]}">
+                                    <MenuItem.Icon>
+                                        <Image Source="C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\cancel.ico" />
+
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                    </ListBox>
+                </Grid>
+            </GroupBox>
         </Expander>
     </Grid>
 </WPF:DSWindow>

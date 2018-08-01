@@ -204,6 +204,14 @@
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Text, ElementName=txtNewShortCut}" Value="">
                     <Setter Property="IsEnabled" Value="False" />
+                 </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="btnNewScStyle" TargetType="Image">
+            <Setter Property="Source" Value="C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\Plus_disabled.ico"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsEnabled, ElementName=btnNewSc}" Value="True">
+                    <Setter Property="Source" Value="C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\Plus.ico"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -423,16 +431,22 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBox x:Name="txtNewShortCut" Grid.Row="0" ToolTip="{Binding UIString[MSDCE_TT20]}" BorderThickness="1" />
-                    <Button x:Name="btnNewSc" Content="ü" Grid.Column="1" Grid.Row="0" Width="24" Height="24" FontFamily="Wingdings"
+                    <Button x:Name="btnNewSc" Grid.Column="1" Grid.Row="0" Width="24" Height="24" FontFamily="Wingdings"
         				FontSize="14" Foreground="#FF2FAE09" VerticalContentAlignment="Bottom" Margin="2,2,0,2" FontWeight="Bold" Cursor="Hand"
         				ToolTipService.ShowOnDisabled="True" ToolTip="{Binding UIString[MSDCE_TT20]}"
         				Style="{StaticResource btnScEnabled}"
-        				Command="{Binding PsCmd[mAddSc]}"/>
-                    <ListBox x:Name="lstBoxShortCuts" Grid.Row="1" MinWidth="180" Margin="0" ItemsSource="{Binding PsList[mReadShortCuts]}" ToolTip="{Binding UIString[MSDCE_TT23]}"  MaxWidth="300" MaxHeight="500" Grid.ColumnSpan="2">
+        				Command="{Binding PsCmd[mAddSc]}">
+                        <Image x:Name="btnNewScImg" Style="{StaticResource btnNewScStyle}"/>
+                    </Button>
+                    <ListBox x:Name="lstBoxShortCuts" Grid.Row="1" MinWidth="180" Margin="0" ItemsSource="{Binding PsVal[mReadShortCuts]}" ToolTip="{Binding UIString[MSDCE_TT23]}"  
+                             MaxWidth="300" MaxHeight="500" Grid.ColumnSpan="2" DisplayMemberPath="Key" SelectedValuePath="Key">
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="{Binding UIString[MSDCE_BTN2], FallbackValue=Activate}" Command="{Binding PsCmd[mScClick]}"/>
-                                <MenuItem Header="{Binding UIString[MSDCE_BTN3], FallbackValue=Activate}" Command="{Binding PsCmd[mRemoveSc]}"/>
+                                <MenuItem Header="{Binding UIString[MSDCE_BTN3], FallbackValue=Activate}" Command="{Binding PsCmd[mRemoveSc]}">
+                                    <MenuItem.Icon>
+                                        <Image Source="C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\cancel.ico" ></Image>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </ContextMenu>
                         </ListBox.ContextMenu>
                     </ListBox>

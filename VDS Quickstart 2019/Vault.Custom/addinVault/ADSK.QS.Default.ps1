@@ -63,12 +63,7 @@ function ValidateFolderName
 {
 	if($Prop["_FolderName"].Value -or !$dsWindow.FindName("DSNumSchmsCtrl").NumSchmFieldsEmpty)
 	{
-		if($Prop["_CreateMode"])
-		{
-			$myValResult = mFldrNameValidation
-			return $myValResult
-		}
-		return $true
+		return $true;
 	}
 	return $false;
 }
@@ -160,12 +155,6 @@ function InitializeWindow
 				#endregion
 			}
 		}
-		"ActivateSchedTaskWindow"
-		{
-			ADSK.QS.ReadSchedTasks
-			$dsWindow.FindName("dataGrdSchedTasks").add_SelectionChanged({ ADSK.QS.TaskSelectionChanged})
-		}
-
 	}
 }
 
@@ -188,11 +177,11 @@ function SetWindowTitle($newFile, $editFile, $name)
 
 function OnLogOn
 {
-	#Executed when User logs on Vault
-	#$vaultUsername can be used to get the username, which is used in Vault on login
+	#Executed when User logs on Vault; $vaultUsername can be used to get the username, which is used in Vault on login
+	
+	#check Vault Client Version to match this configuration requirements; note - Office Client registers as WG or PRO 
 	$mVaultVersion = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Autodesk\Vault Workgroup\24.0\VWG-2440:407\").ProductVersion.Split(".")
 	If(-not $mVaultVersion) { $mVaultVersion = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Autodesk\Vault Professional\24.0\VPRO-2440:407\").ProductVersion.Split(".")}
-	If(-not $mVaultVersion) { $mVaultVersion = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Autodesk\Vault Office\24.0\VOFF-2440:407\").ProductVersion.Split(".")}
 
 	If($mVaultVersion[0] -ne "24" -or $mVaultVersion[1] -lt "1" )
 	{
