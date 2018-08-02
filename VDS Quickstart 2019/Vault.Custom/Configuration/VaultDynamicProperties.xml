@@ -1,40 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DynamicProperties>
-  <DynamicPropertiesCategory Category="3D component" Type="File">
+<DynamicPropertiesCategory Category="3D Component" Type="File">
     <DynamicProperty>Title</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
-    <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Weight</DynamicProperty>
-    <DynamicProperty>Spare-Wear Part</DynamicProperty>
-    <DynamicProperty>Dimensions/Size</DynamicProperty>
-    <DynamicProperty>Description 2</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
-    <DynamicProperty>Stock Number</DynamicProperty>
-    <DynamicProperty>Length (Cut)</DynamicProperty>
-    <DynamicProperty>Semi finished</DynamicProperty>
-    <DynamicProperty>Ident Number</DynamicProperty>
-    <DynamicProperty>Project Number</DynamicProperty>
-    <DynamicProperty>Source File</DynamicProperty>
-    <DynamicProperty>Author</DynamicProperty>
-    <DynamicProperty>Project</DynamicProperty>
-    <DynamicProperty>Mfg Approved By</DynamicProperty>
-    <DynamicProperty>Manager</DynamicProperty>
-    <DynamicProperty>Engr Approved By</DynamicProperty>
-    <DynamicProperty>FDS Key</DynamicProperty>
-    <DynamicProperty>Designer</DynamicProperty>
-    <DynamicProperty>Engineer</DynamicProperty>
-    <DynamicProperty>Comments</DynamicProperty>
-    <DynamicProperty>Cost</DynamicProperty>
-    <DynamicProperty>Keywords</DynamicProperty>
-    <DynamicProperty>Subject</DynamicProperty>
-    <DynamicProperty>Company</DynamicProperty>
-    <DynamicProperty>Project Type</DynamicProperty>
-    <DynamicProperty>Checked By</DynamicProperty>
-    <DynamicProperty>Application Version</DynamicProperty>
+    <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Dimensions/Size</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
-    <DynamicProperty>FLCwsID</DynamicProperty>
-    <DynamicProperty>FLCdmsID</DynamicProperty>
-    <DynamicProperty>Replacement for</DynamicProperty>
+    <DynamicProperty>Length (Cut)</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty>Spare-Wear Part</DynamicProperty>
+    <DynamicProperty>Semi finished</DynamicProperty>
+    <DynamicProperty>Stock Number</DynamicProperty>
+    <DynamicProperty Hidden="True">Application Version</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Part" Type="File">
     <DynamicProperty>Title</DynamicProperty>
@@ -239,7 +217,7 @@
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Scale</DynamicProperty>
     <DynamicProperty>Sheet</DynamicProperty>
-    <DynamicProperty>DWG Type</DynamicProperty>
+    <DynamicProperty Hidden=True>DWG Type</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Folder" Type="Folder">
     <DynamicProperty>Title</DynamicProperty>
@@ -253,5 +231,15 @@
     <DynamicProperty>Ident Number</DynamicProperty>
     <DynamicProperty>Date Start</DynamicProperty>
     <DynamicProperty>Date End</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Drawing Inventor" Type="FILE">
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Format</DynamicProperty>
+    <DynamicProperty Hidden="True">Application Version</DynamicProperty>
+    <DynamicProperty>Scale</DynamicProperty>
+    <DynamicProperty>Sheet</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicProperties>

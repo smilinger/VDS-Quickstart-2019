@@ -1,35 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DynamicsProperties>
-  <DynamicPropertiesCategory Category="3D component">
-    <DynamicProperty Hidden="True">Ident Number</DynamicProperty>
+  <DynamicPropertiesCategory Category="3D Component">
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Project Number</DynamicProperty>
     <DynamicProperty>Material</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
-    <DynamicProperty>Weight</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Spare-Wear Part</DynamicProperty>
     <DynamicProperty>Semi finished</DynamicProperty>
     <DynamicProperty>Stock Number</DynamicProperty>
     <DynamicProperty Hidden="True">G_L</DynamicProperty>
     <DynamicProperty Hidden="True">PL</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
-    <DynamicProperty>Project</DynamicProperty>
-    <DynamicProperty>Key Parameters</DynamicProperty>
-    <DynamicProperty>Project Type</DynamicProperty>
-    <DynamicProperty>Designer</DynamicProperty>
-    <DynamicProperty>Engineer</DynamicProperty>
-    <DynamicProperty>Mfg Approved by</DynamicProperty>
-    <DynamicProperty>Cost</DynamicProperty>
-    <DynamicProperty>Engr Approved by</DynamicProperty>
-    <DynamicProperty>Checked by</DynamicProperty>
-    <DynamicProperty>Author</DynamicProperty>
-    <DynamicProperty>Subject</DynamicProperty>
-    <DynamicProperty>Company</DynamicProperty>
-    <DynamicProperty>Manager</DynamicProperty>
-    <DynamicProperty>Comments</DynamicProperty>
-    <DynamicProperty>Keywords</DynamicProperty>
+    <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Part" Type="File">
     <DynamicProperty>Title</DynamicProperty>
