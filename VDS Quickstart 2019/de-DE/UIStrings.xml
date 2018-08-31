@@ -229,6 +229,8 @@
   <UIString ID="MSDCE_BTN1">Hilfe</UIString>
   <UIString ID="MSDCE_MNU19">Vault Quickstart Dokumentation</UIString>
   <UIString ID="MSDCE_MSG02">Hilfeseite nicht gefunden!</UIString>
+  <UIString ID="ADSK.QS.MSG.00">Vault Quickstart Client Configuration</UIString>
+  <UIString ID="ADSK.QS.MSG.01">Haben Sie sich abgemeldet, um an anderen Vault und/oder Server an zu melden? Wenn ja, starten sie Vault Explorer statt dessen neu und melden sich anschliessend an!</UIString>
   <!--Quickstart Help And Documentation end-->
 
   <!--Quickstart ShortCut Pane-->

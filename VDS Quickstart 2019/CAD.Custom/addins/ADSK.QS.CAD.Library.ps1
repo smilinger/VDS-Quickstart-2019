@@ -11,6 +11,12 @@
 #endregion
 
 #region - version history
+#Version Info - VDS quickstart CAD Library 2019.1.1
+	# added and updated mGetProjectFolderToCADFile function 
+	# added mGetPropTranslations, fixed failure in getting default language for DB if not set in DSLanguages
+
+#Version Info - VDS quickstart CAD Library 2019.1.0
+	# added mGetProjectFolderPropToCadFile
 
 # Version Info - VDS Quickstart CAD Library 2019.0.0
 	# initial release - mGetFolderPropValue function added
@@ -33,4 +39,86 @@ function mGetFolderPropValue ([Int64] $mFldID, [STRING] $mDispName)
 	$mProp = $vault.PropertyService.GetProperties("FLDR",$mEntIDs, $mPropDefIDs)
 	$mProp | Where-Object { $mPropVal = $_.Val }
 	Return $mPropVal
+}
+
+function mGetProjectFolderPropToCADFile ([String] $mFolderSourceProperty, [String] $mCadFileTargetProperty)
+{
+		#get the Vault path of Inventors working folder
+		$mWfVault = $Prop["_VaultVirtualPath"].Value + $Prop["_WorkspacePath"].Value
+
+		#get local path of vault workspace path
+		try {
+			$mWFEnforced = $vault.DocumentService.GetEnforceWorkingFolder()
+			$mIpjEnforced = $vault.DocumentService.GetEnforceInventorProjectFile()
+			if ($mWFEnforced -eq $true -and $mIpjEnforced -eq $true) {
+				$m_IPJ = $vault.DocumentService.GetInventorProjectFileLocation()
+				$m_IPJ = $m_IPJ.Split("/.")
+				$mCAxRoot = $m_IPJ[1]
+				$mWF = $vault.DocumentService.GetRequiredWorkingFolderLocation()				
+				$mWFCAD = $mWF + $mCAxRoot
+				#merge the local path and relative target path of new file in vault
+				$mPath = $Prop["_FilePath"].Value.Replace($mWFCAD, "")
+				$mPath = $mWfVault + $mPath
+				$mPath = $mPath -replace "\\", "/" -replace "//", "/" -replace "/./",""
+				$mFld = $vault.DocumentService.GetFolderByPath($mPath)
+				#the loop to get the next parent project category folder; skip if you don't look for projects
+				IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $mProjectFound = $true}
+				Else{
+					Do {
+						$mParID = $mFld.ParID
+						$mFld = $vault.DocumentService.GetFolderByID($mParID)
+						IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $mProjectFound = $true}
+					} 
+					Until (($mFld.Cat.CatName -eq $UIString["CAT6"]) -or ($mFld.FullName -eq "$"))
+				}	
+			}
+			else {
+				[System.Windows.MessageBox]::Show("Copy Project Property Expects Enforced Working Folder & IPJ!" , "Inventor VDS Client")
+				return
+			}
+		}
+		catch { 
+			[System.Windows.MessageBox]::Show("Failed building local path of selected Vault folder. (Working Folder & IPJ Enforced?)" , "Inventor VDS Client")
+		}			
+			
+		If ($mProjectFound -eq $true) 
+		{
+			#Project's property Value copied to CAD file property
+			$Prop[$mCadFileTargetProperty].Value = mGetFolderPropValue $mFld.Id $mFolderSourceProperty
+		}
+		Else{
+			$Prop[$mCadFileTargetProperty].Value = ""
+		}
+}
+
+# VDS Dialogs and Tabs share property name translations $Prop[_XLTN_*] according DSLanguage.xml override or default powerShell UI culture;
+# VDS MenuCommand scripts don't read as a default; call this function in case $UIString[] key value pairs are needed
+function mGetPropTranslations
+{
+	# check language override settings of VDS
+	[xml]$mDSLangFile = Get-Content "C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault\DSLanguages.xml"
+	$mUICodes = $mDSLangFile.SelectNodes("/DSLanguages/Language_Code")
+	$mLCode = @{}
+	Foreach ($xmlAttr in $mUICodes)
+	{
+		$mKey = $xmlAttr.ID
+		$mValue = $xmlAttr.InnerXML
+		$mLCode.Add($mKey, $mValue)
+	}
+	#If override exists, apply it, else continue with $PSUICulture
+	If ($mLCode["DB"]){
+		$mVdsDb = $mLCode["DB"]
+	} 
+	Else{
+		$mVdsDb=$PSUICulture
+	}
+	[xml]$mPrpTrnsltnFile = get-content ("C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\" + $mVdsDb + "\PropertyTranslations.xml")
+	$mPrpTrnsltns = @{}
+	$xmlPrpTrnsltns = $mPrpTrnsltnFile.SelectNodes("/PropertyTranslations/PropertyTranslation")
+	Foreach ($xmlAttr in $xmlPrpTrnsltns) {
+		$mKey = $xmlAttr.Name
+		$mValue = $xmlAttr.InnerXML
+		$mPrpTrnsltns.Add($mKey, $mValue)
+		}
+	return $mPrpTrnsltns
 }

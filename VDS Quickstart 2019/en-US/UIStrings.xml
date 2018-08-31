@@ -230,6 +230,8 @@
   <UIString ID="MSDCE_BTN1">Help</UIString>
   <UIString ID="MSDCE_MNU19">Vault Quickstart Documentation</UIString>
   <UIString ID="MSDCE_MSG02">Help page not found!</UIString>
+  <UIString ID="ADSK.QS.MSG.00">Vault Quickstart Client Configuration</UIString>
+  <UIString ID="ADSK.QS.MSG.01">Did you log off intending to log in to another Vault or Server? If so, restart the client instead before logging on again.</UIString>
   <!--Quickstart Help And Documentation end-->
 
   <!--Quickstart ShortCut Pane-->

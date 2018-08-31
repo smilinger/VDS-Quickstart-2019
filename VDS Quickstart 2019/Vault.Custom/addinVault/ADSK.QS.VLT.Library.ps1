@@ -11,6 +11,9 @@
 #endregion
 
 #region - version history
+# Version Info - VDS Quickstart Vault Library 2019.1.1
+	# fixed failure in getting PropertyTranslations for default DSLanguages settings
+
 # Version Info - VDS Quickstart Vault Library 2019.1.0
 	# new name, aligned to Quickstart naming convention and added CAD extension library
 
@@ -180,7 +183,7 @@ function mGetPropTranslations
 		$mVdsDb = $mLCode["DB"]
 	} 
 	Else{
-		$mVdsUi=$PSUICulture
+		$mVdsDb=$PSUICulture
 	}
 	[xml]$mPrpTrnsltnFile = get-content ("C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\" + $mVdsDb + "\PropertyTranslations.xml")
 	$mPrpTrnsltns = @{}

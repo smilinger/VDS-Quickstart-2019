@@ -32,6 +32,7 @@
   <PropertyTranslation Name="SCALE">Scale</PropertyTranslation>
   <PropertyTranslation Name="LENGTH">Length</PropertyTranslation>
   <PropertyTranslation Name="IDENTNUMBER">Ident Number</PropertyTranslation>
+  <PropertyTranslation Name="PROJECT">Project</PropertyTranslation>
   <PropertyTranslation Name="PROJECTNUMBER">Project Number</PropertyTranslation>
   <PropertyTranslation Name="CUSTOMER">Customer</PropertyTranslation>
   <PropertyTranslation Name="DATESTART">Date Start</PropertyTranslation>
