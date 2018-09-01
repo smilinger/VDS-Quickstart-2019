@@ -18,15 +18,6 @@ function InitializeWindow
 	#InitializeCategory #Quickstart differentiates for Inventor and AutoCAD
 	#InitializeNumSchm #Quickstart differentiates for Inventor and AutoCAD
 	#InitializeBreadCrumb #Quickstart differentiates Inventor, Inventor C&H, T&P, FG, DA dialogs
-
-	#Copy Parent Project Number to file property "Project Number" if exists
-		If($Prop["Project"]){
-			$Global:mPropTrans = mGetPropTranslations
-			$dsWindow.FindName("txtPath").add_TextChanged({		
-				mGetProjectFolderPropToCADFile  "Name" $mPropTrans["Project"]
-			})
-		}
-
 	#endregion rules applying commonly
 
 	$mWindowName = $dsWindow.Name
