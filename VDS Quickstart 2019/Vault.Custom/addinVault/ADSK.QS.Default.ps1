@@ -533,6 +533,11 @@ function m_CategoryChanged
 		{
 			#Quickstart uses the default numbering scheme for files; GoTo GetNumSchms function to disable this filter incase you'd like to apply numbering per category for files as well
 			$Prop['_XLTN_AUTHOR'].Value = $VaultConnection.UserName
+
+			#Copy Parent Project Number to file property "Project Number" if exists
+			If($Prop["_XLTN_PROJECT"]){
+				mGetProjectFolderPropToVaultFile "Name" $Prop["_XLTN_PROJECT"].Name
+			}
 		}
 
 		"FolderWindow" 
