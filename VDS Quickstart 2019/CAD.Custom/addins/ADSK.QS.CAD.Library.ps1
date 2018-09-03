@@ -41,7 +41,7 @@ function mGetFolderPropValue ([Int64] $mFldID, [STRING] $mDispName)
 	Return $mPropVal
 }
 
-function mGetProjectFolderPropToCADFile ([String] $mFolderSourceProperty, [String] $mCadFileTargetProperty)
+function mGetProjectFolderPropToCADFile ([String] $mFolderSourcePropertyName, [String] $mCadFileTargetPropertyName)
 {
 	#get the Vault path of Inventors working folder
 	$mappedRootPath = $Prop["_VaultVirtualPath"].Value + $Prop["_WorkspacePath"].Value
@@ -95,11 +95,11 @@ function mGetProjectFolderPropToCADFile ([String] $mFolderSourceProperty, [Strin
 			
 	If ($mProjectFound -eq $true) {
 		#Project's property Value copied to CAD file property
-		$Prop[$mCadFileTargetProperty].Value = mGetFolderPropValue $mFld.Id $mFolderSourceProperty
+		$Prop[$mCadFileTargetPropertyName].Value = mGetFolderPropValue $mFld.Id $mFolderSourcePropertyName
 	}
 	Else{
 		#empty field value if file will not link to a project
-		$Prop[$mCadFileTargetProperty].Value = ""
+		$Prop[$mCadFileTargetPropertyName].Value = ""
 	}
 }
 
