@@ -13,6 +13,7 @@
 #region - version history
 # Version Info - VDS Quickstart Vault Library 2019.1.1
 	# fixed failure in getting PropertyTranslations for default DSLanguages settings
+	# added mGetProjectFolderPropToVaultFile
 
 # Version Info - VDS Quickstart Vault Library 2019.1.0
 	# new name, aligned to Quickstart naming convention and added CAD extension library
@@ -297,5 +298,29 @@ function mSearchCustentOfCat([String]$mCatDispName)
 
 		return $mResultAll				
 		break; #limit the search result to the first result page; page scrolling not implemented in this snippet release
+	}
+}
+
+function mGetProjectFolderPropToVaultFile ([String] $mFolderSourcePropertyName, [String] $mFileTargetPropertyName)
+{
+	$mPath = $Prop["_FilePath"].Value
+	$mFld = $vault.DocumentService.GetFolderByPath($mPath)
+
+	IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $Global:mProjectFound = $true}
+	ElseIf ($mPath -ne "$"){
+		Do {
+			$mParID = $mFld.ParID
+			$mFld = $vault.DocumentService.GetFolderByID($mParID)
+			IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $Global:mProjectFound = $true}
+		} Until (($mFld.Cat.CatName -eq $UIString["CAT6"]) -or ($mFld.FullName -eq "$"))
+	}
+
+	If ($mProjectFound -eq $true) {
+		#Project's property Value copied to file property
+		$Prop[$mFileTargetPropertyName].Value = mGetFolderPropValue $mFld.Id $mFolderSourcePropertyName
+	}
+	Else{
+		#empty field value if file will not link to a project
+		$Prop[$mFileTargetPropertyName].Value = ""
 	}
 }
