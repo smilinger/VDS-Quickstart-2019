@@ -217,7 +217,7 @@
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Scale</DynamicProperty>
     <DynamicProperty>Sheet</DynamicProperty>
-    <DynamicProperty Hidden=True>DWG Type</DynamicProperty>
+    <DynamicProperty Hidden="True">DWG Type</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Folder" Type="Folder">
     <DynamicProperty>Title</DynamicProperty>

@@ -12,7 +12,7 @@
 
 #region - version history
 #Version Info - VDS quickstart CAD Library 2019.1.1
-	# added and updated mGetProjectFolderToCADFile function 
+	# added and updated mGetProjectFolderToCADFile function; supports AutoCAD without IPJ settings enforeced.
 	# added mGetPropTranslations, fixed failure in getting default language for DB if not set in DSLanguages
 
 #Version Info - VDS quickstart CAD Library 2019.1.0
@@ -41,54 +41,66 @@ function mGetFolderPropValue ([Int64] $mFldID, [STRING] $mDispName)
 	Return $mPropVal
 }
 
-function mGetProjectFolderPropToCADFile ([String] $mFolderSourceProperty, [String] $mCadFileTargetProperty)
+function mGetProjectFolderPropToCADFile ([String] $mFolderSourcePropertyName, [String] $mCadFileTargetPropertyName)
 {
-		#get the Vault path of Inventors working folder
-		$mWfVault = $Prop["_VaultVirtualPath"].Value + $Prop["_WorkspacePath"].Value
+	#get the Vault path of Inventors working folder
+	$mappedRootPath = $Prop["_VaultVirtualPath"].Value + $Prop["_WorkspacePath"].Value
+    $mappedRootPath = $mappedRootPath -replace "\\", "/" -replace "//", "/"
+    if ($mappedRootPath -eq '')
+    {
+        $mappedRootPath = '$/'
+    }
+	$dsDiag.Trace("mapped root: $($mappedRootPath)")
+	$mWfVault = $mappedRootPath
+					
+	#get local path of vault workspace path for Inventor
+	If($dsWindow.Name -eq "InventorWindow"){
+		$mCAxRoot = $mappedRootPath.Split("/.")[1]
+	}
+	if ($dsWindow.Name -eq "AutoCADWindow") {
+		$mCAxRoot = ""
+	}
 
-		#get local path of vault workspace path
-		try {
-			$mWFEnforced = $vault.DocumentService.GetEnforceWorkingFolder()
-			$mIpjEnforced = $vault.DocumentService.GetEnforceInventorProjectFile()
-			if ($mWFEnforced -eq $true -and $mIpjEnforced -eq $true) {
-				$m_IPJ = $vault.DocumentService.GetInventorProjectFileLocation()
-				$m_IPJ = $m_IPJ.Split("/.")
-				$mCAxRoot = $m_IPJ[1]
-				$mWF = $vault.DocumentService.GetRequiredWorkingFolderLocation()				
-				$mWFCAD = $mWF + $mCAxRoot
-				#merge the local path and relative target path of new file in vault
-				$mPath = $Prop["_FilePath"].Value.Replace($mWFCAD, "")
-				$mPath = $mWfVault + $mPath
-				$mPath = $mPath -replace "\\", "/" -replace "//", "/" -replace "/./",""
-				$mFld = $vault.DocumentService.GetFolderByPath($mPath)
-				#the loop to get the next parent project category folder; skip if you don't look for projects
+	if($vault.DocumentService.GetEnforceWorkingFolder() -eq "true") {
+		$mWF = $vault.DocumentService.GetRequiredWorkingFolderLocation()
+	}
+	else {
+		[System.Windows.MessageBox]::Show("Copy Project Property Expects Enforced Working Folder & IPJ!" , "Inventor VDS Client")
+		return
+	}
+		
+	try {
+		$dsDiag.Trace("mWF: $mWF")
+		$mWFCAD = $mWF + $mCAxRoot
+		#merge the local path and relative target path of new file in vault
+		$mPath = $Prop["_FilePath"].Value.Replace($mWFCAD, "")
+		$mPath = $mWfVault + $mPath
+		$mPath = $mPath.Replace(".\","")
+		$mPath = $mPath.Replace("\", "/")
+		$mFld = $vault.DocumentService.GetFolderByPath($mPath)
+		#the loop to get the next parent project category folder; skip if you don't look for projects
+		IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $mProjectFound = $true}
+		ElseIf ($mPath -ne "$/"){
+			Do {
+				$mParID = $mFld.ParID
+				$mFld = $vault.DocumentService.GetFolderByID($mParID)
 				IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $mProjectFound = $true}
-				Else{
-					Do {
-						$mParID = $mFld.ParID
-						$mFld = $vault.DocumentService.GetFolderByID($mParID)
-						IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $mProjectFound = $true}
-					} 
-					Until (($mFld.Cat.CatName -eq $UIString["CAT6"]) -or ($mFld.FullName -eq "$"))
-				}	
-			}
-			else {
-				[System.Windows.MessageBox]::Show("Copy Project Property Expects Enforced Working Folder & IPJ!" , "Inventor VDS Client")
-				return
-			}
-		}
-		catch { 
-			[System.Windows.MessageBox]::Show("Failed building local path of selected Vault folder. (Working Folder & IPJ Enforced?)" , "Inventor VDS Client")
-		}			
+			} 
+			Until (($mFld.Cat.CatName -eq $UIString["CAT6"]) -or ($mFld.FullName -eq "$"))
+		}	
+	}
+	catch { 
+		[System.Windows.MessageBox]::Show("Failed retreiving the target Vault folder's path of this new file" , "Inventor VDS Client")
+	}			
 			
-		If ($mProjectFound -eq $true) 
-		{
-			#Project's property Value copied to CAD file property
-			$Prop[$mCadFileTargetProperty].Value = mGetFolderPropValue $mFld.Id $mFolderSourceProperty
-		}
-		Else{
-			$Prop[$mCadFileTargetProperty].Value = ""
-		}
+	If ($mProjectFound -eq $true) {
+		#Project's property Value copied to CAD file property
+		$Prop[$mCadFileTargetPropertyName].Value = mGetFolderPropValue $mFld.Id $mFolderSourcePropertyName
+	}
+	Else{
+		#empty field value if file will not link to a project
+		$Prop[$mCadFileTargetPropertyName].Value = ""
+	}
 }
 
 # VDS Dialogs and Tabs share property name translations $Prop[_XLTN_*] according DSLanguage.xml override or default powerShell UI culture;
