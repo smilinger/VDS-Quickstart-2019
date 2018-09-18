@@ -330,7 +330,40 @@
   <UIString ID="Adsk.Org.Pers.Link_02">Primary</UIString>
   <UIString ID="Adsk.Org.Pers.Link_03">Create Link</UIString>
   <UIString ID="Adsk.Org.Pers.Link_04">Enable to create links to any selected item on project creation.</UIString>
-  <UIString ID="Adsk.Org.Pers.Link_05">Select customer name from "Organisation" Workspace. Optionally select contact name also. Only persona linked to organisations are listed as contact name.</UIString>
+  <UIString ID="Adsk.Org.Pers.Link_05">Select customer name from "Organisations" Workspace. Optionally select contact name also. Only contacts linked to organisations are listed as contact name.</UIString>
+  <UIString ID="Adsk.Org.Pers.Link_06">Select Customer and Contact from "Organisations" Workspace</UIString>
+  <UIString ID="Adsk.Org.Pers.Link_07">Assign Person to existing Organisation</UIString>
   <!--Cascading Organisation/Person selection & link creation END-->
   
+  <!--ItemMaster Search and Item Tab START-->
+  <UIString ID="Adsk.QS.ItemSearch_00">Item Master</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_01">Multiple Properties</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_02">Title (Item,CO)</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_03">Description (Item,CO)</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_04">Number</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_05">Category Name</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_06">Item Master  (Search Results)</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_07">Search</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_08">Attention: The result is based on an incomplete index! Contact your Administrator, if you continue seeing this message.</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_09">Search result is limited to page size {0}; Total number of items found: {1}. Refine your search criterias and search again.</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_10">Expand Item Query Builder for item lookup and data copy.</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_11">Copy Item Data</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_12">Copy meta data to file properties</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_13">Semi finished</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_14">Purchased</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_15">The current file exists in Vault but is not accessible for the current login user.</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_16">The item assigned to the opened file exists in Vault but is not accessible for the current login user. Hit Refresh, if the status of the item changed.</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_17">The current file doesn't exist in Vault. Check-in first and assign an item to display metadata in this tab.</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_18">No Item is currently assigned. Assign an item in Vault Explorer's Item Master to display metadata in this tab.</UIString>
+  <!--<UIString ID="Adsk.QS.ItemSearch_19">'Copy Item Data' is disabled because this file is already assigned to an item!</UIString>-->
+  <UIString ID="Adsk.QS.ItemSearch_20">This file is already assigned to an item. Selecting another item will overwrite Title and Part Number values and re-assign this file to the selected item on next item update.{0}{1}Select 'Yes' to overwrite, select 'No' to cancel.</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_21">This file is already assigned to an item. However, do you want to overwrite Part Number and Title with the selected item's data?</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_22">VDS Quickstart Configuration expects 'Enforced Working Folder' to display 'Assigned Item' data. Contact your Vault Administrator.</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_23">Units</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_24">Last Updated By</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_25">Last Updated</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_26">Property Name</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_27">Property Value</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_28">Assigned Item</UIString>
+  <!--ItemMaster Search and Item Tab END-->
 </UIStrings>

@@ -11,7 +11,7 @@
 #=============================================================================
 
 function InitializeWindow
-{
+{    
 	#region rules applying commonly
     $dsWindow.Title = SetWindowTitle
 	#InitializeFileNameValidation #Quickstart initializes at latest to avoid multiple events by UI changes
@@ -177,7 +177,7 @@ function InitializeWindow
 								}
 							} 
 							catch {
-								$dsDiag.Trace("Set path, filename and properties for IPN: At least one custom property failed, most likely it did not exist and is not part of the cfg ")
+								#$dsDiag.Trace("Set path, filename and properties for IPN: At least one custom property failed, most likely it did not exist and is not part of the cfg ")
 							}
 						}
 
@@ -270,7 +270,9 @@ function InitializeWindow
 	} #end switch windows
 	
 	$global:expandBreadCrumb = $true
-	
+
+	if($dsWindow.FindName("tabItemProperties")) { mInitializeTabItemProps}
+
 	InitializeFileNameValidation #do this at the end of all other event initializations
 	
 	#$dsDiag.Trace("... Initialize window end <<")
@@ -648,7 +650,7 @@ function mReadShortCuts {
 				}
 			}
 		}
-		$dsDiag.Trace("... returning Shortcuts")
+		#$dsDiag.Trace("... returning Shortcuts")
 		return $global:m_ScCAD
 	}
 }
@@ -759,7 +761,7 @@ function mAddShortCutByName([STRING] $mScName)
 	}
 	catch 
 	{
-		$dsDiag.Trace("..problem encountered adding ShortCut <<")
+		#$dsDiag.Trace("..problem encountered adding ShortCut <<")
 		return $false
 	}
 }

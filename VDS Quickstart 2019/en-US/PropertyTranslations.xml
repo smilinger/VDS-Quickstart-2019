@@ -46,6 +46,9 @@
   <PropertyTranslation Name="CONTACTNAME">Contact Person</PropertyTranslation>
   <!--Quickstart 2019 end-->
 
+  <!--Quickstart Extensions start-->
+  <PropertyTranslation Name ="ORGANISATION">Organisation</PropertyTranslation>
+  <!--Quickstart Extensions end-->
 
 </PropertyTranslations>
 

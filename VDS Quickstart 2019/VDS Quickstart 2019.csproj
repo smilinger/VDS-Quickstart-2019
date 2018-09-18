@@ -104,6 +104,7 @@
     <None Include="CAD.Custom\addins\ADSK.QS.breadCrumb.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.CAD.Library.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.Default.ps1" />
+    <None Include="CAD.Custom\addins\ADSK.QS.ItemLookup.ps1" />
     <None Include="CAD.Custom\Configuration\AutoCAD-Vanilla\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\Inventor.cfg" />
@@ -145,6 +146,15 @@
     <None Include="Vault\addinVault\Menus\ShowLog.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Vault.Custom\CopyIcon.ico" />
+    <Resource Include="Vault.Custom\ItemMaster.ico" />
+    <Resource Include="Vault.Custom\ItemMaster.png" />
+    <Resource Include="Vault.Custom\Refresh_16.ico" />
+    <Resource Include="Vault.Custom\Refresh_32.ico" />
+    <Resource Include="Vault.Custom\VaultRefreshFromVault.ico" />
+    <Resource Include="Vault.Custom\VaultSearchClear.ico" />
+    <Resource Include="Vault.Custom\VaultSearchExec.ico" />
+    <Resource Include="Vault.Custom\VaultSearchRun.png" />
     <Resource Include="Vault.Custom\cancel.ico" />
     <Resource Include="Vault.Custom\GoToReplacedBy.ico" />
     <Resource Include="Vault.Custom\GoToSelectedFile.ico" />

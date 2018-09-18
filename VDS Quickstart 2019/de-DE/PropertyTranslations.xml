@@ -44,6 +44,10 @@
   <PropertyTranslation Name="FIRSTNAME">Vorname</PropertyTranslation>
   <PropertyTranslation Name="LASTNAME">Nachname</PropertyTranslation>
   <!--Quickstart 2018 end-->
+
+  <!--Quickstart Extensions start-->
+  <PropertyTranslation Name ="ORGANISATION">Organisation</PropertyTranslation>
+  <!--Quickstart Extensions end-->
   
 </PropertyTranslations>
 
