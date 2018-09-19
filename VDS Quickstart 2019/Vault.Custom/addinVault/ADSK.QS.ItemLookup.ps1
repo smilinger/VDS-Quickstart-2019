@@ -287,45 +287,10 @@ function mSelectMakeItem {
 	{
 		$mSelectedItem = $dsWindow.FindName("ItemsFound").SelectedItem
 
-		IF ($dsWindow.Name -eq "AutoCADWindow")
+		IF ($dsWindow.Name -eq "FileWindow")
 		{
-			#ACM Attribute Name Mapping
-			If ($Prop["GEN-TITLE-NR"])
-			{
-				$Prop["GEN-TITLE-NR"].Value = $mSelectedItem.Item 
-			}
-			if($Prop["GEN-TITLE-DES1"])
-			{
-				$Prop["GEN-TITLE-DES1"].Value = $mSelectedItem.Title
-			}
-			if($Prop["GEN-TITLE-DES2"])
-			{
-				$Prop["GEN-TITLE-DES2"].Value = $mSelectedItem.Description
-			}
-			if($Prop["GEN-TITLE-MAT1"])
-			{
-				$Prop["GEN-TITLE-MAT1"].Value = $mSelectedItem.Material
-			}
-			#the UI Translation is used to get Vanilla property name scheme
-			If ($Prop[$UIString["GEN-TITLE-NR"]])
-			{
-				$Prop[$UIString["GEN-TITLE-NR"]].Value = $mSelectedItem.Item 
-			}
-			if($Prop[$UIString["GEN-TITLE-DES1"]])
-			{
-				$Prop[$UIString["GEN-TITLE-DES1"]].Value = $mSelectedItem.Title
-			}
-			if($Prop[$UIString["GEN-TITLE-DES2"]])
-			{
-				$Prop[$UIString["GEN-TITLE-DES2"]].Value = $mSelectedItem.Description
-			}
-
-		}
-		IF ($dsWindow.Name -eq "InventorWindow")
-		{
-			$Prop["Part Number"].Value = $mSelectedItem.Item 
-			$Prop["Title"].Value = $mSelectedItem.Title
-			$Prop["Description"].Value = $mSelectedItem.Description
+			$Prop["_XLTN_PARTNUMBER"].Value = $mSelectedItem.Item
+			$Prop["_XLTN_TITLE"].Value = $mSelectedItem.Title
 		}
 		
 		$dsWindow.FindName("btnOK").IsDefault = $true
@@ -337,35 +302,18 @@ function mSelectMakeItem {
 	}
 }
 
-function mSelectStockItem {
+function mSelectStockItem 
+{
 	#stock number is frequently used for semifinished good's number
 	try 
 	{
 		$mSelectedItem = $dsWindow.FindName("ItemsFound").SelectedItem
 
-		IF ($dsWindow.Name -eq "AutoCADWindow")
+		if($dsWindow.Name -eq "FileWindow")
 		{
-			If ($Prop["GEN-TITLE-MAT2"])#ACM Attribute Name Mapping
-			{
-				$Prop["GEN-TITLE-MAT2"].Value = $mSelectedItem.Item 
-			}
-			If ($Prop[$UIString["GEN-TITLE-MAT2"]])#the UI Translation is used to get Vanilla property name scheme
-			{
-				$Prop[$UIString["GEN-TITLE-MAT2"]].Value = $mSelectedItem.Item 
-			}
-		}
-		IF ($dsWindow.Name -eq "InventorWindow")
-		{
-			$Prop["Stock Number"].Value = $mSelectedItem.Item
-			# Semifinished designation is custom prop; cautiously try to fill :)
-			If($mSelectedItem.Description){
-				Try { $Prop[$UIString["Adsk.QS.ItemSearch_13"]].Value = $mSelectedItem.Description} Catch{}
-			}
-			else{
-				Try { $Prop[$UIString["Adsk.QS.ItemSearch_13"]].Value = $mSelectedItem.Title} Catch{}
-			}
-
-			Try { $Prop[$UIString["LBL75"]].Value = $mSelectedItem.Material} Catch{}
+			if($Prop["_XLTN_STOCKNUMBER"]){ $Prop["_XLTN_STOCKNUMBER"].Value = $mSelectedItem.Item}
+			if($Prop["_XLTN_SEMIFINISHED"]){ $Prop["_XLTN_SEMIFINISHED"].Value = $mSelectedItem.Title}
+			if($Prop["_XLTN_MATERIAL"]){ $Prop["_XLTN_MATERIAL"].Value = $mSelectedItem.Material}
 		}
 
 		$dsWindow.FindName("btnOK").IsDefault = $true
@@ -395,16 +343,23 @@ function mGetItemMaterials
 	return $vault.PropertyService.GetPropertyDefinitionInfosByEntityClassId("ITEM", @($mDef.Id)).ListValArray
 }
 
+Add-Type @"
+public class ItemProp
+{
+	public string Name {get;set;}
+	public string Value {get;set;}
+}
+"@
 
  function mInitializeTabItemProps()
  {
 	$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Collapsed"
 	$dsWindow.FindName("txtAssignedItemStatus").Visibility = "Collapsed"
+	$dsWindow.FindName("expItemMasterSearch").Visibility = "Collapsed"
 	
-	 if(-not $Global:mItemTabInitialized)
+	 if($Global:mItemTabInitialized -ne $true)
 	{	
 		$dsWindow.FindName("tabItemProperties").add_GotFocus({
-			$dsWindow.FindName("expItemMasterSearch").Visibility = "Collapsed" #it's confusing if the item search is still open as it does not apply to the Assigned Item tab
 			if($dsWindow.FindName("dtgrdItemProps").ItemsSource -eq $null)
 			{
 				mGetItemByFileFromVault
@@ -418,72 +373,40 @@ function mGetItemMaterials
 function mGetItemByFileFromVault()
 {
 	#search for the file in Vault
-    $result = FindFile -fileName $Prop["_FileName"].Value
+    $result = FindFile -fileName ($Prop["_FileName"].Value + $Prop["_FileExt"].Value)
 	switch($result.count)
     {
 		0
 		{
 			#$dsDiag.Trace("no file in Vault found")
+			$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Collapsed"
 			$dsWindow.FindName("txtAssignedItemStatus").Visibility = "Visible"
 			$dsWindow.FindName("txtAssignedItemStatus").Text = $UIString["Adsk.QS.ItemSearch_17"]
 			return $null
 		}
 		1
 		{
-			#$dsDiag.Trace("1 file in Vault found")
+			#$dsDiag.Trace("1 file in Vault found, continue...")
 			mInitializeTabItemProps
-			#check that the file found maps to the local working folder location; otherwise a duplicate file locally might jeopardize the result
-			#return $result
+			$file = $result
 		}
 		default{
-			$dsDiag.Trace("More than one file in Vault found")
-			mInitializeTabItemProps
+			#$dsDiag.Trace("More than one file in Vault found; select right one by comparing file path")
+			foreach($fileresult in $result)
+			{
+				if($Prop["_FilePath"].Value -eq ($vault.DocumentService.GetFolderById($fileresult.FolderId)).FullName)
+				{
+					$file = $fileresult
+					mInitializeTabItemProps
+					break;
+				}
+			}
+			
 		}
     }#end switch
    
-	#region get local and Vault path
-		$mappedRootPath = $Prop["_VaultVirtualPath"].Value + $Prop["_WorkspacePath"].Value
-		$mappedRootPath = $mappedRootPath -replace "\\", "/" -replace "//", "/"
-		if ($mappedRootPath -eq '')
-		{
-			$mappedRootPath = '$/'
-		}
-		$dsDiag.Trace("mapped root: $($mappedRootPath)")
-		$mWfVault = $mappedRootPath
-					
-		#get local path of vault workspace path for Inventor
-		If($dsWindow.Name -eq "InventorWindow"){
-			$mCAxRoot = $mappedRootPath.Split("/.")[1]
-		}
-		if ($dsWindow.Name -eq "AutoCADWindow") {
-			$mCAxRoot = ""
-		}
-		if($vault.DocumentService.GetEnforceWorkingFolder() -eq "true") {
-			$mWF = $vault.DocumentService.GetRequiredWorkingFolderLocation()
-		}
-		else {
-			[System.Windows.MessageBox]::Show($UIString["Adsk.QS.ItemSearch_22"], "Inventor VDS Client")
-			return
-		}	
-		$mWFCAD = $mWF + $mCAxRoot
-		#merge the local path and relative target path of new file in vault
-		$mPath = $Prop["_FilePath"].Value.Replace($mWFCAD, "")
-		$mPath = $mWfVault + $mPath
-		$mPath = $mPath.Replace(".\","")
-		$mPath = $mPath.Replace("\", "/")
-	#endregion
-
-    $file = FindLatestFileInVaultByPath($mPath +"/" + $Prop["_FileName"].Value)
     if ($file)
     {
-		#check the accessibility for the current user
-		if($file.Cloaked -eq $true)
-		{
-			$dsWindow.FindName("txtAssignedItemStatus").Visibility = "Visible"
-			$dsWindow.FindName("txtAssignedItemStatus").Text = $UIString["Adsk.QS.ItemSearch_15"]
-			return
-		}
-
 		#query for assigned item
 		$mFileIteration = $vault.DocumentService.GetLatestFileByMasterId($file.MasterId)
 		$items = $vault.ItemService.GetItemsByFileId($mFileIteration.Id)

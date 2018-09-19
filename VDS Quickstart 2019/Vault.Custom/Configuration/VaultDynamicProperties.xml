@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DynamicProperties>
-<DynamicPropertiesCategory Category="3D Component" Type="File">
+  <DynamicPropertiesCategory Category="3D Component" Type="File">
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
