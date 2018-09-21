@@ -236,6 +236,20 @@ function OnTabContextChanged
 		$mEcoEditable = mEcoEditable($mECO.Id) #note - checks the current state to activate buttons, but this might change over time; therefore the state is local
 	}
 
+	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "ADSK.QS.FileItemDataSheet.xaml")
+	{
+		#clear any data from previous selections:
+		mClearItemView
+		$fileMasterId = $vaultContext.SelectedObject.Id
+		$file = $vault.DocumentService.GetLatestFileByMasterId($fileMasterId)
+		#fill item system and user properties
+		mFillItemView -file $file
+		#fill grid of associated files; primary only Yes/No
+		$itemids = @($item.Id)
+		$assocFiles = @(mFileItemTabGetAssocFiles $itemids $([System.IO.Path]::GetDirectoryName($VaultContext.UserControl.XamlFile)))
+		$dsWindow.FindName("AssociatedFiles").ItemsSource = $assocFiles
+	}
+
 	#region derivation tree
 	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "ADSK.QS.DerivationTree.xaml")
 	{

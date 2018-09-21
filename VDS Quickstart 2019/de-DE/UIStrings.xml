@@ -364,6 +364,9 @@
   <UIString ID="Adsk.QS.ItemSearch_26">Eigenschaftsname</UIString>
   <UIString ID="Adsk.QS.ItemSearch_27">Eingenschaftswert</UIString>
   <UIString ID="Adsk.QS.ItemSearch_28">Artikel</UIString> <!--Zugewiesener Artikel-->
+  <UIString ID="Adsk.QS.ItemSearch_29">Eigenschaften</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_30">Verknüpfte Dateien</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_31">Datei, für angemeldeten Benutzer nicht zugänglich</UIString>
   <!--ItemMaster Search and Item Tab END-->
   
 </UIStrings>

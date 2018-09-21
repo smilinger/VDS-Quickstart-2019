@@ -365,5 +365,9 @@
   <UIString ID="Adsk.QS.ItemSearch_26">Property Name</UIString>
   <UIString ID="Adsk.QS.ItemSearch_27">Property Value</UIString>
   <UIString ID="Adsk.QS.ItemSearch_28">Assigned Item</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_29">Properties</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_30">Associated Files</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_31">File not accessible to current user</UIString>
+
   <!--ItemMaster Search and Item Tab END-->
 </UIStrings>

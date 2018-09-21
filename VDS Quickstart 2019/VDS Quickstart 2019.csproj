@@ -146,6 +146,24 @@
     <None Include="Vault\addinVault\Menus\ShowLog.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Vault.Custom\Configuration\File\Icons\attachment.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\docx.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\dwg.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\iam.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\idw.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\ipn.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\ipt.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\linkedfile.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\mdb.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\pdf.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\pptx.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\Primary.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\PrimarySub.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\Secondary.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\SecondarySub.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\StandardComponent.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\unknown.png" />
+    <Resource Include="Vault.Custom\Configuration\File\Icons\xlsx.png" />
     <Resource Include="Vault.Custom\CopyIcon.ico" />
     <Resource Include="Vault.Custom\ItemMaster.ico" />
     <Resource Include="Vault.Custom\ItemMaster.png" />
@@ -615,6 +633,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vault.Custom\Configuration\File\ADSK.QS.FileDataSheet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vault.Custom\Configuration\File\ADSK.QS.FileItemDataSheet.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

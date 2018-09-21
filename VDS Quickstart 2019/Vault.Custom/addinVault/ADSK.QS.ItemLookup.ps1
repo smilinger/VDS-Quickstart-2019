@@ -407,86 +407,289 @@ function mGetItemByFileFromVault()
    
     if ($file)
     {
-		#query for assigned item
-		$mFileIteration = $vault.DocumentService.GetLatestFileByMasterId($file.MasterId)
-		$items = $vault.ItemService.GetItemsByFileId($mFileIteration.Id)
-		$item = $items[0]
-		if($item) 
+		mFillItemView -file $file
+	}
+}
+
+function mFillItemView($file)
+{
+	if(-not $file)
+	{
+		$fileMasterId = $vaultContext.SelectedObject.Id
+		$file = $vault.DocumentService.GetLatestFileByMasterId($fileMasterId)
+	}
+	#query for assigned item
+	$mFileIteration = $vault.DocumentService.GetLatestFileByMasterId($file.MasterId)
+	$items = $vault.ItemService.GetItemsByFileId($mFileIteration.Id)
+	$Global:item = $items[0]
+	if($item) 
+	{
+		$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Collapsed"
+		$dsWindow.FindName("txtAssignedItemStatus").Visibility = "Collapsed"
+		$dsWindow.FindName("txtAssignedItemStatus").Text = ""
+
+		#check accessibility for the current user
+		if($item.IsCloaked -eq $true)
 		{
-			#check accessibility for the current user
-			if($item.IsCloaked -eq $true)
-			{
-				$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Visible"
-				$dsWindow.FindName("txtAssignedItemStatus").Visibility = "Visible"
-				$dsWindow.FindName("txtAssignedItemStatus").Text =  $UIString["Adsk.QS.ItemSearch_16"]
-			}
-			else
-			{
-				#retrieve item meta data
-				#avoid repetitive server calls; we'll need the item property definitions several times
-				If(-not $Global:mAllItemPropDefs) { $Global:mAllItemPropDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("ITEM")}
-				if(-not $Global:mMaterials) { $Global:mMaterials = mGetItemMaterials }
-				if(-not $Global:mItemCategories) { $Global:mItemCategories = mGetItemCategories }
-
-				Try{
-					#derive data set from result do display; items have system properties like number, title, but others require to query the entity properties
-					$mPropDefs = @() #to be consumed by GetProperties
-					$mPropDict = @{} #to be leveraged reading property by Name instead of Def.Id
-					$mDefId += ($mAllItemPropDefs | Where-Object { $_.DispName -eq $UIString["Adsk.QS.ItemSearch_03"]}).Id #Description
-					$mPropDefs += $mDefID
-					$mPropDict.Add($UIString["Adsk.QS.ItemSearch_03"],$mDefID)
-					$mDefId = ($mAllItemPropDefs | Where-Object { $_.DispName -eq $UIString["LBL75"]}).Id #Material
-					$mPropDefs += $mDefID
-					$mPropDict.Add($UIString["LBL75"],$mDefID)
-		
-					$mPropInsts = $vault.PropertyService.GetPropertiesByEntityIds("ITEM",@($item.Id))
-					$mPropTable = @{}
-					$mPropSysNames = @{}
-					$mPropFilter = @("Thumbnail", "CategoryGlyph", "CategoryGlyph(Ver)", "Compliance", "Compliance(Ver)") #system names
-					$mPropFilterKeys = @() #to store display names
-
-					Foreach($PropInst in $mPropInsts)
-					{
-						#Key = Property DispName
-						$mPropDispName = ($mAllItemPropDefs | Where-Object {$_.Id -eq $PropInst.PropDefId}).DispName
-						$mPropSysNames.Add(($mAllItemPropDefs | Where-Object {$_.Id -eq $PropInst.PropDefId}).SysName, $mPropDispName)	#collect the (system) keys of properties to filter later
-						if($mPropFilter -contains ($mAllItemPropDefs | Where-Object {$_.Id -eq $PropInst.PropDefId}).SysName) { $mPropFilterKeys += $mPropDispName}
-						#Value = PropInst Value; don't add if the key is part of the filtered ids
-						$mPropTable.Add($mPropDispName, $PropInst.Val)
-					}
-					#Fill the default properties; use the sysnames to get the key (dispname)
-					$dsWindow.FindName("ItemThumbnail").Source = $mPropTable.($mPropSysNames["Thumbnail"])
-					$dsWindow.FindName("txtItemRevision").Text = $mPropTable.($mPropSysNames["Revision"])
-					$dsWindow.FindName("txtItemNumber").Text = $mPropTable.($mPropSysNames["Number"])
-					$dsWindow.FindName("txtItemTitle").Text = $mPropTable.($mPropSysNames["Title(Item,CO)"])
-					$dsWindow.FindName("txtItemDescription").Text = $mPropTable.($mPropSysNames["Description(Item,CO)"])
-					$dsWindow.FindName("txtItemUnits").Text = $mPropTable.($mPropSysNames["Units"])
-					$dsWindow.FindName("txtItemCategory").Text = $mPropTable.($mPropSysNames["CategoryName"])
-					$dsWindow.FindName("txtItemLfcState").Text = $mPropTable.($mPropSysNames["State"])
-					$dsWindow.FindName("txtItemLastUpdatedBy").Text = $mPropTable.($mPropSysNames["LastModifiedUserName"])
-					$dsWindow.FindName("txtItemLastUpdatedDate").Text = $mPropTable.($mPropSysNames["ModDate"]).ToString("yyyy/mm/dd hh:mm:ss") #default date time formats
-
-					#filter the dataset and hand over
-					Foreach($Filt in $mPropFilter)
-					{
-						$mPropTable.Remove($mPropSysNames[$Filt])
-					}
-					$mPropTable = $mPropTable.GetEnumerator() | Sort-Object { $_.Key}
-					$dsWindow.FindName("dtgrdItemProps").ItemsSource = $mPropTable
-				}
-				Catch [System.Exception]
-				{		
-					[System.Windows.MessageBox]::Show($error)
-				}	
-		
-			} #else: item is accessible
-		}#end item found
-		else{
-			#$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Visible"
+			$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Visible"
 			$dsWindow.FindName("txtAssignedItemStatus").Visibility = "Visible"
-			$dsWindow.FindName("txtAssignedItemStatus").Text =  $UIString["Adsk.QS.ItemSearch_18"]
+			$dsWindow.FindName("txtAssignedItemStatus").Text =  $UIString["Adsk.QS.ItemSearch_16"]
 		}
+		else
+		{
+			#retrieve item meta data
+			#avoid repetitive server calls; we'll need the item property definitions several times
+			If(-not $Global:mAllItemPropDefs) { $Global:mAllItemPropDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("ITEM")}
+			if(-not $Global:mMaterials) { $Global:mMaterials = mGetItemMaterials }
+			if(-not $Global:mItemCategories) { $Global:mItemCategories = mGetItemCategories }
 
-	}#end file found in Vault
-   
+			Try{
+				#derive data set from result do display; items have system properties like number, title, but others require to query the entity properties
+				$mPropDefs = @() #to be consumed by GetProperties
+				$mPropDict = @{} #to be leveraged reading property by Name instead of Def.Id
+				$mDefId += ($mAllItemPropDefs | Where-Object { $_.DispName -eq $UIString["Adsk.QS.ItemSearch_03"]}).Id #Description
+				$mPropDefs += $mDefID
+				$mPropDict.Add($UIString["Adsk.QS.ItemSearch_03"],$mDefID)
+				$mDefId = ($mAllItemPropDefs | Where-Object { $_.DispName -eq $UIString["LBL75"]}).Id #Material
+				$mPropDefs += $mDefID
+				$mPropDict.Add($UIString["LBL75"],$mDefID)
+		
+				$mPropInsts = $vault.PropertyService.GetPropertiesByEntityIds("ITEM",@($item.Id))
+				$mPropTable = @{}
+				$mPropSysNames = @{}
+				$mPropFilter = @("Thumbnail", "CategoryGlyph", "CategoryGlyph(Ver)", "Compliance", "Compliance(Ver)") #system names
+				$mPropFilterKeys = @() #to store display names
+
+				Foreach($PropInst in $mPropInsts)
+				{
+					#Key = Property DispName
+					$mPropDispName = ($mAllItemPropDefs | Where-Object {$_.Id -eq $PropInst.PropDefId}).DispName
+					$mPropSysNames.Add(($mAllItemPropDefs | Where-Object {$_.Id -eq $PropInst.PropDefId}).SysName, $mPropDispName)	#collect the (system) keys of properties to filter later
+					if($mPropFilter -contains ($mAllItemPropDefs | Where-Object {$_.Id -eq $PropInst.PropDefId}).SysName) { $mPropFilterKeys += $mPropDispName}
+					#Value = PropInst Value; don't add if the key is part of the filtered ids
+					$mPropTable.Add($mPropDispName, $PropInst.Val)
+				}
+				#Fill the default properties; use the sysnames to get the key (dispname)
+				$dsWindow.FindName("ItemThumbnail").Source = $mPropTable.($mPropSysNames["Thumbnail"])
+				$dsWindow.FindName("txtItemRevision").Text = $mPropTable.($mPropSysNames["Revision"])
+				$dsWindow.FindName("txtItemNumber").Text = $mPropTable.($mPropSysNames["Number"])
+				$dsWindow.FindName("txtItemTitle").Text = $mPropTable.($mPropSysNames["Title(Item,CO)"])
+				$dsWindow.FindName("txtItemDescription").Text = $mPropTable.($mPropSysNames["Description(Item,CO)"])
+				$dsWindow.FindName("txtItemUnits").Text = $mPropTable.($mPropSysNames["Units"])
+				$dsWindow.FindName("txtItemCategory").Text = $mPropTable.($mPropSysNames["CategoryName"])
+				$dsWindow.FindName("txtItemLfcState").Text = $mPropTable.($mPropSysNames["State"])
+				$dsWindow.FindName("txtItemLastUpdatedBy").Text = $mPropTable.($mPropSysNames["LastModifiedUserName"])
+				$dsWindow.FindName("txtItemLastUpdatedDate").Text = $mPropTable.($mPropSysNames["ModDate"]).ToString("yyyy/mm/dd hh:mm:ss") #default date time formats
+
+				#filter the dataset and hand over
+				Foreach($Filt in $mPropFilter)
+				{
+					$mPropTable.Remove($mPropSysNames[$Filt])
+				}
+				$mPropTable = $mPropTable.GetEnumerator() | Sort-Object { $_.Key}
+				$dsWindow.FindName("dtgrdItemProps").ItemsSource = $mPropTable
+			}
+			Catch [System.Exception]
+			{		
+				[System.Windows.MessageBox]::Show($error)
+			}	
+		} #else: item is accessible
+	}#end item found
+	else
+	{
+		$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Visible"
+		$dsWindow.FindName("txtAssignedItemStatus").Visibility = "Visible"
+		$dsWindow.FindName("txtAssignedItemStatus").Text =  $UIString["Adsk.QS.ItemSearch_18"]
+	}
+}
+
+function mClearItemView()
+{
+	$dsWindow.FindName("ItemThumbnail").Source = $null
+	$dsWindow.FindName("txtItemRevision").Text = ""
+	$dsWindow.FindName("txtItemNumber").Text = ""
+	$dsWindow.FindName("txtItemTitle").Text = ""
+	$dsWindow.FindName("txtItemDescription").Text = ""
+	$dsWindow.FindName("txtItemUnits").Text = ""
+	$dsWindow.FindName("txtItemCategory").Text = ""
+	$dsWindow.FindName("txtItemLfcState").Text = ""
+	$dsWindow.FindName("txtItemLastUpdatedBy").Text = ""
+	$dsWindow.FindName("txtItemLastUpdatedDate").Text = ""
+
+	$dsWindow.FindName("AssociatedFiles").ItemsSource = $null
+	$dsWindow.FindName("dtgrdItemProps").ItemsSource = $null
+}
+
+
+
+Add-Type @'
+public class mFileItemTabAssocFile
+{
+	public string link;
+	public string key;
+	public string componenttype;
+	public string filename;
+	public string version;
+	public string title;
+	public string revision;
+	public string description;
+	public string partnumber;
+}
+'@
+
+function mFileItemTabGetAssocFiles($itemids, $iconLocation)
+{
+	$primary = [Autodesk.Connectivity.Webservices.ItemFileLnkTypOpt]::Primary
+	$secondary = [Autodesk.Connectivity.Webservices.ItemFileLnkTypOpt]::Secondary
+	$tertiary = [Autodesk.Connectivity.Webservices.ItemFileLnkTypOpt]::Tertiary
+	$standard = [Autodesk.Connectivity.Webservices.ItemFileLnkTypOpt]::StandardComponent
+	$primarysub = [Autodesk.Connectivity.Webservices.ItemFileLnkTypOpt]::PrimarySub
+	$secondarysub = [Autodesk.Connectivity.Webservices.ItemFileLnkTypOpt]::SecondarySub
+	
+	$mFileItemTabAssocFiles = @() #the file-property table to return
+	
+	#start reading the item's file associations of any type
+	$assocFiles = $vault.ItemService.GetItemFileAssociationsByItemIds($itemids, $primary -bor $secondary -bor $tertiary -bor $standard -bor $primarysub -bor $secondarysub)
+	$assocAttachments = $vault.ItemService.GetAttachmentsByItemIds($itemids)
+	If(($assocFiles -eq $null) -and ($assocAttachments -eq $null)){
+		break; # no need to continue with any action
+	}
+
+	#start building the property value table for files
+	$PropDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("FILE")
+	$propDefIds = @()
+	$PropDefs | ForEach-Object {
+		$propDefIds += $_.Id
+	}
+
+	#collect the ids for all properties of interest
+	$mFilePropsToDisplay = @($UIString["LBL6"],$UIString["LBL2"],$UIString["LBL3"],$UIString["LBL16"],$UIString["LBL12"],$UIString["LBL13"]) #File Name, Titel, Description, Part Number, Revision, Version
+	$mPropDefs = @() #to be consumed by GetProperties
+	$mPropDict = @{} #to be leveraged reading property by Name instead of Def.Id; DispName = key, DefId = Value
+	Foreach ($mPropDispName in $mFilePropsToDisplay)
+	{
+		$mPropDefNameId = New-Object String[] 3 #new array for [0] = ID, [1] = SysName and [2] = DispName
+		$mPropDef = $PropDefs | Where-Object { $_.DispName -eq $mPropDispName}#file name
+		$mPropDefs += $mPropDef.Id
+		$mPropDict.Add($mPropDispName,$mPropDef.Id)
+	}
+	
+	# start reading properties for existing associated files and add to the table
+	if($assocFiles)
+	{
+		$mFiles = @()
+		$assocFiles | ForEach-Object { $mFiles += $_.CldFileId}
+
+		#get all properties for all associated in one server call
+		$mPropInstArray = @()
+		$mPropInstArray += $vault.PropertyService.GetProperties("FILE", $mFiles, $mPropDefs)
+	
+		#build the table's row for each file
+		$assocFiles | ForEach-Object{
+			$mRow = New-Object mFileItemTabAssocFile
+			#check that the file is accessible by the user
+			if($_.Cloaked)
+			{
+				$mRow.filename = ($UIString["Adsk.QS.ItemSearch_31"])
+				#add the row
+				$mFileItemTabAssocFiles += $mRow
+			}
+			Else
+			{
+				$mId = $_.CldFileId
+				$mPropInsts = @()
+				$mPropInsts += $mPropInstArray | Where-Object {$_.EntityId -eq $mId} #get all property instances for the current file $mId
+				$mRow.filename = $_.FileName #get the property value for the Instance, that matches the display name for filename
+				$mRow.title = ($mPropInsts | Where-Object { $_.PropDefId -eq $mPropDict[$UIString["LBL2"]]}).Val # #get the property value for the Instance, that matches the display name for Title
+				$mRow.description = ($mPropInsts | Where-Object { $_.PropDefId -eq $mPropDict[$UIString["LBL3"]]}).Val # as before for Description
+				$mRow.partnumber = ($mPropInsts | Where-Object { $_.PropDefId -eq $mPropDict[$UIString["LBL16"]]}).Val # as before for Part Number
+				$mRow.revision = ($mPropInsts | Where-Object { $_.PropDefId -eq $mPropDict[$UIString["LBL12"]]}).Val # as before for Revision
+				$mRow.version = $_.CldFileVerNum
+				# get the related icons
+				$mFileExt = ([System.IO.Path]::GetExtension($mRow.filename)).Substring(1)
+				$path = mGetPath $iconLocation $mFileExt
+				$exists = Test-Path $path
+				if (-not $exists)
+				{
+					$path = mGetPath $iconLocation "unknown"
+				}
+				$mRow.Componenttype = $path
+				$keypath = mGetPath $iconLocation $_.Typ
+				$mRow.key = $keypath
+				$linkpath = mGetPath $iconLocation 'linkedfile'
+				$mRow.link = $linkpath
+
+				#add the row
+				$mFileItemTabAssocFiles += $mRow
+			} #file accessible to current user
+
+		} #build row for each file
+
+	}# associated files exist
+
+
+	# start reading properties for attached files if any exist
+	if($assocAttachments)
+	{
+		$mFileAttmtIds = @()
+		$assocAttachments | ForEach-Object { 
+			$_.AttmtArray | ForEach-Object {
+				$mFileAttmtIds += $_.FileId}
+			}
+
+		#get all properties for all associated in one server call
+		$mPropInstArray = @()
+		$mPropInstArray += $vault.PropertyService.GetProperties("FILE", $mFileAttmtIds, $mPropDefs)
+
+		#build the table's row for each file; we need to grab the file object, as an attachment does not share the same properties as an association
+		$mAttachedFiles = $vault.DocumentService.GetFilesByIds($mFileAttmtIds)
+		$mAttachedFiles |ForEach-Object {
+			$mRow = New-Object mFileItemTabAssocFile
+			#check that the file is accessible by the user
+			if($_.Cloaked)
+			{
+				$mRow.filename = ($UIString["Adsk.QS.ItemSearch_31"])
+				#add the row
+				$mFileItemTabAssocFiles += $mRow
+			}
+			Else
+			{
+				$mId = $_.Id
+				$mPropInsts = @()
+				$mPropInsts += $mPropInstArray | Where-Object {$_.EntityId -eq $mId} #get all property instances for the current file $mId
+				$mRow.filename = $_.VerName #the file version may be pinned; use VerName instead of Name (latest name)
+				$mRow.title = ($mPropInsts | Where-Object { $_.PropDefId -eq $mPropDict[$UIString["LBL2"]]}).Val # #get the property value for the Instance, that matches the display name for Title
+				$mRow.description = ($mPropInsts | Where-Object { $_.PropDefId -eq $mPropDict[$UIString["LBL3"]]}).Val # as before for Description
+				$mRow.partnumber = ($mPropInsts | Where-Object { $_.PropDefId -eq $mPropDict[$UIString["LBL16"]]}).Val # as before for Part Number
+				$mRow.revision = ($mPropInsts | Where-Object { $_.PropDefId -eq $mPropDict[$UIString["LBL12"]]}).Val # as before for Revision
+				$mRow.version = $_.VerNum
+				# get the related icons
+				$mFileExt = ([System.IO.Path]::GetExtension($mRow.filename)).Substring(1)
+				$path = mGetPath $iconLocation $mFileExt
+				$exists = Test-Path $path
+				if (-not $exists)
+				{
+					$path = mGetPath $iconLocation "unknown"
+				}
+				$mRow.Componenttype = $path
+				$linkpath = mGetPath $iconLocation 'attachment'
+				$mRow.link = $linkpath
+
+				#add the row
+				$mFileItemTabAssocFiles += $mRow
+
+			}#file is accessible; not cloaked
+
+		} #build row for each file
+
+	}# Attachment(s) exist
+
+	return $mFileItemTabAssocFiles
+										
+}
+
+function mGetPath($iconLocation,$name)
+{
+	$iconpath = [string]::Format("Icons\{0}.png", $name)
+	return [System.IO.Path]::Combine($iconLocation,$iconpath)
 }

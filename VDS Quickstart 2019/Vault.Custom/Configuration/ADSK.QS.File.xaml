@@ -568,10 +568,10 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="130"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="96"/>
+                        <ColumnDefinition Width="234*"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="130"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="235*"/>
                     </Grid.ColumnDefinitions>
                     <Label x:Name="lblRevision" Content="{Binding UIString[LBL12], FallbackValue=Revision}"/>
                     <TextBox x:Name="txtItemRevision" Grid.Column="1" IsReadOnly="True" Background="White"/>
@@ -583,7 +583,7 @@
                     <TextBox x:Name="txtItemDescription" Grid.Column="1" Grid.Row="3" IsReadOnly="True" Background="White"/>
                     <Label x:Name="lblItemUnits" Content="{Binding UIString[Adsk.QS.ItemSearch_23], FallbackValue=Units}"  Grid.Row="4" BorderThickness="1"/>
                     <TextBox x:Name="txtItemUnits" Grid.Column="1" Grid.Row="4" BorderThickness="0,1,1,1" IsReadOnly="True" Background="White"/>
-                    <Border x:Name="brdItemThumbnail" Grid.Column="2" Grid.RowSpan="4" BorderThickness="1" BorderBrush="#FFABADB3" Margin="5,0,5,10">
+                    <Border x:Name="brdItemThumbnail" Grid.Column="2" Grid.RowSpan="4" BorderThickness="1" BorderBrush="#FFABADB3" Margin="5,0" Height="96" Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}">
                         <Image x:Name="ItemThumbnail" VerticalAlignment="Top"/>
                     </Border>
                     <Label x:Name="lblItemCategory" Content="{Binding UIString[Adsk.QS.ItemSearch_05], FallbackValue=Category Name}" BorderThickness="1,1,1,0" Grid.Column="3"/>
