@@ -365,7 +365,7 @@ function GetCategories
 	}
 	elseif ($dsWindow.Name -eq "FolderWindow")
 	{
-		return =  $vault.CategoryService.GetCategoriesByEntityClassId("FLDR", $true)
+		return $vault.CategoryService.GetCategoriesByEntityClassId("FLDR", $true)
 	}
 	elseif ($dsWindow.Name -eq "CustomObjectWindow")
 	{
