@@ -12,6 +12,7 @@
 
 #region - version history
 # Version Info - VDS Quickstart Vault Library 2019.1.1
+	# fixed localization issue in mSearchCustentOfCat
 	# fixed failure in getting PropertyTranslations for default DSLanguages settings
 	# added mGetProjectFolderPropToVaultFile
 
@@ -272,7 +273,7 @@ function mSearchCustentOfCat([String]$mCatDispName)
 	$mSearchString = $mCatDispName
 	$srchCond = New-Object autodesk.Connectivity.WebServices.SrchCond
 	$propDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("CUSTENT")
-	$propDef = $propDefs | Where-Object { $_.DispName -eq "Category Name" }
+	$propDef = $propDefs | Where-Object { $_.SysName -eq "CategoryName" }
 	$srchCond.PropDefId = $propDef.Id
 	$srchCond.SrchOper = 3 
 	$srchCond.SrchTxt = $mSearchString
