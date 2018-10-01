@@ -289,4 +289,41 @@
     <DynamicProperty>Segment</DynamicProperty>
     <DynamicProperty>Hauptgruppe</DynamicProperty>
   </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Kaufteil" Type="File">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Beschreibung</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>EV-Kennung</DynamicProperty>
+    <DynamicProperty>Gewicht</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
+    <DynamicProperty>Sub-Typ</DynamicProperty>
+    <DynamicProperty>Anwendungsversion</DynamicProperty>
+    <DynamicProperty>Ersetzt durch</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
+    <DynamicProperty>Artikeltyp</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="3D Komponente" Type="File">
+    <DynamicProperty>Beschreibung</DynamicProperty>
+    <DynamicProperty>Werksnorm</DynamicProperty>
+    <DynamicProperty>Sub-Typ</DynamicProperty>
+    <DynamicProperty>Dicke/Durchm.</DynamicProperty>
+    <DynamicProperty>Länge</DynamicProperty>
+    <DynamicProperty>Breite</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
+    <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
+    <DynamicProperty>Identnummer</DynamicProperty>
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Gewicht</DynamicProperty>
+    <DynamicProperty>EV-Kennung</DynamicProperty>
+    <DynamicProperty>Halbzeug</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>Halbzeugnummer</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Ersetzt durch</DynamicProperty>
+    <DynamicProperty>Anwendungsversion</DynamicProperty>
+  </DynamicPropertiesCategory>
 </DynamicProperties>

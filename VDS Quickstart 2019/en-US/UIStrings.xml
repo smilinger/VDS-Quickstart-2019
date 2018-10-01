@@ -386,7 +386,7 @@
   <UIString ID="Adsk.QS.Classification_08">Activate Class</UIString>
   <UIString ID="Adsk.QS.Classification_09">Remove Class</UIString>
 
-  <UIString ID="Adsk.QS.Classification_10">Multiple classes are qually named. Unique class names are processes.</UIString>
+  <UIString ID="Adsk.QS.Classification_10">The class doesn't exist or multiple classes are equally named.Only unique class names are processes.</UIString>
   <UIString ID="Adsk.QS.Classification_11">Removal of class will delete all attributes and values of this assignment. {0}Do you really want to remove the classificatoin?</UIString>
   <UIString ID="Adsk.QS.Classification_12">Attention: The result is based on an incomplete index! Contact your Administrator, if you continue seeing this message.</UIString>
   <UIString ID="Adsk.QS.Classification_13">The custom workspace 'Classes' is not available. Contact your Administrator.</UIString>

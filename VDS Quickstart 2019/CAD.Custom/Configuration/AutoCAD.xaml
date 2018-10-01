@@ -524,7 +524,7 @@
                 </Grid>
             </GroupBox>
         </Expander>
-        <Expander x:Name="expItemMasterSearch" Grid.Column="3" Header="" Grid.RowSpan="5" ExpandDirection="Right" Visibility="Collapsed" IsExpanded="False">
+        <Expander x:Name="expItemMasterSearch" Grid.Column="3" Header="" Grid.RowSpan="5" ExpandDirection="Right" Visibility="Visible" IsExpanded="False">
             <Grid x:Name="grdItemSearchMain" Background="#FFF0F0F0" MaxHeight="470" Margin="10,0,0,0" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -537,10 +537,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="180"/>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="grdItemSearchHeader" Grid.ColumnSpan="4">
                     <Grid.Background>
@@ -597,7 +597,7 @@
                 <Label x:Name="lblItemSearchNumber" Content="{Binding UIString[LBL31], FallbackValue=Number}" Grid.Column="2" Grid.Row="1" Height="Auto"/>
                 <Label x:Name="lblItemSearchDescription" Content="{Binding UIString[Adsk.QS.ItemSearch_03], FallbackValue=Description}" Grid.Column="2" Grid.Row="2" Height="Auto"/>
                 <Label x:Name="lblItemSearchMaterial" Content="{Binding UIString[LBL75], FallbackValue=Material}" Grid.Column="2" Grid.Row="3" Height="Auto" BorderThickness="1"/>
-                <TextBox x:Name="txtItemSearchResultMsg" Grid.ColumnSpan="4" Grid.Row="5" TextWrapping="Wrap" Text="" Background="#FFFFFFE1" Height="24" BorderThickness="1,1,1,0"/>
+                <TextBox x:Name="txtItemSearchResultMsg" Grid.ColumnSpan="4" Grid.Row="5" TextWrapping="Wrap" Text="" Background="#FFFFFFE1" Height="24" BorderThickness="1,1,1,0" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"/>
                 <DataGrid x:Name="ItemsFound" AutoGenerateColumns="False" Grid.ColumnSpan="4" Grid.Row="6" Background="White" HorizontalGridLinesBrush="#FFE7E8EC" 
                     VerticalGridLinesBrush="#FFE7E8EC" AlternatingRowBackground="#FFE1F1FB" SelectionMode="Single" CanUserResizeRows="False" IsReadOnly="True" MaxHeight="{Binding MaxHeight, ElementName=DSDynCatPropGrid}">
                     <DataGrid.Columns>

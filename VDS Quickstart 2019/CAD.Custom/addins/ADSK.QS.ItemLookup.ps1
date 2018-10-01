@@ -17,7 +17,6 @@ function mInitializeItemSearch([STRING] $Context)
 	If($Context -eq "Part_Number") { $mCopyTarget = " to " + $UIString["LBL16"] + " / " + $UIString["LBL2"]	}
 	If($Context -eq "Stock_Number") { $mCopyTarget = " to " + $UIString["LBL76"] + " / " + $UIString["LBL75"]	}
 	$dsWindow.FindName("lblBtnItemDataCopy").Content = $UIString["Adsk.QS.ItemSearch_11"] + $mCopyTarget
-	#$dsWindow.FindName("conMnuItemDataCopy").Header = $UIString["Adsk.QS.ItemSearch_11"] + $mCopyTarget
 	
 	#reset data only on demand
 	if(-not $dsWindow.FindName("ItemsFound").ItemsSource) 

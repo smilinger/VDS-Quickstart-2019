@@ -11,7 +11,7 @@
   <PropertyTranslation Name="CATEGORY NAME">Kategoriename</PropertyTranslation>
   <PropertyTranslation Name="FILE NAME">Dateiname</PropertyTranslation>
   <PropertyTranslation Name="DUE DATE">Fälligkeitsdatum</PropertyTranslation>
-  <PropertyTranslation Name="TITLE_ITEM_CO">Titel (Artikel, F)</PropertyTranslation>
+  <PropertyTranslation Name="TITLE_ITEM_CO">Titel (Artikel, ECO)</PropertyTranslation>
   <PropertyTranslation Name="DESCRIPTION_ITEM_CO">Beschreibung (Artikel, F)</PropertyTranslation>
   <PropertyTranslation Name="CREATE DATE">Erstellungsdatum</PropertyTranslation>
   <PropertyTranslation Name="CREATED BY">Erstellt von</PropertyTranslation>

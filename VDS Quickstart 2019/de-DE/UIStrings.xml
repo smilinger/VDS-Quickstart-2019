@@ -337,8 +337,8 @@
   <!--ItemMaster Search and Item Tab START-->
   <UIString ID="Adsk.QS.ItemSearch_00">Stammdaten</UIString>
   <UIString ID="Adsk.QS.ItemSearch_01">Mehrere Eigenschafen</UIString>
-  <UIString ID="Adsk.QS.ItemSearch_02">Titel (Artikel, F)</UIString>
-  <UIString ID="Adsk.QS.ItemSearch_03">Beschreibung (Artikel, F)</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_02">Titel (Artikel, ECO)</UIString>
+  <UIString ID="Adsk.QS.ItemSearch_03">Beschreibung (Artikel, ECO)</UIString>
   <UIString ID="Adsk.QS.ItemSearch_04">Nummer</UIString>
   <UIString ID="Adsk.QS.ItemSearch_05">Kategoriename</UIString>
   <UIString ID="Adsk.QS.ItemSearch_06">Stammdaten  (Suchergebnis)</UIString>
@@ -385,7 +385,7 @@
   <UIString ID="Adsk.QS.Classification_08">Klasse Aktivieren</UIString>
   <UIString ID="Adsk.QS.Classification_09">Klasse Entfernen</UIString>
 
-  <UIString ID="Adsk.QS.Classification_10">Es wurden mehrer gleichnamige Klassen gefunden. Nur eindeutige Klassennamen werden verarbeitet.</UIString>
+  <UIString ID="Adsk.QS.Classification_10">Die Klasse ist entweder nicht vorhanden oder nicht ein-eindeutig. Nur eindeutige Klassennamen werden verarbeitet.</UIString>
   <UIString ID="Adsk.QS.Classification_11">Entfernen einer Klassifizierung löscht alle Merkmale und Werte der Klasse! {0}Möchten Sie wirklich die Klassifizierung aufheben?</UIString>
   <UIString ID="Adsk.QS.Classification_12">Achtung: Das Ergebnis beruht auf einem unvollständigen Suchindex. Wenden Sie sich an den Administrator, wenn diese Meldung immer erscheint.</UIString>
   <UIString ID="Adsk.QS.Classification_13">Der Benutzerdefinierte Arbeitsbereich 'Klassen' steht nicht zur Verfügung. Wenden Sie sich an ihren Administrator.</UIString>

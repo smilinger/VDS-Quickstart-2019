@@ -254,10 +254,10 @@ function mRemoveClassification()
 				$mPropsRemove += $mClassPropDefs.Keys
 			}
 			Else{
-				[System.Windows.MessageBox]::Show($UIString["Adsk.QS.Classification_10"], "Vault Data Standard", "", "Exclamation")
+				[System.Windows.MessageBox]::Show($UIString["Adsk.QS.Classification_10"], "Vault Data Standard", 0 , "Error")
 				return
 			}
-			$mMsgResult = [System.Windows.MessageBox]::Show(([String]::Format($UIString["Adsk.QS.Classification_11"],"`n", "`n")), "Vault Data Standard - CAD Client", 'YesNo', "Question")
+			$mMsgResult = [System.Windows.MessageBox]::Show(([String]::Format($UIString["Adsk.QS.Classification_11"],"`n")), "Vault Data Standard", '4', 'Question')
 			if($mMsgResult -eq "No") { return}
 
 			$mAddRemoveComment = "removed classification"
@@ -272,7 +272,6 @@ function mRemoveClassification()
 	$dsWindow.FindName("btnRemoveClass").IsEnabled = $false
 	if($dsWindow.FindName("cmbAvailableClasses").SelectedIndex -ne -1) { $dsWindow.FindName("btnAddClass").IsEnabled = $true}
 	$dsDiag.Trace("...remove classification finished result=$($mFileUpdated)")
-	$dsDiag.Inspect()
 }
 
 
