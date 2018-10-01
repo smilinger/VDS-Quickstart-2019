@@ -50,5 +50,13 @@
   <PropertyTranslation Name ="ORGANISATION">Organisation</PropertyTranslation>
   <!--Quickstart Extensions end-->
 
+  <!--Quickstart Extension Classification start-->
+  <PropertyTranslation Name="SEGMENT">Segment</PropertyTranslation>
+  <PropertyTranslation Name="MAINGROUP">Main Group</PropertyTranslation>
+  <PropertyTranslation Name="GROUP">Group</PropertyTranslation>
+  <PropertyTranslation Name="SUBGROUP">Sub Group</PropertyTranslation>
+  <PropertyTranslation Name="CLASS">Klasse</PropertyTranslation>
+  <!--Quickstart Extension Classification end-->
+  
 </PropertyTranslations>
 

@@ -120,10 +120,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Vault.Custom\addinVault\ADSK.Org.Pers.Link.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.Classification.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.Default.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.FileBOM.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ItemLookup.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.NameValidation.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.Org.Pers.Link.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ReserveFileNumber.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.VLT.Library.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateCustomObject.ps1" />

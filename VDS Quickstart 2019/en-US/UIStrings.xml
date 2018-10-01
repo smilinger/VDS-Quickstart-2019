@@ -368,6 +368,30 @@
   <UIString ID="Adsk.QS.ItemSearch_29">Properties</UIString>
   <UIString ID="Adsk.QS.ItemSearch_30">Associated Files</UIString>
   <UIString ID="Adsk.QS.ItemSearch_31">File not accessible to current user</UIString>
-
   <!--ItemMaster Search and Item Tab END-->
+
+  <!--Classification start-->
+  <UIString ID="Adsk.QS.ClassLevel_00">Segment</UIString>
+  <UIString ID="Adsk.QS.ClassLevel_01">Main Group</UIString>
+  <UIString ID="Adsk.QS.ClassLevel_02">Group</UIString>
+  <UIString ID="Adsk.QS.ClassLevel_03">Sub Group</UIString>
+  <UIString ID="Adsk.QS.Classification_00">Class</UIString>
+  <UIString ID="Adsk.QS.Classification_01">Attribute</UIString>
+  <UIString ID="Adsk.QS.Classification_02">Value</UIString>
+  <UIString ID="Adsk.QS.Classification_03">Classification</UIString>
+  <UIString ID="Adsk.QS.Classification_04">Class-Hierarchy</UIString>
+  <UIString ID="Adsk.QS.Classification_05">Available Classes</UIString>
+  <UIString ID="Adsk.QS.Classification_06">Active Class</UIString>
+  <UIString ID="Adsk.QS.Classification_07">Properties</UIString>
+  <UIString ID="Adsk.QS.Classification_08">Activate Class</UIString>
+  <UIString ID="Adsk.QS.Classification_09">Remove Class</UIString>
+
+  <UIString ID="Adsk.QS.Classification_10">Multiple classes are qually named. Unique class names are processes.</UIString>
+  <UIString ID="Adsk.QS.Classification_11">Removal of class will delete all attributes and values of this assignment. {0}Do you really want to remove the classificatoin?</UIString>
+  <UIString ID="Adsk.QS.Classification_12">Attention: The result is based on an incomplete index! Contact your Administrator, if you continue seeing this message.</UIString>
+  <UIString ID="Adsk.QS.Classification_13">The custom workspace 'Classes' is not available. Contact your Administrator.</UIString>
+
+
+  <!--Classification end-->
+  
 </UIStrings>

@@ -122,6 +122,18 @@ function InitializeWindow
 				m_TemplateChanged})
 
 			if($dsWindow.FindName("tabItemProperties")) { mInitializeTabItemProps}
+
+			if($dsWindow.FindName("tabClassification")) 
+			{ 
+				$dsWindow.FindName("tabClassification").add_GotFocus({
+					
+						if(-not $Global:mClsTabInitialized)
+						{
+							mInitializeClassificationTab -ParentType "Dialog" -file $null
+						}
+					}) #add selection changed
+			}
+
 			#endregion Quickstart			
 		}
 		"FolderWindow"
@@ -221,6 +233,13 @@ function OnTabContextChanged
 		$assocFiles = @(GetAssociatedFiles $itemids $([System.IO.Path]::GetDirectoryName($VaultContext.UserControl.XamlFile)))
 		$dsWindow.FindName("AssoicatedFiles").ItemsSource = $assocFiles
 	}
+	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "ADSK.QS.FileDataSheet.xaml")
+	{
+		$fileMasterId = $vaultContext.SelectedObject.Id
+		$file = $vault.DocumentService.GetLatestFileByMasterId($fileMasterId)
+		mInitializeClassificationTab -ParentType $null -file $file
+	}
+	
 	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "ItemMaster" -and $xamlFile -eq "ADSK.QS.ItemEdit.xaml")
 	{
 		$items = $vault.ItemService.GetItemsByIds(@($vaultContext.SelectedObject.Id))

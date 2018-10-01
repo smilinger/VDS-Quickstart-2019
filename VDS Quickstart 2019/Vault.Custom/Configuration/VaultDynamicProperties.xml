@@ -242,4 +242,51 @@
     <DynamicProperty>Sheet</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
   </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Blechteil" Type="File">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>Halbzeug</DynamicProperty>
+    <DynamicProperty>Gewicht</DynamicProperty>
+    <DynamicProperty>Anwendungsversion</DynamicProperty>
+    <DynamicProperty>Ersetzt durch</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
+    <DynamicProperty>Blechstärke</DynamicProperty>
+    <DynamicProperty>Werksnorm</DynamicProperty>
+    <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
+    <DynamicProperty>EV-Kennung</DynamicProperty>
+    <DynamicProperty>Halbzeugnummer</DynamicProperty>
+    <DynamicProperty>Beschreibung</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Bauteil" Type="File">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>Gewicht</DynamicProperty>
+    <DynamicProperty>Anwendungsversion</DynamicProperty>
+    <DynamicProperty>Beschreibung</DynamicProperty>
+    <DynamicProperty>Halbzeugnummer</DynamicProperty>
+    <DynamicProperty>EV-Kennung</DynamicProperty>
+    <DynamicProperty>Halbzeug</DynamicProperty>
+    <DynamicProperty>Werksnorm</DynamicProperty>
+    <DynamicProperty>Ersetzt durch</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
+    <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Ordner" Type="Folder">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Beschreibung</DynamicProperty>
+    <DynamicProperty>Typbezeichnung</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Klasse" Type="CustomObject">
+    <DynamicProperty>Klasse</DynamicProperty>
+    <DynamicProperty>Gruppe</DynamicProperty>
+    <DynamicProperty>Untergruppe</DynamicProperty>
+    <DynamicProperty>Segment</DynamicProperty>
+    <DynamicProperty>Hauptgruppe</DynamicProperty>
+  </DynamicPropertiesCategory>
 </DynamicProperties>

@@ -497,7 +497,7 @@ function mFillItemView($file)
 	}#end item found
 	else
 	{
-		$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Visible"
+		#$dsWindow.FindName("btnAssignedItemRefresh").Visibility = "Visible"
 		$dsWindow.FindName("txtAssignedItemStatus").Visibility = "Visible"
 		$dsWindow.FindName("txtAssignedItemStatus").Text =  $UIString["Adsk.QS.ItemSearch_18"]
 	}

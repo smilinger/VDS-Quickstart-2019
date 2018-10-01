@@ -45,9 +45,17 @@
   <PropertyTranslation Name="LASTNAME">Nachname</PropertyTranslation>
   <!--Quickstart 2018 end-->
 
-  <!--Quickstart Extensions start-->
+  <!--Quickstart Extension Organisation-Person-Link start-->
   <PropertyTranslation Name ="ORGANISATION">Organisation</PropertyTranslation>
   <!--Quickstart Extensions end-->
   
+  <!--Quickstart Extension Classification start-->
+  <PropertyTranslation Name="SEGMENT">Segment</PropertyTranslation>
+  <PropertyTranslation Name="MAINGROUP">Hauptgruppe</PropertyTranslation>
+  <PropertyTranslation Name="GROUP">Gruppe</PropertyTranslation>
+  <PropertyTranslation Name="SUBGROUP">Untergruppe</PropertyTranslation>
+  <PropertyTranslation Name="CLASS">Klasse</PropertyTranslation>
+  <!--Quickstart Extension Classification end-->
+
 </PropertyTranslations>
 

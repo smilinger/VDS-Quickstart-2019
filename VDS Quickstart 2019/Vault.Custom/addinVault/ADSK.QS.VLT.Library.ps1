@@ -12,7 +12,6 @@
 
 #region - version history
 # Version Info - VDS Quickstart Vault Library 2019.1.1
-	# fixed localization issue in mSearchCustentOfCat
 	# fixed failure in getting PropertyTranslations for default DSLanguages settings
 	# added mGetProjectFolderPropToVaultFile
 
