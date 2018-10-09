@@ -19,12 +19,15 @@ function InitializeWindow
 	#InitializeNumSchm #Quickstart differentiates for Inventor and AutoCAD
 	#InitializeBreadCrumb #Quickstart differentiates Inventor, Inventor C&H, T&P, FG, DA dialogs
 
-	#Copy Parent Project Number to file property "Project Number" if exists
+	#Copy Parent Project Number to file property "Project Number" if exists; be careful, not all dialogs might have the textbox, e.g. DA, FG,...
 		If($Prop["Project"]){
 			$Global:mPropTrans = mGetPropTranslations
-			$dsWindow.FindName("txtPath").add_TextChanged({		
-				mGetProjectFolderPropToCADFile  "Name" $mPropTrans["Project"]
-			})
+			if($dsWindow.FindName("txtPath"))
+				{
+					$dsWindow.FindName("txtPath").add_TextChanged({		
+									mGetProjectFolderPropToCADFile  "Name" $mPropTrans["Project"]
+								})
+				}
 		}
 
 	#endregion rules applying commonly
