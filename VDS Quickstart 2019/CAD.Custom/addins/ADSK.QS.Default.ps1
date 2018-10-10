@@ -16,6 +16,7 @@ function InitializeWindow
     $dsWindow.Title = SetWindowTitle
 	#InitializeFileNameValidation #Quickstart initializes at latest to avoid multiple events by UI changes
 	#InitializeCategory #Quickstart differentiates for Inventor and AutoCAD
+	$Global:mCategories = GetCategories
 	#InitializeNumSchm #Quickstart differentiates for Inventor and AutoCAD
 	#InitializeBreadCrumb #Quickstart differentiates Inventor, Inventor C&H, T&P, FG, DA dialogs
 
@@ -113,7 +114,7 @@ function InitializeWindow
 							If($_mFdsKeys.Get_Item("FdsType") -eq "FDS-Asset")
 							{
 								# only the MSDCE FDS configuration template provides a category for assets, check for this otherwise continue with the selection done before
-								$mCatName = GetCategories | Where {$_.Name -eq "Factory Asset"}
+								$mCatName = $Global:mCategories | Where {$_.Name -eq "Factory Asset"}
 								IF ($mCatName) { $Prop["_Category"].Value = "Factory Asset"}
 							}
 							# skip for publishing the 3D temporary file save event for VDS
@@ -133,7 +134,7 @@ function InitializeWindow
 							{
 								#$dsDiag.Trace("3DLayout, not synced")
 								# only the MSDCE FDS configuration template provides a category for layouts, check for this otherwise continue with the selection done before
-								$mCatName = GetCategories | Where {$_.Name -eq "Factory Layout"}
+								$mCatName = $Global:mCategories | Where {$_.Name -eq "Factory Layout"}
 								IF ($mCatName) { $Prop["_Category"].Value = "Factory Layout"}
 							}
 
@@ -201,7 +202,12 @@ function InitializeWindow
 				}
 				$false # EditMode = True
 				{
-					#add specific action rules for edit mode here
+					#Quickstart Professional - handle weldbead material" 
+					$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT11"]} # weldment assembly
+					IF ($mCatName) 
+					{ 
+						$Prop["Material"].Value = $Document.ComponentDefinition.WeldBeadMaterial.DisplayName
+					}
 				}
 				default
 				{
@@ -235,11 +241,11 @@ function InitializeWindow
 				{
 					#$dsDiag.Trace(">> CreateMode Section executes...")
 					# set the category: Quickstart = "AutoCAD Drawing"
-					$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT01"]}
+					$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT01"]}
 					IF ($mCatName) { $Prop["_Category"].Value = $UIString["MSDCE_CAT01"]}
 						# in case the current vault is not quickstart, but a plain MFG default configuration
 					Else {
-						$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+						$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
 						IF ($mCatName) { $Prop["_Category"].Value = $UIString["CAT1"]}
 					}
 
@@ -374,19 +380,19 @@ function InitializeInventorCategory
 	{
 		'12291' #assembly
 		{ 
-			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT10"]} #assembly, available in Quickstart Advanced, e.g. INV-Samples Vault
+			$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT10"]} #assembly, available in Quickstart Advanced, e.g. INV-Samples Vault
 			IF ($mCatName) 
 			{ 
 				$Prop["_Category"].Value = $UIString["MSDCE_CAT10"]
 			}
-			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]}
+			$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]}
 			IF ($mCatName) 
 			{ 
 				$Prop["_Category"].Value = $UIString["MSDCE_CAT02"] #3D Component, Quickstart, e.g. MFG-2019-PRO-EN
 			}
 			Else 
 			{
-				$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+				$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
 				IF ($mCatName) 
 				{ 
 					$Prop["_Category"].Value = $UIString["CAT1"]
@@ -394,28 +400,29 @@ function InitializeInventorCategory
 			}
 			If($mDocSubType -eq "{28EC8354-9024-440F-A8A2-0E0E55D635B0}") #weldment assembly
 			{
-				$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT11"]} # weldment assembly
+				$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT11"]} # weldment assembly
 				IF ($mCatName) 
 				{ 
-					$Prop["_Category"].Value = $UIString["MSDCE_CAT10"]
+					$Prop["_Category"].Value = $UIString["MSDCE_CAT11"]
+					$Prop["Material"].Value = $Document.ComponentDefinition.WeldBeadMaterial.DisplayName
 				}
 			} 
 		}
 		'12290' #part
 		{
-			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT08"]} #Part, available in Quickstart Advanced, e.g. INV-Samples Vault
+			$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT08"]} #Part, available in Quickstart Advanced, e.g. INV-Samples Vault
 			IF ($mCatName) 
 			{ 
 				$Prop["_Category"].Value = $UIString["MSDCE_CAT08"]
 			}
-			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]}
+			$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]}
 			IF ($mCatName) 
 			{ 
 				$Prop["_Category"].Value = $UIString["MSDCE_CAT02"] #3D Component, Quickstart, e.g. MFG-2019-PRO-EN
 			}
 			Else 
 			{
-				$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+				$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
 				IF ($mCatName) 
 				{ 
 					$Prop["_Category"].Value = $UIString["CAT1"]
@@ -423,7 +430,7 @@ function InitializeInventorCategory
 			}
 			If($mDocSubType -eq "{9C464203-9BAE-11D3-8BAD-0060B0CE6BB4}") 
 			{
-				$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT09"]} #sheet metal part, available in Quickstart Advanced, e.g. INV-Samples Vault
+				$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT09"]} #sheet metal part, available in Quickstart Advanced, e.g. INV-Samples Vault
 				IF ($mCatName) 
 				{ 
 					$Prop["_Category"].Value = $UIString["MSDCE_CAT09"]
@@ -431,7 +438,7 @@ function InitializeInventorCategory
 			}
 			If($Document.IsSubstitutePart -eq $true) 
 			{
-				$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT12"]} #substitute, available in Quickstart Advanced, e.g. INV-Samples Vault
+				$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT12"]} #substitute, available in Quickstart Advanced, e.g. INV-Samples Vault
 				IF ($mCatName) 
 				{ 
 					$Prop["_Category"].Value = $UIString["MSDCE_CAT12"]
@@ -440,29 +447,29 @@ function InitializeInventorCategory
 		}
 		'12292' #drawing
 		{
-			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT00"]}
+			$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT00"]}
 			IF ($mCatName) { $Prop["_Category"].Value = $UIString["MSDCE_CAT00"]}
 			Else # in case the current vault is not quickstart, but a plain MFG default configuration
 			{
-				$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+				$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
 				IF ($mCatName) { $Prop["_Category"].Value = $UIString["CAT1"]}
 			}
 		}
 		'12293' #presentation
 		{
-			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT13"]} #presentation, available in Quickstart Advanced, e.g. INV-Samples Vault
+			$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT13"]} #presentation, available in Quickstart Advanced, e.g. INV-Samples Vault
 			IF ($mCatName) 
 			{ 
 				$Prop["_Category"].Value = $UIString["MSDCE_CAT13"]
 			}
-			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]} #3D Component, Quickstart, e.g. MFG-2019-PRO-EN
+			$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT02"]} #3D Component, Quickstart, e.g. MFG-2019-PRO-EN
 			IF ($mCatName) 
 			{ 
 				$Prop["_Category"].Value = $UIString["MSDCE_CAT02"]
 			}
 			Else 
 			{
-				$mCatName = GetCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
+				$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["CAT1"]} #"Engineering"
 				IF ($mCatName) 
 				{ 
 					$Prop["_Category"].Value = $UIString["CAT1"]

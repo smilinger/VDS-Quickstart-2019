@@ -357,13 +357,10 @@ function mSelectStockItem {
 		{
 			$Prop["Stock Number"].Value = $mSelectedItem.Item
 			# Semifinished designation is custom prop; cautiously try to fill :)
-			If($mSelectedItem.Description){
-				Try { $Prop[$UIString["Adsk.QS.ItemSearch_13"]].Value = $mSelectedItem.Description} Catch{}
-			}
-			else{
+			If($mSelectedItem.Title){
 				Try { $Prop[$UIString["Adsk.QS.ItemSearch_13"]].Value = $mSelectedItem.Title} Catch{}
 			}
-
+			
 			Try { $Prop[$UIString["LBL75"]].Value = $mSelectedItem.Material} Catch{}
 		}
 

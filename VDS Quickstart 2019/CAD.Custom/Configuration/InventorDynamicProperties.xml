@@ -53,37 +53,15 @@
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Assembly" Type="File">
     <DynamicProperty>Title</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty Hidden="True">Material</DynamicProperty>
+    <DynamicProperty>Dimensions</DynamicProperty>
+    <DynamicProperty>Dimensions/Size</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Weight</DynamicProperty>
     <DynamicProperty>Spare-Wear Part</DynamicProperty>
-    <DynamicProperty>Dimensions/Size</DynamicProperty>
-    <DynamicProperty>Description 2</DynamicProperty>
-    <DynamicProperty>Description</DynamicProperty>
-    <DynamicProperty>Stock Number</DynamicProperty>
-    <DynamicProperty>Length (Cut)</DynamicProperty>
-    <DynamicProperty>Semi finished</DynamicProperty>
-    <DynamicProperty>Ident Number</DynamicProperty>
-    <DynamicProperty>Project Number</DynamicProperty>
-    <DynamicProperty>Source File</DynamicProperty>
-    <DynamicProperty>Author</DynamicProperty>
-    <DynamicProperty>Project</DynamicProperty>
-    <DynamicProperty>Mfg Approved By</DynamicProperty>
-    <DynamicProperty>Manager</DynamicProperty>
-    <DynamicProperty>Engr Approved By</DynamicProperty>
-    <DynamicProperty>FDS Key</DynamicProperty>
-    <DynamicProperty>Designer</DynamicProperty>
-    <DynamicProperty>Engineer</DynamicProperty>
-    <DynamicProperty>Comments</DynamicProperty>
-    <DynamicProperty>Cost</DynamicProperty>
-    <DynamicProperty>Keywords</DynamicProperty>
-    <DynamicProperty>Subject</DynamicProperty>
-    <DynamicProperty>Company</DynamicProperty>
-    <DynamicProperty>Project Type</DynamicProperty>
-    <DynamicProperty>Checked By</DynamicProperty>
-    <DynamicProperty>Dimensions</DynamicProperty>
-    <DynamicProperty>LastUpdatedWith</DynamicProperty>
-    <DynamicProperty>Mass</DynamicProperty>
+    <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
     <DynamicProperty Hidden="True">Part Type name</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Sheet Metal Part" Type="File">
@@ -209,6 +187,24 @@
     <DynamicProperty>Part Type name</DynamicProperty>
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Weldment Assembly">
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
+    <DynamicProperty>Dimensions</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty>Spare-Wear Part</DynamicProperty>
+    <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Reference">
+    <DynamicProperty>Dimensions</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty>LastUpdatedWith</DynamicProperty>
+    <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicsProperties>
