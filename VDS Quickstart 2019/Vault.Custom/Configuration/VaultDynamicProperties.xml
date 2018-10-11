@@ -47,6 +47,7 @@
     <DynamicProperty>Application Version</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Sub-Type</DynamicProperty>
+    <DynamicProperty>Semi-finished</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Assembly" Type="File">
     <DynamicProperty>Title</DynamicProperty>

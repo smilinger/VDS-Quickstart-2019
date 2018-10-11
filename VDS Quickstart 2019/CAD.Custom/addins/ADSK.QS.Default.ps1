@@ -204,9 +204,14 @@ function InitializeWindow
 				{
 					#Quickstart Professional - handle weldbead material" 
 					$mCatName = $Global:mCategories | Where {$_.Name -eq $UIString["MSDCE_CAT11"]} # weldment assembly
-					IF ($mCatName) 
+					IF ($Prop["_Category"].Value -eq $mCatName) 
 					{ 
-						$Prop["Material"].Value = $Document.ComponentDefinition.WeldBeadMaterial.DisplayName
+						try{
+							$Prop["Material"].Value = $Document.ComponentDefinition.WeldBeadMaterial.DisplayName
+						}
+						catch{
+							$dsDiag.Trace("Failed reading weld bead material; most likely the assembly subtype is not an weldment.")
+						}
 					}
 				}
 				default

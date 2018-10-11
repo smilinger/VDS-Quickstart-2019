@@ -9,13 +9,6 @@
               Background="#F0F0F0" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <WPF:DSWindow.Resources>
         <Style x:Key="ItemPropertyTableStyle" TargetType="{x:Type DataGridCell}">
-            <!--<Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>-->
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Typ}" Value="Text">
                     <Setter Property="Template">
@@ -107,8 +100,7 @@
                         <Setter.Value>
                             <ControlTemplate>
                                 <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value}"
-                                  IsEditable="False" BorderThickness="0" IsEnabled="False" IsHitTestVisible="False" ToolTipService.ShowOnDisabled="True"
-                                          ToolTip="Weldment Material derives from weld bead material setting."/>
+                                  IsEditable="False" BorderThickness="0" IsHitTestVisible="False"  ToolTipService.ShowOnDisabled="True" ToolTip="Weldment Material derives from weld bead material setting."/>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -393,8 +385,7 @@
         </Grid>
         <TabControl x:Name="tabCtrlMain" Grid.ColumnSpan="2" Grid.Column="1" Margin="0,5,0,0" Grid.Row="2" MaxWidth="700">
             <TabItem x:Name="tabProperties" Header="{Binding UIString[LBL63], FallbackValue=Properties}" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Grid x:Name="DSDynCatPropGrid" MinHeight="80" MinWidth="694"
-            		ToolTip="{Binding UIString[LBL63], FallbackValue=Category Properties}" >
+                <Grid x:Name="DSDynCatPropGrid" MinHeight="80" MinWidth="694">
                     <DataGrid x:Name="DSDynamicCategoryProperties"
             			AutoGenerateColumns="False"
             			HeadersVisibility="Column"

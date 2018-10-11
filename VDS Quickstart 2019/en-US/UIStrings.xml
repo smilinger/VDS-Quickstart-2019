@@ -150,7 +150,7 @@
   <!--<UIString ID="aim_description1">Description</UIString>-->
 
   <!--Inventor custom iProperties Displaynames for dynamic properties-->
-  <UIString ID="Part Type name">Sub-Type</UIString>
+
   
   <!--Vault Categories-->
   <UIString ID="CAT1">Engineering</UIString>
