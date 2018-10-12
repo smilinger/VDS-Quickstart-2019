@@ -8,16 +8,24 @@ public class itemData
 	public string Material {get;set;}
 	public string Category {get;set;}
 	public string Description {get;set;}
+	public string StockNumber {get;set;}
 }
 "@
 
 function mInitializeItemSearch([STRING] $Context)
 {
+	
+	if($Prop["_Category"].Value -eq $UIString["Adsk.QS.ItemSearch_14"])
+	{
+		$Context = "Purchased"
+	}
 	$Global:mPropContext = $Context #used to determine the target fields copying item meta data
-	If($Context -eq "Part_Number") { $mCopyTarget = " to " + $UIString["LBL16"] + " / " + $UIString["LBL2"]	}
+	
+	If($Context -eq "Part_Number") { $mCopyTarget = " to " + $UIString["LBL16"] + " / " + $UIString["LBL2"] + " / " + $UIString["LBL3"] }
 	If($Context -eq "Stock_Number") { $mCopyTarget = " to " + $UIString["LBL76"] + " / " + $UIString["LBL75"]	}
+	If($Context -eq "Purchased") { $mCopyTarget = " to " + $UIString["LBL2"] + " / " + $UIString["LBL3"] + " / " + $UIString["LBL76"] }
+
 	$dsWindow.FindName("lblBtnItemDataCopy").Content = $UIString["Adsk.QS.ItemSearch_11"] + $mCopyTarget
-	#$dsWindow.FindName("conMnuItemDataCopy").Header = $UIString["Adsk.QS.ItemSearch_11"] + $mCopyTarget
 	
 	#reset data only on demand
 	if(-not $dsWindow.FindName("ItemsFound").ItemsSource) 
@@ -58,6 +66,14 @@ function mInitializeItemSearch([STRING] $Context)
 		{
 			#set the item's category to align to CAD component for part and assembly only
 			if($Prop["_Category"].Value -eq $UIString["MSDCE_CAT08"] -or $Prop["_Category"].Value -eq $UIString["MSDCE_CAT10"])
+			{
+				$dsWindow.FindName("cmbItemSearchCategory").Text = $Prop["_Category"].Value 
+			}
+		}
+		"Purchased"
+		{
+			#set the item's category to align to CAD component for part and assembly only
+			if($Prop["_Category"].Value -eq $UIString["Adsk.QS.ItemSearch_14"] -or $Prop["_Category"].Value -eq $UIString["Adsk.QS.ItemSearch_14"])
 			{
 				$dsWindow.FindName("cmbItemSearchCategory").Text = $Prop["_Category"].Value 
 			}
@@ -200,6 +216,9 @@ function mGetItemsBySearchCriterias()
 		$mDefId = ($mAllItemPropDefs | Where-Object { $_.DispName -eq $UIString["LBL75"]}).Id #Material
 		$mPropDefs += $mDefID
 		$mPropDict.Add($UIString["LBL75"],$mDefID)
+		$mDefId = ($mAllItemPropDefs | Where-Object { $_.DispName -eq $UIString["LBL76"]}).Id #Stock Number
+		$mPropDefs += $mDefID
+		$mPropDict.Add($UIString["LBL76"],$mDefID)
 
 		$mPropInst = $vault.PropertyService.GetProperties("ITEM", $mResultItemIds, $mPropDefs)
 	
@@ -214,6 +233,7 @@ function mGetItemsBySearchCriterias()
 			$row.Description = ($mPropInst | Where-Object { $_.EntityId -eq $item.Id -and $_.PropDefId -eq $mPropDict[$UIString["Adsk.QS.ItemSearch_03"]]}).Val
 			$row.Material = ($mPropInst | Where-Object { $_.EntityId -eq $item.Id -and $_.PropDefId -eq $mPropDict[$UIString["LBL75"]]}).Val
 			$row.Category = $item.Cat.CatName
+			$row.StockNumber = ($mPropInst | Where-Object { $_.EntityId -eq $item.Id -and $_.PropDefId -eq $mPropDict[$UIString["LBL76"]]}).Val
 			$results += $row
 		}
 		If($results)
@@ -261,6 +281,10 @@ function mCopyItemData
 		{
 			mSelectMakeItem
 		}
+		"Purchased"
+		{
+			mSelectMakeItem
+		}
 		"default"{}
 	}
 }
@@ -291,6 +315,13 @@ function mSelectMakeItem {
 		{
 			$Prop["_XLTN_PARTNUMBER"].Value = $mSelectedItem.Item
 			$Prop["_XLTN_TITLE"].Value = $mSelectedItem.Title
+			$Prop["_XLTN_DESCRIPTION"].Value = $mSelectedItem.Description
+		}
+		if($Global:mPropContext -eq "Purchased")
+		{
+			$Prop["_XLTN_STOCKNUMBER"].Value = $mSelectedItem.StockNumber #the item's stock number, e.g the purchased part vendor's item number
+			# Semifinished designation is custom prop; cautiously try to fill :)			
+			#Try { $Prop[$UIString["LBL75"]].Value = $mSelectedItem.Material} Catch{}
 		}
 		
 		$dsWindow.FindName("btnOK").IsDefault = $true
