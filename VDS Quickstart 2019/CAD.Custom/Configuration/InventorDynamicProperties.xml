@@ -54,7 +54,8 @@
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty Hidden="False">Material</DynamicProperty>
+    <DynamicProperty Hidden="True">VLT_Material</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
     <DynamicProperty>Thickness</DynamicProperty>
     <DynamicProperty>G_L</DynamicProperty>
@@ -80,7 +81,8 @@
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty Hidden="False">Material</DynamicProperty>
+    <DynamicProperty Hidden="True">VLT_Material</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
     <DynamicProperty>CUTDETAIL1</DynamicProperty>
     <DynamicProperty>CUTDETAIL2</DynamicProperty>
@@ -96,14 +98,25 @@
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty Hidden="False">Material</DynamicProperty>
+    <DynamicProperty Hidden="True">VLT_Material</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
-    <DynamicProperty>G_L</DynamicProperty>
+    <DynamicProperty>Cut Length</DynamicProperty>
     <DynamicProperty>Semi finished</DynamicProperty>
     <DynamicProperty>Stock Number</DynamicProperty>
     <DynamicProperty>Spare-Wear Part</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Purchased">
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Stock Number</DynamicProperty>
+    <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
+    <DynamicProperty Hidden="True">VLT_Material</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicsProperties>

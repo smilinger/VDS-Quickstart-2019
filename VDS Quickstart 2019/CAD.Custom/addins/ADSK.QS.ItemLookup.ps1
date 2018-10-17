@@ -393,6 +393,7 @@ function mSelectStockItem {
 			}
 			
 			Try { $Prop[$UIString["LBL75"]].Value = $mSelectedItem.Material} Catch{}
+			Try { $Prop["VLT_Material"].Value = $mSelectedItem.Material} Catch{}
 		}
 
 		$dsWindow.FindName("btnOK").IsDefault = $true

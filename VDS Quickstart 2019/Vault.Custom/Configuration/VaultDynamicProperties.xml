@@ -113,6 +113,10 @@
     <DynamicProperty>Company</DynamicProperty>
     <DynamicProperty>Project Type</DynamicProperty>
     <DynamicProperty>Checked By</DynamicProperty>
+    <DynamicProperty>Application Version</DynamicProperty>
+    <DynamicProperty>Semi-finished</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
+    <DynamicProperty>Diam./Thickn.</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Office" Type="File">
     <DynamicProperty>Title</DynamicProperty>

@@ -150,6 +150,8 @@
   <!--<UIString ID="aim_description1">Description</UIString>-->
 
   <!--Inventor custom iProperties Displaynames for dynamic properties-->
+  <UIString ID="G_L">Cut Length</UIString>
+  <UIString ID="PL">Cut Length</UIString>
 
   
   <!--Vault Categories-->

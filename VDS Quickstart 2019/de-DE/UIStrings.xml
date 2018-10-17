@@ -149,7 +149,8 @@
   <!--<UIString ID="aim_description1">Description</UIString>-->
 
   <!--Inventor custom iProperties Displaynames for dynamic properties-->
-  <UIString ID="Part Type name">Sub-Type</UIString>
+  <UIString ID="G_L">Länge (Zuschnitt)</UIString>
+  <UIString ID="PL">Länge (Zuschnitt)</UIString>
 
   <!--Vault Categories-->
   <UIString ID="CAT1">Konstruktion</UIString>
