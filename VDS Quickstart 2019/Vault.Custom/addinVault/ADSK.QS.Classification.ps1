@@ -75,9 +75,12 @@ function mInitializeClassificationTab($ParentType, $file)
 				}
 			}) #lostFocus
 		
-			mAvlblClsReset 
-			mAddClsLevelCombo -ClassLevelName $UIString["Adsk.QS.ClassLevel_00"]
-			
+			mAvlblClsReset
+			if($dsWindow.FindName("wrpClassification").Children.Count -lt 1)
+			{
+				#activate command should not add another combo row, if already classe(s) are selected
+				mAddClsLevelCombo -ClassLevelName $UIString["Adsk.QS.ClassLevel_00"]
+			}
 			if($Prop["_XLTN_CLASS"].Value.Length -lt 1) { $dsWindow.FindName("btnRemoveClass").IsEnabled = $false}
 			if($Prop["_XLTN_CLASS"].Value.Length -gt 0) { 	$dsWindow.FindName("btnRemoveClass").IsEnabled = $true}
 
