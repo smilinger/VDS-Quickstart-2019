@@ -153,7 +153,7 @@
   <UIString ID="G_L">Cut Length</UIString>
   <UIString ID="PL">Cut Length</UIString>
 
-  
+
   <!--Vault Categories-->
   <UIString ID="CAT1">Engineering</UIString>
   <UIString ID="CAT2">Office</UIString>
@@ -191,7 +191,7 @@
   <!--Quickstart Inventor Dialog-->
   <UIString ID="MSDCE_MSG00">Missing Model View! Your system is set to save IPN/IDW/DWG depending on model's name and location. Either add a model or change the Vault option to generate numbers for IPN/IDW/DWG.</UIString>
   <!--Quickstart Inventor Dialog end-->
-  
+
   <!--Quickstart Functional Dialogs (FG, DA, TP, CH)-->
   <UIString ID="MSDCE_BOMType_00">Phantom</UIString>
   <UIString ID="MSDCE_BOMType_01">Phantom-Assembly</UIString>
@@ -325,7 +325,7 @@
   <!--Insert CAD Copy-->
   <UIString ID="ADSK-InsertInvCopy_00">Insert CAD: Component Copy</UIString>
   <!--Insert CAD Copy-->
-  
+
   <!--Cascading Organisation/Person selection & link creation-->
   <UIString ID="Adsk.Org.Pers.Link_00">Contact</UIString>
   <UIString ID="Adsk.Org.Pers.Link_01">Contacts</UIString>
@@ -336,7 +336,7 @@
   <UIString ID="Adsk.Org.Pers.Link_06">Select Customer and Contact from "Organisations" Workspace</UIString>
   <UIString ID="Adsk.Org.Pers.Link_07">Assign Person to existing Organisation</UIString>
   <!--Cascading Organisation/Person selection & link creation END-->
-  
+
   <!--ItemMaster Search and Item Tab START-->
   <UIString ID="Adsk.QS.ItemSearch_00">Item Master</UIString>
   <UIString ID="Adsk.QS.ItemSearch_01">Multiple Properties</UIString>
@@ -392,8 +392,51 @@
   <UIString ID="Adsk.QS.Classification_11">Removal of class will delete all attributes and values of this assignment. {0}Do you really want to remove the classificatoin?</UIString>
   <UIString ID="Adsk.QS.Classification_12">Attention: The result is based on an incomplete index! Contact your Administrator, if you continue seeing this message.</UIString>
   <UIString ID="Adsk.QS.Classification_13">The custom workspace 'Classes' is not available. Contact your Administrator.</UIString>
-
-
   <!--Classification end-->
+
+  <!--CatalogTermsTranslations-->
+  <UIString ID="ClassTerms_MNU10">New Term...</UIString>
+  <UIString ID="ClassTerms_MNU11">Create new term</UIString>
+  <UIString ID="ClassTerms_MNU12">Edit Term...</UIString>
+  <UIString ID="ClassTerms_MNU13">Edit existing term</UIString>
+  <UIString ID="ClassTerms_00">Term</UIString>
+  <UIString ID="ClassTerms_01">Terms Catalog</UIString>
+  <UIString ID="ClassTerms_02">German</UIString>
+  <UIString ID="ClassTerms_03">English</UIString>
+  <UIString ID="ClassTerms_04">French</UIString>
+  <UIString ID="ClassTerms_05">Italian</UIString>
+  <UIString ID="ClassTerms_06">No matching term(s) found.</UIString>
+  <UIString ID="ClassTerms_07">Classification</UIString>
+  <UIString ID="ClassTerms_08">Category Name</UIString>
+  <UIString ID="ClassTerms_09">Term DE</UIString>
+  <UIString ID="ClassTerms_10">Term EN</UIString>
+  <UIString ID="ClassTerms_11">Term FR</UIString>
+  <UIString ID="ClassTerms_12">Term IT</UIString>
+  <UIString ID="ClassTerms_13">Catalog...</UIString>
+  <UIString ID="ClassTerms_14">Filter</UIString>
+  <UIString ID="ClassTerms_15">Additional Languages</UIString>
+  <UIString ID="ClassTerms_16">Search text to match term definition, use "*" and/or add Languages to widen the scope</UIString>
+  <UIString ID="ClassTerms_BTN8">Search</UIString>
+  <UIString ID="ClassTerms_BTN9">Inherit Term to Title</UIString>
+  <UIString ID="ClassTerms_BTN10">Inherit</UIString>
+  <UIString ID="ClassTerms_TT00">Inherit Term(s) to Title DE (EN, FR, IT)</UIString>
+  <UIString ID="ClassTerms_TT01">Limit search to hierarchy level</UIString>
+  <UIString ID="ClassTerms_TT02">Name = 'TERM EN' if not typed manually</UIString>
+  <UIString ID="ClassTerms_TT03">Assigned by classification</UIString>
+  <UIString ID="ClassTerms_TT04">No hand typed terms allowed; select available term from catalog</UIString>
+  <UIString ID="ClassTerms_TT05">Activates catalog of terms</UIString>
+  <UIString ID="ClassTerms_TT06">Apply '*' for partial terms</UIString>
+  <UIString ID="ClassTerms_TT07">Resets classification</UIString>
+  <UIString ID="ClassTerms_MSG01">You are going to change the selected classification, are you sure?"</UIString>
+  <UIString ID="ClassTerms_MSG02">Search result displays {0} out of {1}; refine your search.</UIString>
+  <UIString ID="ClassTerms_MSG03">No matching terms found</UIString>
+  <!--CatalogTermsTranslations End-->
   
+  <!--Document Structure Tab Extension-->
+  <UIString ID="ADSK-DocStructure_00">File Structure</UIString>
+  <UIString ID="ADSK-DocStructure_01">Copy file name to clipboard</UIString>
+  <UIString ID="ADSK-DocStructure_02">Designated file '{0}' in property '{1}' not found.</UIString>
+  <!--Document Structure Tab Extension End-->
+
+
 </UIStrings>

@@ -11,6 +11,9 @@
 #endregion
 
 #region - version history
+# Version Info - VDS Quickstart Vault Library 2019.2
+	# added mRecursivelyCreateFolders - create folder structures using folder template(s)
+
 # Version Info - VDS Quickstart Vault Library 2019.1.1
 	# fixed failure in getting PropertyTranslations for default DSLanguages settings
 	# added mGetProjectFolderPropToVaultFile
@@ -324,3 +327,54 @@ function mGetProjectFolderPropToVaultFile ([String] $mFolderSourcePropertyName, 
 		$Prop[$mFileTargetPropertyName].Value = ""
 	}
 }
+
+#create folder structure based on a template;
+function mRecursivelyCreateFolders($sourceFolder, $targetFolder)
+{
+	If(-not $Global:FldPropDefs){
+		$Global:FldPropDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("FLDR")
+		$Global:FldPropDefIds = @()
+		$Global:FldPropDefs| ForEach-Object {
+			If($_.IsSys -eq $false)
+			{
+				$Global:FldPropDefIds += $_.Id
+			}
+		}
+	}
+
+    $sourceSubFolders = $vault.DocumentService.GetFoldersByParentId($sourceFolder.Id,$false)
+	
+		$mFldIdsArray = @() #collect the level's folder(s) Id(s)
+		$propInstParamArrayArray = @()
+
+		foreach ($folder in $sourceSubFolders) {
+			$mSourceFldrProps = $vault.PropertyService.GetProperties("FLDR", @($folder.id) , $Global:FldPropDefIds)
+		
+			$mSourceUdpInstArray = @()
+			$mSourceUdpInstArray += 	$mSourceFldrProps | Where-Object { $Global:FldPropDefIds -contains $_.PropDefId}	
+
+			$newTargetSubFolder = $vault.DocumentServiceExtensions.AddFolderWithCategory($folder.Name, $targetFolder.Id, $folder.IsLibrary, $folder.Cat.CatId)
+			$mFldIdsArray  += $newTargetSubFolder.Id
+			
+			$propInstParamArray = New-Object Autodesk.Connectivity.WebServices.PropInstParamArray #collect the folder's property instance arrays
+		
+			Foreach($Inst in $mSourceUdpInstArray)
+			{
+				$propInstParam = New-Object Autodesk.Connectivity.WebServices.PropInstParam
+				$propInstParam.PropDefId	= $Inst.PropDefId
+				$propInstParam.Val = $Inst.Val
+				$propInstParamArray.Items += $propInstParam
+			}
+						
+			$propInstParamArrayArray += $propInstParamArray
+			mrecursivelyCreateFolders -targetFolder $newTargetSubFolder -sourceFolder $folder
+		
+			#returning to the initial level we can update the level folder's properties
+
+		 }
+
+		Try{
+				$vault.DocumentServiceExtensions.UpdateFolderProperties($mFldIdsArray, $propInstParamArrayArray)
+			}
+			catch {}
+} #end function mRecursivelyCreateFolders

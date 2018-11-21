@@ -391,5 +391,50 @@
   <UIString ID="Adsk.QS.Classification_12">Achtung: Das Ergebnis beruht auf einem unvollständigen Suchindex. Wenden Sie sich an den Administrator, wenn diese Meldung immer erscheint.</UIString>
   <UIString ID="Adsk.QS.Classification_13">Der Benutzerdefinierte Arbeitsbereich 'Klassen' steht nicht zur Verfügung. Wenden Sie sich an ihren Administrator.</UIString>
   <!--Classification end-->
+
+  <!--CatalogTermsTranslations-->
+  <UIString ID="ClassTerms_MNU10">Neuer Begriff...</UIString>
+  <UIString ID="ClassTerms_MNU11">Neuen Begriff erstellen</UIString>
+  <UIString ID="ClassTerms_MNU12">Begriff bearbeiten...</UIString>
+  <UIString ID="ClassTerms_MNU13">Vorhandenen Begriff bearbeiten</UIString>
+  <UIString ID="ClassTerms_00">Begriff</UIString>
+  <UIString ID="ClassTerms_01">Benennungs-Katalog</UIString>
+  <UIString ID="ClassTerms_02">Deutsch</UIString>
+  <UIString ID="ClassTerms_03">Englisch</UIString>
+  <UIString ID="ClassTerms_04">Französisch</UIString>
+  <UIString ID="ClassTerms_05">Italienisch</UIString>
+  <UIString ID="ClassTerms_06">Keine übereinstimmende Begriffe vorhanden.</UIString>
+  <UIString ID="ClassTerms_07">Klassifizierung</UIString>
+  <UIString ID="ClassTerms_08">Kategoriename</UIString>
+  <UIString ID="ClassTerms_09">Begriff DE</UIString>
+  <UIString ID="ClassTerms_10">Begriff EN</UIString>
+  <UIString ID="ClassTerms_11">Begriff FR</UIString>
+  <UIString ID="ClassTerms_12">Begriff IT</UIString>
+  <UIString ID="ClassTerms_13">Katalog...</UIString>
+  <UIString ID="ClassTerms_14">Filter</UIString>
+  <UIString ID="ClassTerms_15">Zusätzliche Sprachen</UIString>
+  <UIString ID="ClassTerms_16">Search text to match term definition, use "*" and/or add Languages to widen the scope</UIString>
+  <UIString ID="ClassTerms_BTN8">Suche</UIString>
+  <UIString ID="ClassTerms_BTN9">Begriff in Titel Feld übernehmen</UIString>
+  <UIString ID="ClassTerms_BTN10">Übernehmen</UIString>
+  <UIString ID="ClassTerms_TT00">Begriff(e) in Titel und Titel (EN, FR, IT) übernehmen.</UIString>
+  <UIString ID="ClassTerms_TT01">Suche auf Hierarchieebene begrenzen...</UIString>
+  <UIString ID="ClassTerms_TT02">Name = 'Begriff' wenn nicht anders angegeben</UIString>
+  <UIString ID="ClassTerms_TT03">Wird über Klassifizierung gefüllt</UIString>
+  <UIString ID="ClassTerms_TT04">Keine manuelle Eingabe zulässig; wählen sie eine Benennung aus dem Katalog</UIString>
+  <UIString ID="ClassTerms_TT05">Öffnet Benennungskatalog</UIString>
+  <UIString ID="ClassTerms_TT06">Verwenden sie '*' für gekürzte Begriffe</UIString>
+  <UIString ID="ClassTerms_TT07">Klassifizierung zurücksetzen</UIString>
+  <UIString ID="ClassTerms_MSG01">Sie setzen gerade die Klassifizierung zurück, wollen Sie fortfahren?"</UIString>
+  <UIString ID="ClassTerms_MSG02">Anzeige auf Seitengröße {0} von {1} möglichen begrenzt; grenzen Sie die Suche ein.</UIString>
+  <UIString ID="ClassTerms_MSG03">Keine übereinstimmenden Begriffe gefunden</UIString>
+  <!--CatalogTermsTranslations End-->
   
+  <!--Document Structure Tab Extension-->
+  <UIString ID="ADSK-DocStructure_00">Dokumentstruktur</UIString>
+  <UIString ID="ADSK-DocStructure_01">Kopiere Dateiname in Zwischenablage</UIString>
+  <UIString ID="ADSK-DocStructure_02">Angegebene Datei '{0}' im Feld '{1}' konnte nicht gefunden werden.</UIString>
+  <!--Document Structure Tab Extension End-->
+
+
 </UIStrings>
