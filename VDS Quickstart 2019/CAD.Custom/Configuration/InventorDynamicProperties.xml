@@ -65,9 +65,12 @@
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
+    <DynamicProperty>Cut Length</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Assembly">
     <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
@@ -76,6 +79,7 @@
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
     <DynamicProperty>Project</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty>InternalName</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Frame Member">
     <DynamicProperty>Title</DynamicProperty>
@@ -96,6 +100,7 @@
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Part">
     <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
     <DynamicProperty Hidden="False">Material</DynamicProperty>
@@ -108,6 +113,7 @@
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
+    <DynamicProperty>InternalName</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Purchased">
     <DynamicProperty>Title</DynamicProperty>
@@ -118,5 +124,21 @@
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty Hidden="True">VLT_Material</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Base">
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Title</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="3D Component" />
+  <DynamicPropertiesCategory Category="Drawing Inventor">
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Format</DynamicProperty>
+    <DynamicProperty>Scale</DynamicProperty>
+    <DynamicProperty>Sheet</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicsProperties>

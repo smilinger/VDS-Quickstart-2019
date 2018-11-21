@@ -85,6 +85,10 @@ function InitializeTabWindow
 
 function InitializeWindow
 {	      
+
+        #$dsDiag.ShowLog()
+        #$dsDiag.Clear()
+      
 	#begin rules applying commonly
 	$Prop["_Category"].add_PropertyChanged({
         if ($_.PropertyName -eq "Value")
@@ -133,8 +137,8 @@ function InitializeWindow
 						}
 					}) #add selection changed
 			}
-
-			#endregion Quickstart			
+			#endregion Quickstart
+			
 		}
 		"FolderWindow"
 		{
@@ -169,6 +173,121 @@ function InitializeWindow
 				#endregion
 			}
 		}
+		#region GoToInvSibling
+		"GoToInvSibling"
+		{
+			$_t = $Prop["Internal ID"].Value
+
+			$mTargetFile = Get-Content $env:TEMP"\mStrTabClick.txt"
+
+			#create search conditions for 
+			$srchConds = New-Object autodesk.Connectivity.WebServices.SrchCond[] 1
+				$srchCond = New-Object autodesk.Connectivity.WebServices.SrchCond
+				$propDefs = $vault.PropertyService.GetPropertyDefinitionsByEntityClassId("FILE")
+				$propNames = @("Internal ID")
+				$propDefIds = @{}
+				foreach($name in $propNames) {
+					$propDef = $propDefs | Where-Object { $_.DispName -eq $name }
+					$propDefIds[$propDef.Id] = $propDef.DispName
+				}
+				$srchCond.PropDefId = $propDef.Id
+				$srchCond.SrchOper = 3
+				$srchCond.SrchTxt = $Prop["Internal ID"].Value
+
+				$srchCond.PropTyp = [Autodesk.Connectivity.WebServices.PropertySearchType]::SingleProperty
+				$srchCond.SrchRule = [Autodesk.Connectivity.WebServices.SearchRuleType]::Must
+				$srchConds[0] = $srchCond
+				$srchSort = New-Object autodesk.Connectivity.WebServices.SrchSort
+				$mSearchStatus = New-Object autodesk.Connectivity.WebServices.SrchStatus
+				$mBookmark = ""     
+				$mResultAll = New-Object 'System.Collections.Generic.List[Autodesk.Connectivity.WebServices.File]'
+				$mResultFiltered = New-Object 'System.Collections.Generic.List[Autodesk.Connectivity.WebServices.File]'
+	
+				while(($mSearchStatus.TotalHits -eq 0) -or ($mResultAll.Count -lt $mSearchStatus.TotalHits))
+				{
+					$mResultPage = $vault.DocumentService.FindFilesBySearchConditions($srchConds,@($srchSort),@(($vault.DocumentService.GetFolderRoot()).Id),$true,$false,[ref]$mBookmark,[ref]$mSearchStatus)
+					if($mResultPage.Count -ne 0)
+					{
+						$mResultAll.AddRange($mResultPage)
+					}
+					else { break;}
+		
+					break; #limit the search result to the first result page; page scrolling not implemented in this snippet release
+				}
+
+				If($mResultAll.Count -lt $mSearchStatus.TotalHits)
+				{
+					$dsWindow.FindName("txtBlck_Notification1").Text = ([String]::Format($UIString["ADSK-GoToInvSibl_MSG00"], $mResultAll.Count, $mSearchStatus.TotalHits))
+				}
+				Else{
+					$dsWindow.FindName("txtBlck_Notification1").Visibility = "Collapsed"
+				}
+
+				IF($mResultAll.Count -gt 0)
+				{
+					$mResultFiltered += $mResultAll | Where-Object {$_.Name -ne ($Prop["_FileName"].Value + $Prop["_FileExt"].Value)} # don't list the selected file's versions as parallel copies
+					If ($mResultFiltered.Count -gt 0)
+					{
+						$dsWindow.FindName("mDerivatives1").ItemsSource = @(mGetResultMeta $mResultFiltered) # @() #the array of each file iterations meta data
+					}
+					$dsWindow.FindName("mDerivatives1").add_SelectionChanged({
+						mDerivatives1Click
+						If($dsWindow.FindName("mDerivatives1").SelectedItem)
+							{
+								$dsWindow.FindName("btnGoTo").IsEnabled = $true
+							}
+						})
+				}
+				IF($mResultFiltered.Count -lt 1)
+				{
+					$dsWindow.FindName("txtBlck_Notification1").Visibility = "Visible"
+					$dsWindow.FindName("txtBlck_Notification1").Text = $UIString["ADSK-GoToInvSibl_MSG01"]
+				}
+		}
+		#endregion GoToInvSibling
+
+		#region CustomObjectTermWindow-CatalogTermsTranslations
+		"CustomObjectTermWindow"
+		{      
+			IF ($Prop["_CreateMode"].Value -eq $true) 
+			{
+				$Prop["_Category"].Value = $Prop["_CustomObjectDefName"].Value
+
+					$dsWindow.FindName("Categories").IsEnabled = $false
+					$dsWindow.FindName("NumSchms").Visibility = "Collapsed"
+					$Prop["_NumSchm"].Value = $Prop["_Category"].Value
+
+				IF($Prop["_XLTN_IDENTNUMBER"]){ $Prop["_XLTN_IDENTNUMBER"].Value = $UIString["LBL27"]}
+			}
+
+			#region EditMode
+			IF ($Prop["_EditMode"].Value -eq $true) 
+			{
+				#read existing classification elements
+				$_classes = @()
+				Try{ #likely not all properties are used...
+					If ($Prop["_XLTN_SEGMENT"].Value.Length -gt 1){
+						$_classes += $Prop["_XLTN_SEGMENT"].Value
+						If ($Prop["_XLTN_MAINGROUP"].Value.Length -gt 1){
+							$_classes += $Prop["_XLTN_MAINGROUP"].Value
+							If ($Prop["_XLTN_GROUP"].Value.Length -gt 1){
+								$_classes += $Prop["_XLTN_GROUP"].Value
+								If ($Prop["_XLTN_SEGMENT"].Value.Length -gt 1){
+									$_classes += $Prop["_XLTN_SUBGROUP"].Value
+								}
+							}
+						}
+					}
+				}
+				catch {}
+			}
+			#endregion EditMode
+			mAddCoCombo -_CoName "Segment" -_classes $_classes #enables classification for catalog of terms
+			# ToDo: createmode: activate last used classification
+			
+		} # objectterm Window
+		#endregion CatalogTermsTranslations-CustomObjectTermsWindow
+
 	}
 }
 
@@ -216,6 +335,10 @@ function GetTitleWindow
 #fired when the file selection changes
 function OnTabContextChanged
 {
+
+        $dsDiag.ShowLog()
+        $dsDiag.Clear()
+      
 	$xamlFile = [System.IO.Path]::GetFileName($VaultContext.UserControl.XamlFile)
 	
 	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "ADSK.QS.CAD BOM.xaml")
@@ -269,6 +392,27 @@ function OnTabContextChanged
 		$dsWindow.FindName("AssociatedFiles").ItemsSource = $assocFiles
 	}
 
+	#region Documentstructure Extension
+		if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "ADSK.QS.FileDocStructure.xaml")
+		{
+			Add-Type -Path 'C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\addinVault\UsesWhereUsed.dll'
+			$file = $vault.DocumentService.GetLatestFileByMasterId($vaultContext.SelectedObject.Id)
+			$treeNode = New-Object UsesWhereUsed.TreeNode($file, $vaultConnection)
+			$dsWindow.FindName("Uses").ItemsSource = @($treeNode)
+
+			$dsWindow.FindName("Uses").add_SelectedItemChanged({
+				#mUwUsdChldrnClick
+$dsDiag.Trace("Child selected")
+			})
+			#$dsWindow.FindName("WhereUsed").add_SelectedItemChanged({
+			#	#mUwUsdPrntClick
+			#	$dsDiag.Trace("Child selected")
+			#})
+
+		}
+	#endregion documentstructure
+
+
 	#region derivation tree
 	if ($VaultContext.SelectedObject.TypeId.SelectionContext -eq "FileMaster" -and $xamlFile -eq "ADSK.QS.DerivationTree.xaml")
 	{
@@ -298,6 +442,17 @@ function GetNewCustomObjectName
 					$Prop["_XLTN_IDENTNUMBER"].Value = $Prop["_GeneratedNumber"].Value
 				}
 				$customObjectName = $Prop["_XLTN_FIRSTNAME"].Value + " " + $Prop["_XLTN_LASTNAME"].Value
+				return $customObjectName
+			}
+
+			$UIString["ClassTerms_00"] #CatalogTermsTranslations
+			{
+				if($dsWindow.FindName("DSNumSchmsCtrl").NumSchmFieldsEmpty -eq $false)
+				{
+					Try {$Prop["_XLTN_IDENTNUMBER"].Value = $Prop["_GeneratedNumber"].Value}
+					catch { $dsDiag.Trace("UDP to save ident number does not exist")}
+				}
+				$customObjectName = $Prop["_XLTN_TERM"].Value
 				return $customObjectName
 			}
 
@@ -390,6 +545,10 @@ function GetCategories
 	{
 		return $vault.CategoryService.GetCategoriesByEntityClassId("CUSTENT", $true)
 	}
+	elseif ($dsWindow.Name -eq "CustomObjectTermWindow")
+	{
+		return $vault.CategoryService.GetCategoriesByEntityClassId("CUSTENT", $true)
+	}
 }
 
 function GetNumSchms
@@ -438,6 +597,13 @@ function GetNumSchms
 							$_FilteredNumSchems = $numSchems | Where { $_.Name -eq $Prop["_Category"].Value}
 							return $_FilteredNumSchems
 						}
+
+						"CustomObjectTermWindow"
+						{
+							$_FilteredNumSchems = $numSchems | Where-Object { $_.Name -eq $Prop["_Category"].Value}
+							return $_FilteredNumSchems
+						}
+
 						default
 						{
 							$numSchems = $numSchems | Sort-Object -Property IsDflt -Descending

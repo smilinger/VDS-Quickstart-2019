@@ -11,7 +11,7 @@
 #=============================================================================
 
 function InitializeWindow
-{    
+{        
 	#region rules applying commonly
     $dsWindow.Title = SetWindowTitle
 	#InitializeFileNameValidation #Quickstart initializes at latest to avoid multiple events by UI changes
@@ -286,6 +286,19 @@ function InitializeWindow
 	$global:expandBreadCrumb = $true
 
 	if($dsWindow.FindName("tabItemProperties")) { mInitializeTabItemProps}
+
+	#region CatalogTerm
+	If ($dsWindow.FindName("expTermSearch"))
+	{			
+		Try{
+			Import-Module -FullyQualifiedName "C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault.Custom\addinVault\ADSK.QS.TermsTranslations.psm1"
+		}
+		catch{
+			$dsWindow.FindName("tabTermsCatalog").Visibility = "Collapsed"
+			return
+		}
+	}
+	#endregionCatalogTerm
 
 	InitializeFileNameValidation #do this at the end of all other event initializations
 	

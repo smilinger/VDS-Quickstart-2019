@@ -55,8 +55,22 @@
   <PropertyTranslation Name="MAINGROUP">Main Group</PropertyTranslation>
   <PropertyTranslation Name="GROUP">Group</PropertyTranslation>
   <PropertyTranslation Name="SUBGROUP">Sub Group</PropertyTranslation>
-  <PropertyTranslation Name="CLASS">Klasse</PropertyTranslation>
+  <PropertyTranslation Name="CLASS">Class</PropertyTranslation>
   <!--Quickstart Extension Classification end-->
+
+  <!--CatalogTermsTranslations-->
+  <!--Note the default "Term" is used as object name and varies according the language-->
+  <PropertyTranslation Name="TERM">Term EN</PropertyTranslation>
+  <PropertyTranslation Name="TERM-DE">Term DE</PropertyTranslation>
+  <PropertyTranslation Name="TERM-EN">Term EN</PropertyTranslation>
+  <PropertyTranslation Name="TERM-FR">Term FR</PropertyTranslation>
+  <PropertyTranslation Name="TERM-IT">Term IT</PropertyTranslation>
+  <!--Note the default "Term" is used as object name and varies according the language-->
+  <PropertyTranslation Name="TITLE-DE">Title DE</PropertyTranslation>
+  <PropertyTranslation Name="TITLE-EN">Title</PropertyTranslation>
+  <PropertyTranslation Name="TITLE-FR">Title FR</PropertyTranslation>
+  <PropertyTranslation Name="TITLE-IT">Title IT</PropertyTranslation>
+  <!--Classification & Terms-->
   
 </PropertyTranslations>
 

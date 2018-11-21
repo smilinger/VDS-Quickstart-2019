@@ -76,7 +76,7 @@ function mInitializeClassificationTab($ParentType, $file)
 			}) #lostFocus
 		
 			mAvlblClsReset
-			if($dsWindow.FindName("wrpClassification").Children.Count -lt 1)
+			if($dsWindow.FindName("wrpClassification2").Children.Count -lt 1)
 			{
 				#activate command should not add another combo row, if already classe(s) are selected
 				mAddClsLevelCombo -ClassLevelName $UIString["Adsk.QS.ClassLevel_00"]
@@ -282,7 +282,7 @@ function mRemoveClassification()
 function mAddClsLevelCombo ([String] $ClassLevelName, $ClsLvls) {
 	$children = mGetCustentClsLevelList -ClassLevelName $ClassLevelName
 	if($children -eq $null) { return }
-	$mBreadCrumb = $dsWindow.FindName("wrpClassification")
+	$mBreadCrumb = $dsWindow.FindName("wrpClassification2")
 	$cmb = New-Object System.Windows.Controls.ComboBox
 	$cmb.Name = "cmbClsBrdCrmb_" + $mBreadCrumb.Children.Count.ToString();
 	$cmb.DisplayMemberPath = "Name";
@@ -375,7 +375,7 @@ function mAddClsLevelCmbChild ($data) {
 		mAvlblClsReset 
 	}
 	$children = $mClassLevelObjects
-	$mBreadCrumb = $dsWindow.FindName("wrpClassification")
+	$mBreadCrumb = $dsWindow.FindName("wrpClassification2")
 	$cmb = New-Object System.Windows.Controls.ComboBox
 	$cmb.Name = "cmbClsBrdCrmb_" + $mBreadCrumb.Children.Count.ToString();
 	$cmb.DisplayMemberPath = "Name";
@@ -492,7 +492,7 @@ function mGetCustentClsLevelList ([String] $ClassLevelName) {
 function mGetCustentClsLevelUsesList ($sender) {
 	try {
 		$dsDiag.Trace(">> mGetCustentClsLevelUsesList started")
-		$mBreadCrumb = $dsWindow.FindName("wrpClassification")
+		$mBreadCrumb = $dsWindow.FindName("wrpClassification2")
 		$_i = $mBreadCrumb.Children.Count -1
 		$_CurrentCmbName = "cmbClsBrdCrmb_" + $mBreadCrumb.Children.Count.ToString()
 		$_CurrentClass = $mBreadCrumb.Children[$_i].SelectedValue.Name
@@ -525,7 +525,7 @@ function mGetCustentClsLevelUsesList ($sender) {
 }
 
 function mClsLevelCmbSelectionChanged ($sender) {
-	$mBreadCrumb = $dsWindow.FindName("wrpClassification")
+	$mBreadCrumb = $dsWindow.FindName("wrpClassification2")
 	$position = [int]::Parse($sender.Name.Split('_')[1]);
 	$children = $mBreadCrumb.Children.Count - 1
 	while($children -gt $position )
@@ -571,13 +571,13 @@ function mResetClassSelection
 			}
 				IF (($Prop["_CreateMode"].Value -eq $true) -or ($_Return -eq "Yes"))
 				{
-					$mBreadCrumb = $dsWindow.FindName("wrpClassification")
+					$mBreadCrumb = $dsWindow.FindName("wrpClassification2")
 					$mBreadCrumb.Children[1].SelectedIndex = -1
 				}
 			}
 			default
 			{
-				$mBreadCrumb = $dsWindow.FindName("wrpClassification")
+				$mBreadCrumb = $dsWindow.FindName("wrpClassification2")
 				$mBreadCrumb.Children[0].SelectedIndex = -1
 			}
 		}

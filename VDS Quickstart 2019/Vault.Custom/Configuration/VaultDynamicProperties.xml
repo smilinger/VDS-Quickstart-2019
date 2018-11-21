@@ -48,6 +48,9 @@
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Sub-Type</DynamicProperty>
     <DynamicProperty>Semi-finished</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
+    <DynamicProperty>FLCdmsID</DynamicProperty>
+    <DynamicProperty>FLCwsID</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Assembly" Type="File">
     <DynamicProperty>Title</DynamicProperty>
@@ -82,6 +85,9 @@
     <DynamicProperty>Application Version</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Sub-Type</DynamicProperty>
+    <DynamicProperty>FLCdmsID</DynamicProperty>
+    <DynamicProperty>FLCwsID</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Sheet Metal Part" Type="File">
     <DynamicProperty>Title</DynamicProperty>
@@ -117,6 +123,9 @@
     <DynamicProperty>Semi-finished</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Diam./Thickn.</DynamicProperty>
+    <DynamicProperty>FLCdmsID</DynamicProperty>
+    <DynamicProperty>FLCwsID</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Office" Type="File">
     <DynamicProperty>Title</DynamicProperty>
@@ -188,6 +197,9 @@
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Ident Number</DynamicProperty>
+    <DynamicProperty>Company</DynamicProperty>
+    <DynamicProperty>Street address</DynamicProperty>
+    <DynamicProperty>Web link</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Person" Type="CustomObject">
     <DynamicProperty>Description</DynamicProperty>
@@ -212,6 +224,8 @@
     <DynamicProperty>Project Number</DynamicProperty>
     <DynamicProperty>Project Title</DynamicProperty>
     <DynamicProperty>Project</DynamicProperty>
+    <DynamicProperty>FLCdmsID</DynamicProperty>
+    <DynamicProperty>FLCwsID</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Drawing AutoCAD" Type="FILE">
     <DynamicProperty>Title</DynamicProperty>
@@ -361,5 +375,130 @@
     <DynamicProperty>Cut Detail 2</DynamicProperty>
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory>
+    <DynamicProperty>Created By</DynamicProperty>
+    <DynamicProperty>Date Version Created</DynamicProperty>
+    <DynamicProperty>Obsolete</DynamicProperty>
+    <DynamicProperty>File Replicated</DynamicProperty>
+    <DynamicProperty>Current Owner</DynamicProperty>
+    <DynamicProperty>Leased Until</DynamicProperty>
+    <DynamicProperty>File Name</DynamicProperty>
+    <DynamicProperty>Name</DynamicProperty>
+    <DynamicProperty>Checked In</DynamicProperty>
+    <DynamicProperty>File Name (Historical)</DynamicProperty>
+    <DynamicProperty>Date Modified</DynamicProperty>
+    <DynamicProperty>Checked Out</DynamicProperty>
+    <DynamicProperty>Version</DynamicProperty>
+    <DynamicProperty>Comment</DynamicProperty>
+    <DynamicProperty>File Size</DynamicProperty>
+    <DynamicProperty>File Extension</DynamicProperty>
+    <DynamicProperty>Visualization Attachment</DynamicProperty>
+    <DynamicProperty>Number of Attachments</DynamicProperty>
+    <DynamicProperty>Linked to Item</DynamicProperty>
+    <DynamicProperty>Item Assignable</DynamicProperty>
+    <DynamicProperty>Category Name</DynamicProperty>
+    <DynamicProperty>Category Glyph</DynamicProperty>
+    <DynamicProperty>Lifecycle Definition</DynamicProperty>
+    <DynamicProperty>State</DynamicProperty>
+    <DynamicProperty>Revision Scheme</DynamicProperty>
+    <DynamicProperty>Latest Released Revision</DynamicProperty>
+    <DynamicProperty>Released Revision</DynamicProperty>
+    <DynamicProperty>Property Compliance</DynamicProperty>
+    <DynamicProperty>Property Compliance (Historical)</DynamicProperty>
+    <DynamicProperty>Provider</DynamicProperty>
+    <DynamicProperty>Thumbnail</DynamicProperty>
+    <DynamicProperty>Originator</DynamicProperty>
+    <DynamicProperty>Original Create Date</DynamicProperty>
+    <DynamicProperty>Controlled By Change Order</DynamicProperty>
+    <DynamicProperty>Classification</DynamicProperty>
+    <DynamicProperty>Hidden</DynamicProperty>
+    <DynamicProperty>Latest Version</DynamicProperty>
+    <DynamicProperty>Category Name (Historical)</DynamicProperty>
+    <DynamicProperty>Category Glyph (Historical)</DynamicProperty>
+    <DynamicProperty>Lifecycle Definition (Historical)</DynamicProperty>
+    <DynamicProperty>State (Historical)</DynamicProperty>
+    <DynamicProperty>Revision Scheme (Historical)</DynamicProperty>
+    <DynamicProperty>Revision</DynamicProperty>
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Internal ID</DynamicProperty>
+    <DynamicProperty>Application Version</DynamicProperty>
+    <DynamicProperty>Dimensions/Size</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty>Mass</DynamicProperty>
+    <DynamicProperty>Sub-Type</DynamicProperty>
+    <DynamicProperty>Semi-finished</DynamicProperty>
+    <DynamicProperty>Spare-Wear Part</DynamicProperty>
+    <DynamicProperty>Length (Cut)</DynamicProperty>
+    <DynamicProperty>Stock Number</DynamicProperty>
+    <DynamicProperty>Checked Out Local Spec</DynamicProperty>
+    <DynamicProperty>Checked Out Machine</DynamicProperty>
+    <DynamicProperty>Checked Out By</DynamicProperty>
+    <DynamicProperty>Change Order State</DynamicProperty>
+    <DynamicProperty>iLogicRuleStatus</DynamicProperty>
+    <DynamicProperty>Initial Release Date</DynamicProperty>
+    <DynamicProperty>Initial Approver</DynamicProperty>
+    <DynamicProperty>Author</DynamicProperty>
+    <DynamicProperty>Comments</DynamicProperty>
+    <DynamicProperty>Keywords</DynamicProperty>
+    <DynamicProperty>Subject</DynamicProperty>
+    <DynamicProperty>Company</DynamicProperty>
+    <DynamicProperty>DWG Creator Name</DynamicProperty>
+    <DynamicProperty>DWG Creator Version</DynamicProperty>
+    <DynamicProperty>Checked By</DynamicProperty>
+    <DynamicProperty>Cost</DynamicProperty>
+    <DynamicProperty>Cost Center</DynamicProperty>
+    <DynamicProperty>Date File Created</DynamicProperty>
+    <DynamicProperty>User Status</DynamicProperty>
+    <DynamicProperty>GeoRss</DynamicProperty>
+    <DynamicProperty>Designer</DynamicProperty>
+    <DynamicProperty>Engineer</DynamicProperty>
+    <DynamicProperty>Engr Approved By</DynamicProperty>
+    <DynamicProperty>Manager</DynamicProperty>
+    <DynamicProperty>Mfg Approved By</DynamicProperty>
+    <DynamicProperty>Project</DynamicProperty>
+    <DynamicProperty>Type Tag</DynamicProperty>
+    <DynamicProperty>Object Handle</DynamicProperty>
+    <DynamicProperty>Format</DynamicProperty>
+    <DynamicProperty>AeccVisable</DynamicProperty>
+    <DynamicProperty>Customer</DynamicProperty>
+    <DynamicProperty>Project Number</DynamicProperty>
+    <DynamicProperty>Scale</DynamicProperty>
+    <DynamicProperty>Sheet</DynamicProperty>
+    <DynamicProperty>ACADE</DynamicProperty>
+    <DynamicProperty>Description 2</DynamicProperty>
+    <DynamicProperty>Description 3</DynamicProperty>
+    <DynamicProperty>Installation Code</DynamicProperty>
+    <DynamicProperty>Location Code</DynamicProperty>
+    <DynamicProperty>Project Code</DynamicProperty>
+    <DynamicProperty>Section</DynamicProperty>
+    <DynamicProperty>Sub-Section</DynamicProperty>
+    <DynamicProperty>Drawing Number</DynamicProperty>
+    <DynamicProperty>Email Attachment</DynamicProperty>
+    <DynamicProperty>Email Conversation</DynamicProperty>
+    <DynamicProperty>Email Recipient</DynamicProperty>
+    <DynamicProperty>Email Sent Date</DynamicProperty>
+    <DynamicProperty>Document Type</DynamicProperty>
+    <DynamicProperty>Inventor Content Center</DynamicProperty>
+    <DynamicProperty>Vault ID</DynamicProperty>
+    <DynamicProperty>Width</DynamicProperty>
+    <DynamicProperty>Depth</DynamicProperty>
+    <DynamicProperty>Cut Detail 1</DynamicProperty>
+    <DynamicProperty>Cut Detail 2</DynamicProperty>
+    <DynamicProperty>BOM Type</DynamicProperty>
+    <DynamicProperty>DWG Type</DynamicProperty>
+    <DynamicProperty>Diam./Thickn.</DynamicProperty>
+    <DynamicProperty>Part Family</DynamicProperty>
+    <DynamicProperty>_NumSchm</DynamicProperty>
+    <DynamicProperty>_FilePath</DynamicProperty>
+    <DynamicProperty>_FileName</DynamicProperty>
+    <DynamicProperty>_FileExt</DynamicProperty>
+    <DynamicProperty>_CreateMode</DynamicProperty>
+    <DynamicProperty>_EditMode</DynamicProperty>
+    <DynamicProperty>_ReadOnly</DynamicProperty>
+    <DynamicProperty>_Category</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicProperties>

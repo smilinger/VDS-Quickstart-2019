@@ -66,10 +66,10 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
     <HelpMenu Label="myMenu" DeployAsPullDown="False" Location="HelpMenu">
       <Item Name="AboutDialog"></Item>
     </HelpMenu>
-    <CustomObject Label="Task" DeployAsPullDown="False" Location="Task">
+    <!--<CustomObject Label="Task" DeployAsPullDown="False" Location="Task">
       <Item Name="NewTask"></Item>
       <Item Name="EditTask"></Item>
-    </CustomObject>
+    </CustomObject>-->
   </CommandSite>
 
   <!--
