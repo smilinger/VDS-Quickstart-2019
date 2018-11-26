@@ -1,19 +1,13 @@
 #region disclaimer
 #=============================================================================
-# PowerShell script sample for Vault Data Standard                            
-#                                                                             
-# Copyright (c) Autodesk - All rights reserved.                              
-#                                                                             
-# THIS SCRIPT/CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER   
-# EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
-# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.  
+# PowerShell script sample for Vault Data Standard
+#
+# Copyright (c) Autodesk - All rights reserved.
+# 
+# THIS SCRIPT/CODE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
+# EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
 #=============================================================================
-#endregion
-
-#region Version History
-	# Version Info - VDS Quickstart Derivation Tree 2019.0.
-		# renamed 2018 version adding ADSK.QS. prefix
-
 #endregion
 
 Add-Type @'
@@ -30,6 +24,81 @@ public class mClsDerivate
 	public string Comment;
 }
 '@
+
+function mDerivationTreeUpdateView($fileMasterId)
+{
+	mDerivativesSelectNothing
+		$fileMasterId = $vaultContext.SelectedObject.Id
+		$file = $vault.DocumentService.GetLatestFileByMasterId($fileMasterId)
+
+		$mDerivativesSource = @(mGetDerivativeSource($file)) #querying all file versions (historical) of the source
+		if($mDerivativesSource.Count -eq 0) { 
+			$dsWindow.FindName("mDerivatives").Visibility = "Collapsed"
+			$dsWindow.FindName("txtBlck_Notification1").Text = $UIString["DerivationTree_13"]
+			$dsWindow.FindName("txtBlck_Notification1").Visibility = "Visible"
+			$dsWindow.FindName("SourceTree").IsExpanded = $false
+			mDerivativesSelectNothing
+		}
+		Else{
+			$dsWindow.FindName("mDerivatives").ItemsSource = $mDerivativesSource
+			$dsWindow.FindName("mDerivatives").Visibility = "Visible"
+			$dsWindow.FindName("SourceTree").IsExpanded = $true
+			
+		}
+		$dsWindow.FindName("mDerivatives").add_SelectionChanged({
+				mDerivativesClick
+			})
+
+		$mDerivativesParallels = @(mGetDerivativeParallels($file)) #querying all file versions (historical) of the source
+		if($mDerivativesParallels.Count -eq 0) { 
+			$dsWindow.FindName("mDerivatives1").Visibility = "Collapsed"
+			$dsWindow.FindName("txtBlck_Notification2").Text = $UIString["DerivationTree_14"]
+			$dsWindow.FindName("txtBlck_Notification2").Visibility = "Visible"
+			$dsWindow.FindName("ParallelsTree").IsExpanded = $false
+			mDerivativesSelectNothing
+		}
+		Else{
+			$dsWindow.FindName("mDerivatives1").ItemsSource = $mDerivativesParallels
+			$dsWindow.FindName("mDerivatives1").Visibility = "Visible"
+			$dsWindow.FindName("ParallelsTree").IsExpanded = $true
+			
+		}
+		$dsWindow.FindName("mDerivatives1").add_SelectionChanged({
+				mDerivatives1Click
+			})
+		$mDerivativesCopies = @(mGetDerivativeCopies($file)) #querying all file versions (historical) of the source
+		if($mDerivativesCopies.Count -eq 0) { 
+			$dsWindow.FindName("mDerivatives2").Visibility = "Collapsed"
+			$dsWindow.FindName("txtBlck_Notification3").Text = $UIString["DerivationTree_15"]
+			$dsWindow.FindName("txtBlck_Notification3").Visibility = "Visible"
+			$dsWindow.FindName("DerivedTree").IsExpanded = $false
+			mDerivativesSelectNothing
+		}
+		Else{
+			$dsWindow.FindName("mDerivatives2").ItemsSource = $mDerivativesCopies
+			$dsWindow.FindName("mDerivatives2").Visibility = "Visible"
+			$dsWindow.FindName("DerivedTree").IsExpanded = $true
+			
+		}
+		$dsWindow.FindName("mDerivatives2").add_SelectionChanged({
+				mDerivatives2Click
+			})
+	$dsWindow.FindName("btnUpdate").IsEnabled = $false
+}
+
+function mDerivationTreeResetView()
+{
+	$dsWindow.FindName("mDerivatives").ItemsSource = $null		
+	$dsWindow.FindName("mDerivatives").Visibility = "Collapsed"
+	$dsWindow.FindName("mDerivatives1").ItemsSource = $null
+	$dsWindow.FindName("SourceTree").IsExpanded = $false
+	$dsWindow.FindName("mDerivatives1").Visibility = "Collapsed"
+	$dsWindow.FindName("mDerivatives2").ItemsSource = $null
+	$dsWindow.FindName("ParallelsTree").IsExpanded = $false
+	$dsWindow.FindName("mDerivatives2").Visibility = "Collapsed"
+	$dsWindow.FindName("DerivedTree").IsExpanded = $false
+	$dsWindow.FindName("btnUpdate").IsEnabled = $true
+}
 
 function mGetDerivativeSource($mFile) #expects the (master) file object
 {

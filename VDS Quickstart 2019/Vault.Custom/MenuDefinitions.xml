@@ -12,6 +12,12 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
 -->
 <mymenu>
   <MenuItem>
+    <!--FileImportNnumbering MenuItem Start-->
+    <FileImport Label = "Add Files (DMS)" Description = "Import Files" Hint = "Import Files"
+          PSFile = "ADSK.QS.ImportFiles.ps1" Image="FileImport.ico" ToolbarPaintStyle = "TextAndGlyph"
+          MultiSelectEnabled = "false"/>
+    <!--FileImportNnumbering Menu item end-->
+    
     <!--CatalogTermsTranslations-->
     <newTermObject Label = "$UIString[ClassTerms_MNU10]" Description = "$UIString[ClassTerms_MNU11]" Hint = "$UIString[ClassTerms_MNU11]"
           PSFile = "ADSK.QS.CreateCustomObjectTerm.ps1" Image="Term-add.ico" ToolbarPaintStyle = "TextAndGlyph"
@@ -41,6 +47,12 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
      PSFile = "ADSK.QS.ActivateSchedTask.ps1" Image="Vault.ico" ToolbarPaintStyle = "TextAndGlyph"
      MultiSelectEnabled = "false"/>
     <!--Activate Scheduled Task-->
+
+    <!--AddPdfDsgnRepToQu Menu item start-->
+    <AddPdfDsgnRepToQu Label = "$UIString[ADSK-AddPdfDsgnRepToQu-MNU00]" Description = "$UIString[ADSK-AddPdfDsgnRepToQu-MNU00]" Hint = "$UIString[ADSK-AddPdfDsgnRepToQu-MNU00]"
+      PSFile = "ADSK.QS.AddPdfDsgnRepToQu.ps1" Image="PDF.ico" ToolbarPaintStyle = "TextAndGlyph"
+      MultiSelectEnabled = "true"/>
+    <!--AddPdfDsgnRepToQu Menu item end-->
 
     <!--ReserveNumbers Menu item start-->
     <ReserveNumbers Label = "$UIString[ADSK-RSRVNUMBERS_MNU20]" Description = "$UIString[ADSK-RSRVNUMBERS_MNU20]" Hint = "$UIString[ADSK-RSRVNUMBERS_MNU20]"
@@ -119,11 +131,13 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
       <Item Name="NewFile"></Item>
       <Item Name="EditFile"></Item>
       <Item Name="mInsertInvCompCopy"></Item>
+      <Item Name="FileImport"></Item>
     </FileContext>
     <FolderContex Label="myMenu" DeployAsPullDown="False" Location="FolderContextMenu">
       <Item Name="NewFile"></Item>
       <Item Name="NewFolder"></Item>
       <Item Name="EditFolder"></Item>
+      <Item Name="FileImport"></Item>
     </FolderContex>
     <StandardToolbar Label="myMenu" DeployAsPullDown="False" Location="StandardToolbar">
       <Item Name="NewFile"></Item>
@@ -135,6 +149,7 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
     </ToolsMenu>
     <ActionsMenu Label="myMenu" DeployAsPullDown="False" Location="ActionsMenu">
       <Item Name="ActivateSchedTask"></Item>
+      <Item Name="AddPdfDsgnRepToQu"></Item>
     </ActionsMenu>
     <HelpMenu Label="myMenu" DeployAsPullDown="False" Location="HelpMenu">
       <Item Name="AboutDialog"></Item>
@@ -170,9 +185,9 @@ MultiSelectEnabled: If true, command is active for multiple selections, can be t
     <Item Name="editTermObject"></Item>
   </CustomObject>-->
     <CustomObject Label="$UIString[ClassTerms_00]" DeployAsPullDown="False" Location="Term">
-    <Item Name="newTermObject"></Item>
-    <Item Name="editTermObject"></Item>
-  </CustomObject>
+      <Item Name="newTermObject"></Item>
+      <Item Name="editTermObject"></Item>
+    </CustomObject>
   </CommandSite>
 
   <!--
