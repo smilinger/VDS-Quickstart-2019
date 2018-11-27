@@ -181,6 +181,12 @@ function InitializeWindow
 						}
 					} # end of copy mode = false check
 
+					#overridden display names will change suggested file names. Reset overrides!
+					if ($Prop["_CopyMode"].Value)
+					{
+						$Document.DisplayNameOverridden = $false
+					}
+
 					if ($Prop["_CopyMode"].Value -and @(".DWG",".IDW",".IPN") -contains $Prop["_FileExt"].Value)
 					{
 						$Prop["DocNumber"].Value = $Prop["DocNumber"].Value.TrimStart($UIString["CFG2"])
