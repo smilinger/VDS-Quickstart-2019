@@ -844,7 +844,7 @@ function m_TemplateChanged {
 	#$dsDiag.Trace(">> Template Changed ...")
 	$mContext = $dsWindow.DataContext
 	$mTemplatePath = $mContext.TemplatePath
-	$mTemplateFile = $mContext.SelectedTemplate
+	$mTemplateFile = $mContext.SelectedTemplate.Name
 	$mTemplate = $mTemplatePath + "/" + $mTemplateFile
 	$mFolder = $vault.DocumentService.GetFolderByPath($mTemplatePath)
 	$mFiles = $vault.DocumentService.GetLatestFilesByFolderId($mFolder.Id,$false)
@@ -856,6 +856,15 @@ function m_TemplateChanged {
 	{
 		$dsWindow.FindName("Categories").IsEnabled = $false #comment out this line if admins like to release the choice to the user
 	}
+
+	#region navigation & derivation structure
+	If($Prop[($UIString["ADSK-GoToNavigation_Prop01"])]){
+		If($mContext.SelectedTemplate)
+		{
+			$Prop[($UIString["ADSK-GoToNavigation_Prop01"])].Value = $mContext.SelectedTemplate.Name
+		}
+	}
+
 	#$dsDiag.Trace(" ... TemplateChanged finished <<")
 }
 
