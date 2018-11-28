@@ -344,12 +344,12 @@ function GetCategories
 		#return $vault.CategoryService.GetCategoriesByEntityClassId("FILE", $true)
 		#region quickstart
 			$global:mFileCategories = $vault.CategoryService.GetCategoriesByEntityClassId("FILE", $true)
-			return $global:mFileCategories
+			return $global:mFileCategories | Sort-Object -Property "Name" #Ascending is default; no option required
 		#endregion
 	}
 	elseif ($dsWindow.Name -eq "FolderWindow")
 	{
-		return $vault.CategoryService.GetCategoriesByEntityClassId("FLDR", $true)
+		return $vault.CategoryService.GetCategoriesByEntityClassId("FLDR", $true) | Sort-Object -Property "Name" #Ascending is default; no option required
 	}
 	elseif ($dsWindow.Name -eq "CustomObjectWindow")
 	{

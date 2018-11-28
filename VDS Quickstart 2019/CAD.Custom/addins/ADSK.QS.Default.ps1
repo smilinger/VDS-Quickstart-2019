@@ -531,7 +531,7 @@ function GetCategories
 {
 	$mAllCats =  $vault.CategoryService.GetCategoriesByEntityClassId("FILE", $true)
 	$mFDSFilteredCats = $mAllCats | Where { $_.Name -ne "Asset Library"}
-	return $mFDSFilteredCats
+	return $mFDSFilteredCats | Sort-Object -Property "Name" #Ascending is default; no option required
 }
 
 function OnPostCloseDialog
