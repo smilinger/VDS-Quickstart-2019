@@ -151,6 +151,12 @@
   <!--Inventor custom iProperties Displaynames for dynamic properties-->
   <UIString ID="G_L">Länge (Zuschnitt)</UIString>
   <UIString ID="PL">Länge (Zuschnitt)</UIString>
+  <UIString ID="Title_EN">Titel EN</UIString>
+  <UIString ID="Mass">Gewicht</UIString>
+  <UIString ID="Original">Entstanden aus</UIString>
+  <UIString ID="Replacement">Ersetzt durch</UIString>
+  <UIString ID="Dimensions">Abmessungen</UIString>
+  <UIString ID="Thickness">Blechstärke</UIString>
 
   <!--Vault Categories-->
   <UIString ID="CAT1">Konstruktion</UIString>

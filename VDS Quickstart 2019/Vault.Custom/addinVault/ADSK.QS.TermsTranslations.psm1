@@ -37,14 +37,14 @@ function mInitializeTermCatalog
 				}
 				"InventorWindow"
 				{
-					$dsWindow.FindName("mSearchTermText").text = $Prop["Title"].Value
+					$dsWindow.FindName("mSearchTermText").Text = $Prop["Title"].Value
 				}
 				default #applies to all Vault windows
 				{
-					$dsWindow.FindName("mSearchTermText").text = $Prop["_XLTN_TITLE"].Value
+					$dsWindow.FindName("mSearchTermText").Text = $Prop["_XLTN_TITLE"].Value
 				}
 			}
-			$dsWindow.FindName("mSearchTermText").text = $Prop["_XLTN_TITLE"].Value
+			
 			
 			If($mTermCatalogInitialized -ne $true)
 			{
@@ -290,11 +290,26 @@ function m_SelectTerm {
 			$_temp1 = $dsWindow.FindName("Categories").SelectedIndex
 			#endregion
 
-			$Prop["Title"].Value = $mSelectedItem.Term_EN
-			Try{
-				$Prop["Title DE"].Value = $mSelectedItem.Term_DE
-			}
-			catch{ $dsDiag.Trace("Title DE does not exist")}
+			# check language override settings of VDS
+			$mLCode = @{}
+			$mLCode += mGetDBOverride
+			#If override exists, apply it, else continue with $PSUICulture
+			If ($mLCode["UI"] -eq "de-DE")
+			{
+				$Prop["Title"].Value = $mSelectedItem.Term_DE
+				Try{
+					$Prop["Title_EN"].Value = $mSelectedItem.Term_EN
+				}
+				catch{ $dsDiag.Trace("Title EN does not exist")}
+			} 
+			Else
+			{
+				$Prop["Title"].Value = $mSelectedItem.Term_EN
+				Try{
+					$Prop["Title_DE"].Value = $mSelectedItem.Term_DE
+				}
+				catch{ $dsDiag.Trace("Title DE does not exist")}
+			}		
 			
 		}
 		If ($dsWindow.Name -eq "FileWindow") {

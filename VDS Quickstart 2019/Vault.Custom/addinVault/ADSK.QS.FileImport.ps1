@@ -28,7 +28,15 @@ public class FilePropData
 
 function mInitializeFileImport
 {
+	$dsWindow.FindName("txtStatusInfo").Text = ""
+	$dsWindow.FindName("txtInstructionMsg").Text = "Drop Files on Upload Symbol below; files are added to Vault DMS Folder."
+	$dsWindow.FindName("btnRestart").IsEnabled = $false
+	$dsWindow.FindName("btnUpdate").IsEnabled = $false
+	$dsWindow.FindName("dtGrdPropEdit").Visibility = "Collapsed"
+	$dsWindow.FindName("dockPanelDragArea").Visibility = "Visible"
+	$dsWindow.FindName("grdRadioBtns1").Visibility = "Visible"
 	$dsWindow.FindName("mImportProgress").Value = 0
+	
 	$dsWindow.FindName("mFilesDragArea").add_Drop({			
 		param( $sender, $e)						
 		mDragEnter $sender $e
@@ -38,12 +46,7 @@ function mInitializeFileImport
 
 function mFileImportRestart
 {
-	$dsWindow.FindName("txtStatusInfo").Text = ""
-	$dsWindow.FindName("btnRestart").IsEnabled = $false
-	$dsWindow.FindName("btnUpdate").IsEnabled = $false
-	$dsWindow.FindName("dtGrdPropEdit").Visibility = "Collapsed"
-	$dsWindow.FindName("dockPanelDragArea").Visibility = "Visible"
-	$dsWindow.FindName("mImportProgress").Value = 0
+	mInitializeFileImport
 }
 
 function mImportUpdateProps
@@ -61,12 +64,19 @@ function mImportUpdateProps
 		$mFileUpdated = $null
 		$mUpdateProps.Set_Item('Titel', $mGridItem.mFileTitle)
 		$mUpdateProps.Set_Item('Beschreibung', $mGridItem.mFileDescr)
-		$mFileUpdated = Update-VaultFile -File $mGridItem.mFileNewFullName -Properties $mUpdateProps
-		If ($mFileUpdated) 
-		{ 
-			$_n +=1 
-			$dsWindow.FindName("mImportProgress").Value += 10
+		Try
+		{
+			$mFileUpdated = Update-VaultFile -File $mGridItem.mFileNewFullName -Properties $mUpdateProps
+			If ($mFileUpdated) 
+			{ 
+				$_n +=1 
+				$dsWindow.FindName("mImportProgress").Value += 10
+			}
 		}
+		Catch{
+			$dsDiag.Trace("--Update-VaultFile failed for file: $($mGridItem.mFileNewFullName)")
+		}
+		
 	}
 	$dsWindow.FindName("btnUpdate").IsEnabled = $false
 	$dsWindow.FindName("btnRestart").IsEnabled = $true
@@ -90,7 +100,9 @@ function mDragEnter ($sender, $e)
 			$_n = 0
 			$dsWindow.FindName("mImportProgress").Value = 0
 			$mExtExclude = @(".ipt", ".iam", ".ipn", ".dwg", ".idw", ".slddrw", ".sldprt", ".sldasm")
-			$m_ImpFileList = @() #filepath array of imported files to be attached
+			$mImportFilesPath = @() #filepath array of imported files to be attached
+			$mImportFiles = @() #array of file objects imported
+			$mGridFiles = @()
 			ForEach ($_file in $mFileList)
 			{
 				$m_FileName = [System.IO.Path]::GetFileNameWithoutExtension($_file)
@@ -100,10 +112,13 @@ function mDragEnter ($sender, $e)
 					break;
 				}
 				$m_Dir = [System.IO.Path]::GetDirectoryName($_file)
-					
+				
+				#create new datagrid row object
+				$mDtRow = New-Object FilePropData
+				
 				#get new number and create new file name
 				[System.Collections.ArrayList]$numSchems = @($vault.DocumentService.GetNumberingSchemesByType('Activated'))
-				if ($numSchems.Count -gt 1)
+				if ($numSchems.Count -gt 1 -and $dsWindow.FindName("radioNumberedName").IsChecked -eq $true)
 				{							
 					$_DfltNumSchm = $numSchems | Where { $_.Name -eq $UIString["ADSK-ItemFileImport_00"]}
 					if($_DfltNumSchm)
@@ -126,15 +141,31 @@ function mDragEnter ($sender, $e)
 					#add extension to number
 					$_newFile = $_newFile + $m_Ext
 					$mFullTargetPath = $mTargetPath + $_newFile
-					$m_ImportedFile = Add-VaultFile -From $_file -To $mFullTargetPath -Comment $UIString["ADSK-ItemFileImport_02"]
-					$m_ImpFileList += $m_ImportedFile._FullPath
+					$mImportedFile = Add-VaultFile -From $_file -To $mFullTargetPath -Comment $UIString["ADSK-ItemFileImport_02"]
+					$mImportFilesPath += $mImportedFile._FullPath
+					$mImportFiles += $mImportedFile
+					#add grid row data
+					$mDtRow.mFileNewName = $_newFile
+					$mDtRow.mFileNewFullName = $mFullTargetPath
+					$mDtRow.mOrigFileName = [System.IO.Path]::GetFileName($_file)
+					$mDtRow.mFileTitle = $mImportedFile._Title
+					$mDtRow.mFileDescr = $mImportedFile._Description
+					$mGridFiles += $mDtRow
 				}
 				Else #continue with the given file name
 				{
 					$mTargetPath = "$/xDMS/"
-					$mFullTargetPath = $mTargetPath + $m_FileName
-					$m_ImportedFile = Add-VaultFile -From $_file -To $mFullTargetPath -Comment $UIString["ADSK-ItemFileImport_02"]
-					$m_ImpFileList += $m_ImportedFile._FullPath
+					$mFullTargetPath = $mTargetPath + $m_FileName + $m_Ext
+					$mImportedFile = Add-VaultFile -From $_file -To $mFullTargetPath -Comment $UIString["ADSK-ItemFileImport_02"]
+					$mImportFilesPath += $mImportedFile._FullPath
+					$mImportFiles += $mImportedFile
+					#add grid row data
+					$mDtRow.mFileNewName = $mImportedFile._Name
+					$mDtRow.mFileNewFullName = $mFullTargetPath
+					$mDtRow.mOrigFileName = [System.IO.Path]::GetFileName($_file)
+					$mDtRow.mFileTitle = $mImportedFile._Title
+					$mDtRow.mFileDescr = $mImportedFile._Description
+					$mGridFiles += $mDtRow
 				}
 				$_n += 1
 				$dsWindow.FindName("mImportProgress").Value = (($_n/$_NumFiles)*100)-10
@@ -142,13 +173,26 @@ function mDragEnter ($sender, $e)
 			} #for each file
 			
 			$dsWindow.FindName("mImportProgress").Value = (($_n/$_NumFiles)*100)
-$dsWindow.FindName("dtGrdPropEdit").ItemsSource = $m_ImpFileList 
+			#
+			$dsWindow.FindName("dtGrdPropEdit").ItemsSource = $mGridFiles
 			If ($mCADWarning)
 			{
 				[System.Windows.MessageBox]::Show($UIString["ADSK-ItemFileImport_04"], "Item-File Attachment Import")
 			}
 		}
 		$mFileList = $null
+		#reset the UI
+		$dsWindow.FindName("txtStatusInfo").Text = ""
+		$dsWindow.FindName("txtInstructionMsg").Text = "Optionally, you may edit property values and update the imported files."
+
+		$dsWindow.FindName("btnRestart").IsEnabled = $true
+		$dsWindow.FindName("btnUpdate").IsEnabled = $true
+		$dsWindow.FindName("dtGrdPropEdit").Visibility = "Visible"
+		$dsWindow.FindName("dockPanelDragArea").Visibility = "Collapsed"
+		$dsWindow.FindName("grdRadioBtns1").Visibility = "Collapsed"
+		$dsWindow.FindName("mImportProgress").Value = 0
 		$dsWindow.Cursor = "Arrow"
+
 		$dsWindow.FindName("mDragAreaEnabled").remove_Drop()
+		
 }

@@ -240,6 +240,8 @@
     <DynamicProperty>Scale</DynamicProperty>
     <DynamicProperty>Sheet</DynamicProperty>
     <DynamicProperty Hidden="True">DWG Type</DynamicProperty>
+    <DynamicProperty>FLCdmsID</DynamicProperty>
+    <DynamicProperty>FLCwsID</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Folder" Type="Folder">
     <DynamicProperty>Title</DynamicProperty>
@@ -266,38 +268,39 @@
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Blechteil" Type="File">
     <DynamicProperty>Titel</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
+    <DynamicProperty>Beschreibung</DynamicProperty>
     <DynamicProperty>Teilenummer</DynamicProperty>
-    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>Bestandsnummer</DynamicProperty>
     <DynamicProperty>Halbzeug</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Blechstärke</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
     <DynamicProperty>Gewicht</DynamicProperty>
-    <DynamicProperty>Anwendungsversion</DynamicProperty>
+    <DynamicProperty>EV-Kennung</DynamicProperty>
+    <DynamicProperty Hidden="True">Anwendungsversion</DynamicProperty>
     <DynamicProperty>Ersetzt durch</DynamicProperty>
     <DynamicProperty>Entstanden aus</DynamicProperty>
-    <DynamicProperty>Titel EN</DynamicProperty>
-    <DynamicProperty>Blechstärke</DynamicProperty>
     <DynamicProperty>Werksnorm</DynamicProperty>
-    <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
-    <DynamicProperty>EV-Kennung</DynamicProperty>
-    <DynamicProperty>Halbzeugnummer</DynamicProperty>
-    <DynamicProperty>Beschreibung</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Bauteil" Type="File">
     <DynamicProperty>Titel</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
-    <DynamicProperty>Teilenummer</DynamicProperty>
-    <DynamicProperty>Abmessungen</DynamicProperty>
-    <DynamicProperty>Gewicht</DynamicProperty>
-    <DynamicProperty>Anwendungsversion</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
     <DynamicProperty>Beschreibung</DynamicProperty>
-    <DynamicProperty>Halbzeugnummer</DynamicProperty>
-    <DynamicProperty>EV-Kennung</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty>Bestandsnummer</DynamicProperty>
+    <DynamicProperty>Bestandsnummer</DynamicProperty>
     <DynamicProperty>Halbzeug</DynamicProperty>
-    <DynamicProperty>Werksnorm</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
+    <DynamicProperty>Gewicht</DynamicProperty>
+    <DynamicProperty Hidden="True">Anwendungsversion</DynamicProperty>
+    <DynamicProperty>EV-Kennung</DynamicProperty>
     <DynamicProperty>Ersetzt durch</DynamicProperty>
     <DynamicProperty>Entstanden aus</DynamicProperty>
-    <DynamicProperty>Titel EN</DynamicProperty>
-    <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
+    <DynamicProperty>Werksnorm</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Ordner" Type="Folder">
     <DynamicProperty>Titel</DynamicProperty>
@@ -306,47 +309,47 @@
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Klasse" Type="CustomObject">
     <DynamicProperty>Klasse</DynamicProperty>
-    <DynamicProperty>Gruppe</DynamicProperty>
-    <DynamicProperty>Untergruppe</DynamicProperty>
     <DynamicProperty>Segment</DynamicProperty>
     <DynamicProperty>Hauptgruppe</DynamicProperty>
+    <DynamicProperty>Gruppe</DynamicProperty>
+    <DynamicProperty>Untergruppe</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Kaufteil" Type="File">
     <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
     <DynamicProperty>Beschreibung</DynamicProperty>
     <DynamicProperty>Material</DynamicProperty>
     <DynamicProperty>Teilenummer</DynamicProperty>
     <DynamicProperty>Abmessungen</DynamicProperty>
     <DynamicProperty>EV-Kennung</DynamicProperty>
     <DynamicProperty>Gewicht</DynamicProperty>
-    <DynamicProperty>Titel EN</DynamicProperty>
     <DynamicProperty>Sub-Typ</DynamicProperty>
-    <DynamicProperty>Anwendungsversion</DynamicProperty>
+    <DynamicProperty Hidden="True">Anwendungsversion</DynamicProperty>
     <DynamicProperty>Ersetzt durch</DynamicProperty>
     <DynamicProperty>Entstanden aus</DynamicProperty>
-    <DynamicProperty>Artikeltyp</DynamicProperty>
+    <DynamicProperty Hidden="True">Artikeltyp</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="3D Komponente" Type="File">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
     <DynamicProperty>Beschreibung</DynamicProperty>
-    <DynamicProperty>Werksnorm</DynamicProperty>
-    <DynamicProperty>Sub-Typ</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty Hidden="True">Identnummer</DynamicProperty>
+    <DynamicProperty>Bestandsnummer</DynamicProperty>
+    <DynamicProperty>Halbzeug</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
     <DynamicProperty>Dicke/Durchm.</DynamicProperty>
     <DynamicProperty>Länge</DynamicProperty>
-    <DynamicProperty>Breite</DynamicProperty>
-    <DynamicProperty>Entstanden aus</DynamicProperty>
-    <DynamicProperty>Titel EN</DynamicProperty>
     <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
-    <DynamicProperty>Identnummer</DynamicProperty>
-    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Breite</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
     <DynamicProperty>Gewicht</DynamicProperty>
     <DynamicProperty>EV-Kennung</DynamicProperty>
-    <DynamicProperty>Halbzeug</DynamicProperty>
-    <DynamicProperty>Abmessungen</DynamicProperty>
-    <DynamicProperty>Halbzeugnummer</DynamicProperty>
-    <DynamicProperty>Teilenummer</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
     <DynamicProperty>Ersetzt durch</DynamicProperty>
-    <DynamicProperty>Anwendungsversion</DynamicProperty>
+    <DynamicProperty>Sub-Typ</DynamicProperty>
+    <DynamicProperty>Werksnorm</DynamicProperty>
+    <DynamicProperty Hidden="True">Anwendungsversion</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Weldment Assembly" Type="FILE">
     <DynamicProperty>Title</DynamicProperty>
@@ -376,129 +379,54 @@
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
   </DynamicPropertiesCategory>
-  <DynamicPropertiesCategory>
-    <DynamicProperty>Created By</DynamicProperty>
-    <DynamicProperty>Date Version Created</DynamicProperty>
-    <DynamicProperty>Obsolete</DynamicProperty>
-    <DynamicProperty>File Replicated</DynamicProperty>
-    <DynamicProperty>Current Owner</DynamicProperty>
-    <DynamicProperty>Leased Until</DynamicProperty>
-    <DynamicProperty>File Name</DynamicProperty>
-    <DynamicProperty>Name</DynamicProperty>
-    <DynamicProperty>Checked In</DynamicProperty>
-    <DynamicProperty>File Name (Historical)</DynamicProperty>
-    <DynamicProperty>Date Modified</DynamicProperty>
-    <DynamicProperty>Checked Out</DynamicProperty>
-    <DynamicProperty>Version</DynamicProperty>
-    <DynamicProperty>Comment</DynamicProperty>
-    <DynamicProperty>File Size</DynamicProperty>
-    <DynamicProperty>File Extension</DynamicProperty>
-    <DynamicProperty>Visualization Attachment</DynamicProperty>
-    <DynamicProperty>Number of Attachments</DynamicProperty>
-    <DynamicProperty>Linked to Item</DynamicProperty>
-    <DynamicProperty>Item Assignable</DynamicProperty>
-    <DynamicProperty>Category Name</DynamicProperty>
-    <DynamicProperty>Category Glyph</DynamicProperty>
-    <DynamicProperty>Lifecycle Definition</DynamicProperty>
-    <DynamicProperty>State</DynamicProperty>
-    <DynamicProperty>Revision Scheme</DynamicProperty>
-    <DynamicProperty>Latest Released Revision</DynamicProperty>
-    <DynamicProperty>Released Revision</DynamicProperty>
-    <DynamicProperty>Property Compliance</DynamicProperty>
-    <DynamicProperty>Property Compliance (Historical)</DynamicProperty>
-    <DynamicProperty>Provider</DynamicProperty>
-    <DynamicProperty>Thumbnail</DynamicProperty>
-    <DynamicProperty>Originator</DynamicProperty>
-    <DynamicProperty>Original Create Date</DynamicProperty>
-    <DynamicProperty>Controlled By Change Order</DynamicProperty>
-    <DynamicProperty>Classification</DynamicProperty>
-    <DynamicProperty>Hidden</DynamicProperty>
-    <DynamicProperty>Latest Version</DynamicProperty>
-    <DynamicProperty>Category Name (Historical)</DynamicProperty>
-    <DynamicProperty>Category Glyph (Historical)</DynamicProperty>
-    <DynamicProperty>Lifecycle Definition (Historical)</DynamicProperty>
-    <DynamicProperty>State (Historical)</DynamicProperty>
-    <DynamicProperty>Revision Scheme (Historical)</DynamicProperty>
-    <DynamicProperty>Revision</DynamicProperty>
-    <DynamicProperty>Title</DynamicProperty>
-    <DynamicProperty>Description</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
-    <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Internal ID</DynamicProperty>
-    <DynamicProperty>Application Version</DynamicProperty>
-    <DynamicProperty>Dimensions/Size</DynamicProperty>
-    <DynamicProperty>Source File</DynamicProperty>
-    <DynamicProperty>Mass</DynamicProperty>
-    <DynamicProperty>Sub-Type</DynamicProperty>
-    <DynamicProperty>Semi-finished</DynamicProperty>
-    <DynamicProperty>Spare-Wear Part</DynamicProperty>
-    <DynamicProperty>Length (Cut)</DynamicProperty>
-    <DynamicProperty>Stock Number</DynamicProperty>
-    <DynamicProperty>Checked Out Local Spec</DynamicProperty>
-    <DynamicProperty>Checked Out Machine</DynamicProperty>
-    <DynamicProperty>Checked Out By</DynamicProperty>
-    <DynamicProperty>Change Order State</DynamicProperty>
-    <DynamicProperty>iLogicRuleStatus</DynamicProperty>
-    <DynamicProperty>Initial Release Date</DynamicProperty>
-    <DynamicProperty>Initial Approver</DynamicProperty>
-    <DynamicProperty>Author</DynamicProperty>
-    <DynamicProperty>Comments</DynamicProperty>
-    <DynamicProperty>Keywords</DynamicProperty>
-    <DynamicProperty>Subject</DynamicProperty>
-    <DynamicProperty>Company</DynamicProperty>
-    <DynamicProperty>DWG Creator Name</DynamicProperty>
-    <DynamicProperty>DWG Creator Version</DynamicProperty>
-    <DynamicProperty>Checked By</DynamicProperty>
-    <DynamicProperty>Cost</DynamicProperty>
-    <DynamicProperty>Cost Center</DynamicProperty>
-    <DynamicProperty>Date File Created</DynamicProperty>
-    <DynamicProperty>User Status</DynamicProperty>
-    <DynamicProperty>GeoRss</DynamicProperty>
-    <DynamicProperty>Designer</DynamicProperty>
-    <DynamicProperty>Engineer</DynamicProperty>
-    <DynamicProperty>Engr Approved By</DynamicProperty>
-    <DynamicProperty>Manager</DynamicProperty>
-    <DynamicProperty>Mfg Approved By</DynamicProperty>
-    <DynamicProperty>Project</DynamicProperty>
-    <DynamicProperty>Type Tag</DynamicProperty>
-    <DynamicProperty>Object Handle</DynamicProperty>
+  <DynamicPropertiesCategory Category="Baugruppe" Type="FILE">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
+    <DynamicProperty>Beschreibung</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>EV-Kennung</DynamicProperty>
+    <DynamicProperty>Gewicht</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
+    <DynamicProperty>Ersetzt durch</DynamicProperty>
+    <DynamicProperty>Werksnorm</DynamicProperty>
+    <DynamicProperty Hidden="True">Anwendungsversion</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Schweissbaugruppe" Type="FILE">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Titel EN</DynamicProperty>
+    <DynamicProperty>Beschreibung</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty>Abmessungen</DynamicProperty>
+    <DynamicProperty>EV-Kennung</DynamicProperty>
+    <DynamicProperty>Gewicht</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
+    <DynamicProperty>Ersetzt durch</DynamicProperty>
+    <DynamicProperty>Werksnorm</DynamicProperty>
+    <DynamicProperty Hidden="True">Anwendungsversion</DynamicProperty>
+    <DynamicProperty>Statik geprüft am</DynamicProperty>
+    <DynamicProperty>Statik geprüft von</DynamicProperty>
+    <DynamicProperty>SFI geprüft am</DynamicProperty>
+    <DynamicProperty>SFI geprüft von</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Zeichnung Inventor" Type="File">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Beschreibung</DynamicProperty>
+    <DynamicProperty>Teilenummer</DynamicProperty>
+    <DynamicProperty>Maßstab</DynamicProperty>
     <DynamicProperty>Format</DynamicProperty>
-    <DynamicProperty>AeccVisable</DynamicProperty>
-    <DynamicProperty>Customer</DynamicProperty>
-    <DynamicProperty>Project Number</DynamicProperty>
-    <DynamicProperty>Scale</DynamicProperty>
-    <DynamicProperty>Sheet</DynamicProperty>
-    <DynamicProperty>ACADE</DynamicProperty>
-    <DynamicProperty>Description 2</DynamicProperty>
-    <DynamicProperty>Description 3</DynamicProperty>
-    <DynamicProperty>Installation Code</DynamicProperty>
-    <DynamicProperty>Location Code</DynamicProperty>
-    <DynamicProperty>Project Code</DynamicProperty>
-    <DynamicProperty>Section</DynamicProperty>
-    <DynamicProperty>Sub-Section</DynamicProperty>
-    <DynamicProperty>Drawing Number</DynamicProperty>
-    <DynamicProperty>Email Attachment</DynamicProperty>
-    <DynamicProperty>Email Conversation</DynamicProperty>
-    <DynamicProperty>Email Recipient</DynamicProperty>
-    <DynamicProperty>Email Sent Date</DynamicProperty>
-    <DynamicProperty>Document Type</DynamicProperty>
-    <DynamicProperty>Inventor Content Center</DynamicProperty>
-    <DynamicProperty>Vault ID</DynamicProperty>
-    <DynamicProperty>Width</DynamicProperty>
-    <DynamicProperty>Depth</DynamicProperty>
-    <DynamicProperty>Cut Detail 1</DynamicProperty>
-    <DynamicProperty>Cut Detail 2</DynamicProperty>
-    <DynamicProperty>BOM Type</DynamicProperty>
-    <DynamicProperty>DWG Type</DynamicProperty>
-    <DynamicProperty>Diam./Thickn.</DynamicProperty>
-    <DynamicProperty>Part Family</DynamicProperty>
-    <DynamicProperty>_NumSchm</DynamicProperty>
-    <DynamicProperty>_FilePath</DynamicProperty>
-    <DynamicProperty>_FileName</DynamicProperty>
-    <DynamicProperty>_FileExt</DynamicProperty>
-    <DynamicProperty>_CreateMode</DynamicProperty>
-    <DynamicProperty>_EditMode</DynamicProperty>
-    <DynamicProperty>_ReadOnly</DynamicProperty>
-    <DynamicProperty>_Category</DynamicProperty>
+    <DynamicProperty>Blatt</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
+    <DynamicProperty>Ersetzt durch</DynamicProperty>
+    <DynamicProperty Hidden="True">Anwendungsversion</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Dokument" Type="FILE">
+    <DynamicProperty>Titel</DynamicProperty>
+    <DynamicProperty>Thema</DynamicProperty>
+    <DynamicProperty>Verfasser</DynamicProperty>
+    <DynamicProperty>Kommentare</DynamicProperty>
+    <DynamicProperty>Identnummer</DynamicProperty>
+    <DynamicProperty>Entstanden aus</DynamicProperty>
+    <DynamicProperty>Ersetzt durch</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicProperties>

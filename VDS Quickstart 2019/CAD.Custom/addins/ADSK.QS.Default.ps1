@@ -11,7 +11,7 @@
 #=============================================================================
 
 function InitializeWindow
-{        
+{             
 	#region rules applying commonly
     $dsWindow.Title = SetWindowTitle
 	#InitializeFileNameValidation #Quickstart initializes at latest to avoid multiple events by UI changes
@@ -25,6 +25,7 @@ function InitializeWindow
 			$Global:mPropTrans = mGetPropTranslations
 			if($dsWindow.FindName("txtPath"))
 				{
+					mGetProjectFolderPropToCADFile  "Name" $mPropTrans["Project"]
 					$dsWindow.FindName("txtPath").add_TextChanged({		
 									mGetProjectFolderPropToCADFile  "Name" $mPropTrans["Project"]
 								})
@@ -188,9 +189,9 @@ function InitializeWindow
 						if (($_ModelFullFileName -eq "") -and ($global:mGFN4Special -eq $false)) 
 						{ 
 							[System.Windows.MessageBox]::Show($UIString["MSDCE_MSG00"],"Vault MFG Quickstart")
-							$dsWindow.add_Loaded({
-										# Will skip VDS Dialog for Drawings without model view; 
-										$dsWindow.CancelWindowCommand.Execute($this)})
+							#$dsWindow.add_Loaded({
+							#			# Will skip VDS Dialog for Drawings without model view; 
+							#			$dsWindow.CancelWindowCommand.Execute($this)})
 						}
 					} # end of copy mode = false check
 
@@ -280,7 +281,6 @@ function InitializeWindow
 					}
 				}
 			}
-
 			#endregion quickstart
 		}
 		default
@@ -526,16 +526,16 @@ function GetNumSchms
 
 			#reverse order for these cases; none is added latest; reverse the list, if None is pre-set to index = 0
 
-			If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Assembly*" -and $Prop["_FileExt"].Value -eq ".iam") #you might find better criteria based on then numbering scheme
-			{
-				$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
-				return $_FilteredNumSchems
-			}
-			If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Part*" -and $Prop["_FileExt"].Value -eq ".ipt") #you might find better criteria based on then numbering scheme
-			{
-				$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
-				return $_FilteredNumSchems
-			}
+			#If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Assembly*" -and $Prop["_FileExt"].Value -eq ".iam") #you might find better criteria based on then numbering scheme
+			#{
+			#	$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
+			#	return $_FilteredNumSchems
+			#}
+			#If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Part*" -and $Prop["_FileExt"].Value -eq ".ipt") #you might find better criteria based on then numbering scheme
+			#{
+			#	$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
+			#	return $_FilteredNumSchems
+			#}
 			If($dsWindow.Name-eq "InventorFrameWindow")
 			{ 
 				#None is not supported by multi-select dialogs

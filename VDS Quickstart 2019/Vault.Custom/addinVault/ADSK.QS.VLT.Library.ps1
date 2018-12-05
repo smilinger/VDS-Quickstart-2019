@@ -140,9 +140,8 @@ function mGetFolderNumber($_FileNumber, $_nChar)
 
 # VDS Dialogs and Tabs share UIString according DSLanguage.xml override or default powerShell UI culture;
 # VDS MenuCommand scripts don't read as a default; call this function in case $UIString[] key value pairs are needed
-function mGetUIStrings
+function mGetUIOverride
 {
-	# check language override settings of VDS
 	[xml]$mDSLangFile = Get-Content "C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault\DSLanguages.xml"
 	$mUICodes = $mDSLangFile.SelectNodes("/DSLanguages/Language_Code")
 	$mLCode = @{}
@@ -152,6 +151,27 @@ function mGetUIStrings
 		$mValue = $xmlAttr.InnerXML
 		$mLCode.Add($mKey, $mValue)
 	}
+	return $mLCode
+}
+function mGetDBOverride
+{
+	[xml]$mDSLangFile = Get-Content "C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault\DSLanguages.xml"
+	$mUICodes = $mDSLangFile.SelectNodes("/DSLanguages/Language_Code")
+	$mLCode = @{}
+	Foreach ($xmlAttr in $mUICodes)
+	{
+		$mKey = $xmlAttr.ID
+		$mValue = $xmlAttr.InnerXML
+		$mLCode.Add($mKey, $mValue)
+	}
+	return $mLCode
+}
+
+function mGetUIStrings
+{
+	# check language override settings of VDS
+	$mLCode = @{}
+	$mLCode += mGetUIOverride
 	#If override exists, apply it, else continue with $PSUICulture
 	If ($mLCode["UI"]){
 		$mVdsUi = $mLCode["UI"]
@@ -173,15 +193,8 @@ function mGetUIStrings
 function mGetPropTranslations
 {
 	# check language override settings of VDS
-	[xml]$mDSLangFile = Get-Content "C:\ProgramData\Autodesk\Vault 2019\Extensions\DataStandard\Vault\DSLanguages.xml"
-	$mUICodes = $mDSLangFile.SelectNodes("/DSLanguages/Language_Code")
 	$mLCode = @{}
-	Foreach ($xmlAttr in $mUICodes)
-	{
-		$mKey = $xmlAttr.ID
-		$mValue = $xmlAttr.InnerXML
-		$mLCode.Add($mKey, $mValue)
-	}
+	$mLCode += mGetDBOverride
 	#If override exists, apply it, else continue with $PSUICulture
 	If ($mLCode["DB"]){
 		$mVdsDb = $mLCode["DB"]
