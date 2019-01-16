@@ -104,6 +104,7 @@
     <None Include="CAD.Custom\addins\ADSK.QS.breadCrumb.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.CAD.Library.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.Default.ps1" />
+    <None Include="CAD.Custom\addins\ADSK.QS.FileNameValidation.ps1" />
     <None Include="CAD.Custom\addins\ADSK.QS.ItemLookup.ps1" />
     <None Include="CAD.Custom\Configuration\AutoCAD-Vanilla\AutoCAD.cfg" />
     <None Include="CAD.Custom\Configuration\AutoCAD.cfg" />
@@ -120,20 +121,34 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.ActivateSchedTaskAsJob.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.Classification.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.Default.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.DerivationTree.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.FileBOM.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.FileDocStructure.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.FileImport.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ItemLookup.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.NameValidation.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.Org.Pers.Link.ps1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.ReserveFileNumber.ps1" />
+    <None Include="Vault.Custom\addinVault\ADSK.QS.TermsTranslations.psm1" />
     <None Include="Vault.Custom\addinVault\ADSK.QS.VLT.Library.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ActivateSchedTask.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.AddPdfDsgnRepToQu.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateCustomObject.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateCustomObjectTerm.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateFile.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.CreateFolder.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.EditCustomObject.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.EditCustomObjectTerm.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.EditFile.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.EditFolder.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToInvSibling.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToReplacedBy.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToSelectedFile.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.GoToSourceFile.ps1" />
+    <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ImportFiles.ps1" />
     <None Include="Vault.Custom\addinVault\Menus\ADSK.QS.ReserveNumbers.ps1" />
     <None Include="Vault\addinVault\AssociatedFiles.ps1" />
     <None Include="Vault\addinVault\Default.ps1" />
@@ -150,6 +165,7 @@
     <None Include="Vault\addinVault\Menus\ShowLog.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Vault.Custom\addinVault\UsesWhereUsed.dll" />
     <Resource Include="Vault.Custom\Configuration\File\Icons\attachment.png" />
     <Resource Include="Vault.Custom\Configuration\File\Icons\docx.png" />
     <Resource Include="Vault.Custom\Configuration\File\Icons\dwg.png" />

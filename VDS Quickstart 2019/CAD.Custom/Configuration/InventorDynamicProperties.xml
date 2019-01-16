@@ -80,6 +80,8 @@
     <DynamicProperty>Project</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
     <DynamicProperty>InternalName</DynamicProperty>
+    <DynamicProperty>Engr Approved by</DynamicProperty>
+    <DynamicProperty>Designer</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Frame Member">
     <DynamicProperty>Title</DynamicProperty>
@@ -114,6 +116,8 @@
     <DynamicProperty>Source File</DynamicProperty>
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
     <DynamicProperty>InternalName</DynamicProperty>
+    <DynamicProperty>Engr Approved by</DynamicProperty>
+    <DynamicProperty>Designer</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Purchased">
     <DynamicProperty>Title</DynamicProperty>
@@ -143,6 +147,8 @@
     <DynamicProperty>Dimensions</DynamicProperty>
     <DynamicProperty>Project Type</DynamicProperty>
     <DynamicProperty>Type</DynamicProperty>
+    <DynamicProperty>Engr Approved by</DynamicProperty>
+    <DynamicProperty>Designer</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Bauteil">
     <DynamicProperty>Titel</DynamicProperty>
@@ -179,7 +185,7 @@
     <DynamicProperty>Bauteilnummer</DynamicProperty>
     <DynamicProperty>Bestandsnummer</DynamicProperty>
     <DynamicProperty>Halbzeug</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>   
+    <DynamicProperty>Material</DynamicProperty>
     <DynamicProperty>Gewicht</DynamicProperty>
     <DynamicProperty>Blechstärke</DynamicProperty>
     <DynamicProperty>Länge (Zuschnitt)</DynamicProperty>
