@@ -298,7 +298,7 @@ function m_SelectTerm {
 			{
 				$Prop["Title"].Value = $mSelectedItem.Term_DE
 				Try{
-					$Prop["Title_EN"].Value = $mSelectedItem.Term_EN
+					$Prop["Title EN"].Value = $mSelectedItem.Term_EN
 				}
 				catch{ $dsDiag.Trace("Title EN does not exist")}
 			} 
@@ -306,7 +306,7 @@ function m_SelectTerm {
 			{
 				$Prop["Title"].Value = $mSelectedItem.Term_EN
 				Try{
-					$Prop["Title_DE"].Value = $mSelectedItem.Term_DE
+					$Prop["Title DE"].Value = $mSelectedItem.Term_DE
 				}
 				catch{ $dsDiag.Trace("Title DE does not exist")}
 			}		

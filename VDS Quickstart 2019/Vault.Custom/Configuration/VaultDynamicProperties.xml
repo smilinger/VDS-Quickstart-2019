@@ -51,6 +51,7 @@
     <DynamicProperty>Title DE</DynamicProperty>
     <DynamicProperty>FLCdmsID</DynamicProperty>
     <DynamicProperty>FLCwsID</DynamicProperty>
+    <DynamicProperty>Engr Approved Date</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Assembly" Type="File">
     <DynamicProperty>Title</DynamicProperty>
@@ -428,5 +429,24 @@
     <DynamicProperty>Identnummer</DynamicProperty>
     <DynamicProperty>Entstanden aus</DynamicProperty>
     <DynamicProperty>Ersetzt durch</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Term" Type="CustomObject">
+    <DynamicProperty>Segment</DynamicProperty>
+    <DynamicProperty>Main Group</DynamicProperty>
+    <DynamicProperty>Group</DynamicProperty>
+    <DynamicProperty>Sub Group</DynamicProperty>
+    <DynamicProperty>Term EN</DynamicProperty>
+    <DynamicProperty>Term DE</DynamicProperty>
+    <DynamicProperty>Term FR</DynamicProperty>
+    <DynamicProperty>Term IT</DynamicProperty>
+    <DynamicProperty>Ident Number</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Product" Type="Folder">
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Owner</DynamicProperty>
+    <DynamicProperty>Product Group</DynamicProperty>
+    <DynamicProperty>FLCdmsID</DynamicProperty>
+    <DynamicProperty>FLCwsID</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicProperties>

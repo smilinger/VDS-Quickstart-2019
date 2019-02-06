@@ -861,7 +861,7 @@
                     <GradientStop Color="#FFF0F0F0" Offset="1"/>
                 </LinearGradientBrush>
             </TabItem.Background>
-            <Grid x:Name="grdClassification" Background="#FFF0F0F0" Width="{Binding ActualWidth, ElementName=grdMain, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=grdMain, Mode=OneWay}" Margin="5">
+            <Grid x:Name="grdClassification" Background="#FFF0F0F0" Width="{Binding ActualWidth, ElementName=grdMain, Mode=OneWay}" MinHeight="{Binding ActualHeight, ElementName=grdMain, Mode=OneWay}" Margin="5">
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="Auto"/>

@@ -52,21 +52,20 @@
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Sheet Metal Part">
     <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
     <DynamicProperty Hidden="False">Material</DynamicProperty>
     <DynamicProperty Hidden="True">VLT_Material</DynamicProperty>
     <DynamicProperty>Dimensions</DynamicProperty>
     <DynamicProperty>Thickness</DynamicProperty>
-    <DynamicProperty>G_L</DynamicProperty>
+    <DynamicProperty>Cut Length</DynamicProperty>
     <DynamicProperty>Semi finished</DynamicProperty>
     <DynamicProperty>Stock Number</DynamicProperty>
     <DynamicProperty>Spare-Wear Part</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
-    <DynamicProperty>Cut Length</DynamicProperty>
-    <DynamicProperty>Title DE</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Assembly">
     <DynamicProperty>Title</DynamicProperty>
@@ -79,7 +78,7 @@
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
     <DynamicProperty>Project</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
-    <DynamicProperty>InternalName</DynamicProperty>
+    <DynamicProperty Hidden="True">InternalName</DynamicProperty>
     <DynamicProperty>Engr Approved by</DynamicProperty>
     <DynamicProperty>Designer</DynamicProperty>
   </DynamicPropertiesCategory>
@@ -115,12 +114,13 @@
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
-    <DynamicProperty>InternalName</DynamicProperty>
+    <DynamicProperty Hidden="True">InternalName</DynamicProperty>
     <DynamicProperty>Engr Approved by</DynamicProperty>
     <DynamicProperty>Designer</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Purchased">
     <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Title DE</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
     <DynamicProperty>Material</DynamicProperty>
@@ -128,6 +128,7 @@
     <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
     <DynamicProperty>Mass</DynamicProperty>
     <DynamicProperty Hidden="True">VLT_Material</DynamicProperty>
+    <DynamicProperty>Designer</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Base">
     <DynamicProperty>Description</DynamicProperty>
