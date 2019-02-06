@@ -275,12 +275,32 @@ function m_SelectTerm {
 
 		If ($dsWindow.Name -eq "AutoCADWindow")
 		{
-			If ($Prop["GEN-TITLE-DES1"]){ $Prop["GEN-TITLE-DES1"].Value = $mSelectedItem.Term_DE} #AutoCAD Mechanical Title Attribute Name
-			If ($Prop["Title"]){ $Prop["Title"].Value = $mSelectedItem.Term_DE} #Vanilla AutoCAD Title Attribute Name
-			Try{
-				$Prop["Title_EN"].Value = $mSelectedItem.Term_EN
+			# check language override settings of VDS
+			$mLCode = @{}
+			$mLCode += mGetDBOverride
+			#If override exists, apply it, else continue with $PSUICulture
+			If ($mLCode["UI"] -eq "de-DE")
+			{
+				If ($Prop["GEN-TITLE-DES1"]){ $Prop["GEN-TITLE-DES1"].Value = $mSelectedItem.Term_DE} #AutoCAD Mechanical Title Attribute Name
+				If ($Prop["Title"]){ $Prop["Title"].Value = $mSelectedItem.Term_DE} #Vanilla AutoCAD Title Attribute Name
+				Try{
+					$Prop["Title_EN"].Value = $mSelectedItem.Term_EN
+				}
+				catch{ $dsDiag.Trace("Title_EN does not exist")}
 			}
-			catch{ $dsDiag.Trace("Title_EN does not exist")}
+			Else{
+				If ($Prop["GEN-TITLE-DES1"]){ $Prop["GEN-TITLE-DES1"].Value = $mSelectedItem.Term_EN} #AutoCAD Mechanical Title Attribute Name
+				If ($Prop["Title"]){ $Prop["Title"].Value = $mSelectedItem.Term_EN} #Vanilla AutoCAD Title Attribute Name
+				Try{
+					$Prop["Title_EN"].Value = $mSelectedItem.Term_EN
+				}
+				catch{ $dsDiag.Trace("Title_EN does not exist")}
+			
+				Try{
+					$Prop["Title DE"].Value = $mSelectedItem.Term_DE
+				}
+				catch{ $dsDiag.Trace("Title_EN does not exist")}
+			}
 		}
 		If ($dsWindow.Name -eq "InventorWindow")
 		{
