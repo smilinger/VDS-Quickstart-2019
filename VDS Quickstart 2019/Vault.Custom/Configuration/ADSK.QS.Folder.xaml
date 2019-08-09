@@ -154,15 +154,31 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="NumSchmCtrlStyle" TargetType="{x:Type WPF:DSNumSchemeCtrl}">
-            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="Auto" />
             <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
             <Setter Property="BorderBrush" Value="Gray" />
-            <Setter Property="BorderThickness" Value="0,1,1,0" />
+            <Setter Property="BorderThickness" Value="0" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding EditMode}" Value="True">
                     <Setter Property="Visibility" Value="Collapsed" />
                 </DataTrigger>
             </Style.Triggers>
+            <Style.Resources>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="ToolTip" Value="{Binding Name}" />
+                    <Style.Resources>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="Padding" Value="2" />
+                        </Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="Padding" Value="0,1,0,1" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </Style.Resources>
         </Style>
         <Style x:Key="ButtonGridStyle" TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="0,15,2,5" />
@@ -196,7 +212,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="120" />
-                        <ColumnDefinition MinWidth="140" MaxWidth="220" />
+                        <ColumnDefinition MinWidth="140" MaxWidth="280" />
                     </Grid.ColumnDefinitions>
                     <Label Content="{Binding UIString[LBL8], FallbackValue=Categories}" Grid.Row="0" Grid.Column="0" />
                     <ComboBox x:Name="Categories" Grid.Row="0" Grid.Column="1"

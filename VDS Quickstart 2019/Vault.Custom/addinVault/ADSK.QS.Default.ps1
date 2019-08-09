@@ -124,6 +124,10 @@ function InitializeWindow
 		}
 		"FolderWindow"
 		{
+			if ($Prop["_FolderPath"].Value -eq "$/Engineering/Contracts")
+			{
+				$Global:Contract = $true
+			}
 			#rules applying for Folder
 			$dsWindow.Title = SetWindowTitle $UIString["LBL29"] $UIString["LBL30"] $Prop["_FolderName"].Value
 			if ($Prop["_CreateMode"].Value)
@@ -321,7 +325,45 @@ function GetNewFolderName
 	}
 	else{
 		$dsDiag.Trace("-> GenerateNumber")
-		$folderName = $Prop["_GeneratedNumber"].Value
+
+		if ($Prop["_FolderPath"].Value -eq "$/Engineering/Contracts")
+		{
+			$Global:Contract = $true
+			$contractNo = $Prop["_GeneratedNumber"].Value
+
+			$fields = $dsWindow.DataContext.NumSchemeCtrlViewModel.NumSchmFields[0..5]
+			$fldrNames = $fields.Value
+
+			$fldrPath = $Prop["_FolderPath"].Value + "/" + ($fldrNames -join "/")
+
+			$fldrMgr = $VaultConnection.FolderManager
+			$fldrPathAbsl1 = New-Object Autodesk.DataManagement.Client.Framework.Currency.FolderPathAbsolute($fldrPath)
+
+			try {
+			$fldrs = $fldrMgr.EnsureFolderPathsExist([Autodesk.DataManagement.Client.Framework.Currency.FolderPathAbsolute[]]@($fldrPathAbsl1))
+			$dsDiag.Trace("1. " + $Prop['_FolderPath'].Value)
+			$fldr = $fldrs[$fldrPath]
+				
+			}
+			catch {
+				$dsDiag.Trace("Error!")
+			}
+
+			$Prop["_FolderPath"].Value = $fldr.FullName
+			$dsDiag.Trace("2. " + $Prop['_FolderPath'].Value)
+			$folderName = $contractNo.SubString(11)
+
+			# $fldrNames += $contractNo.SubString(11)
+			# $fields[-2] = $contractNo.SubString(11, 4)
+
+
+			# $path = $Prop["_FolderPath"].Value
+
+		}
+		else {
+			
+			$folderName = $Prop["_GeneratedNumber"].Value
+		}
 		$dsDiag.Trace("folderName = $folderName")
 	}
 	$dsDiag.Trace("<< GetNewFolderName $folderName")
@@ -333,7 +375,15 @@ function GetNewFolderName
 # ! Do not remove the function
 function GetParentFolderName
 {
-	$folderName = ""
+	if ($Global:Contract)
+	{
+		$folderName = $Prop["_FolderPath"].Value
+		$dsDiag.Trace("2. folderpath = $folderName")
+	}
+	else {
+		
+		$folderName = ""
+	}
 	return $folderName
 }
 
@@ -364,7 +414,7 @@ function GetNumSchms
 		try
 		{
 			[System.Collections.ArrayList]$numSchems = @($vault.DocumentService.GetNumberingSchemesByType('Activated'))
-			if ($numSchems.Count -gt 1)
+			if ($numSchems.Count -gt 0)
 			{
 				#$numSchems = $numSchems | Sort-Object -Property IsDflt -Descending
 				#region Quickstart
@@ -387,7 +437,7 @@ function GetNumSchms
 							$_FilteredNumSchems = @()
 							Foreach ($item in $_FolderCats) 
 							{
-								$_temp = $numSchems | Where { $_.Name -eq $item.Name}
+								$_temp = $numSchems | Where { $_.Name -eq "Contract Number"}
 								$_FilteredNumSchems += ($_temp)
 							}
 							#we need an option to unselect a previosly selected numbering; to achieve that we add a virtual one, named "None"
@@ -540,13 +590,14 @@ function m_CategoryChanged
 
 		"FolderWindow" 
 		{
-			$dsWindow.FindName("NumSchms").SelectedItem = $null
-			$dsWindow.FindName("NumSchms").Visibility = "Collapsed"
+			# $dsWindow.FindName("NumSchms").SelectedItem = $null
+			# $dsWindow.FindName("NumSchms").Visibility = "Collapsed"
+			$dsWindow.FindName("NumSchms").IsEnabled = "True"
 			$dsWindow.FindName("DSNumSchmsCtrl").Visibility = "Collapsed"
 			$dsWindow.FindName("FOLDERNAME").Visibility = "Visible"
 					
-			$Prop["_NumSchm"].Value = $Prop["_Category"].Value
-			IF ($dsWindow.FindName("DSNumSchmsCtrl").Scheme.Name -eq $Prop["_Category"].Value) 
+			$Prop["_NumSchm"].Value = "Contract Number" #$Prop["_Category"].Value
+			IF ($dsWindow.FindName("DSNumSchmsCtrl").Scheme.Name -ne $Prop["_Category"].Value) 
 			{
 				$dsWindow.FindName("DSNumSchmsCtrl").Visibility = "Visible"
 				$dsWindow.FindName("FOLDERNAME").Visibility = "Collapsed"
