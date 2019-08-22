@@ -113,6 +113,16 @@ function InitializeWindow
 				{
 					$Prop["_Category"].Value = $UIString["CAT1"]
 				}
+
+				if ($Prop["_Category"].Value -eq $UIString["CAT1"])
+				{
+					switch -wildcard ($Prop["_FilePath"].Value)
+					{
+						"$/Engineering/Contracts/*" { $Prop["_NumSchm"].Value = "Sequential" }
+						"$/Engineering/Orders/*" {  $Prop["_NumSchm"].Value = "Nash Document Number For Order" }
+						default {}
+					}
+				}
 			}
 			#region Quickstart to get category from selected template
 			$dsWindow.FindName("DocTypeCombo").add_SelectionChanged({
@@ -129,6 +139,15 @@ function InitializeWindow
 			if ($Prop["_CreateMode"].Value)
 			{
 				$Prop["_Category"].Value = $UIString["CAT5"]
+
+				if ($Prop["_FolderPath"].Value -like "$/Engineering/Contracts/????")
+				{
+					$Prop["_Category"].Value = "Contract"
+				}
+				elseif ($Prop["_FolderPath"].Value -like "$/Engineering/Orders/????")
+				{
+					$Prop["_Category"].Value = "Order"
+				}
 			}
 			#region Quickstart - for imported folders easily set title to folder name on edit
 			If ($Prop["_EditMode"].Value) {
@@ -305,7 +324,14 @@ function GetNewFileName
 			If($Prop["_XLTN_PARTNUMBER"]) { $Prop["_XLTN_PARTNUMBER"].Value = $Prop["_GeneratedNumber"].Value }
 		#Quickstart
 	}
-	$newfileName = $fileName + $Prop["_FileExt"].Value
+	if ($Prop["Description"].Value)
+	{
+		$newfileName = $fileName + " " + $Prop["Description"].Value + $Prop["_FileExt"].Value
+	}
+	else
+	{
+		$newfileName = $fileName + $Prop["_FileExt"].Value
+	}
 	$dsDiag.Trace("<< GetNewFileName $newfileName")
 	return $newfileName
 }
@@ -373,9 +399,10 @@ function GetNumSchms
 					{
 						"FileWindow"
 						{
-							$_FilteredNumSchems = $numSchems | Where { $_.IsDflt -eq $true}
-							$Prop["_NumSchm"].Value = $_FilteredNumSchems[0].Name
-							$dsWindow.FindName("NumSchms").IsEnabled = $false
+							$_FilteredNumSchems = $numSchems | Where-Object {
+								@("Nash Drawing Number", "Nash Document Number For Order", "Sequential") -contains $_.Name
+							}
+
 							return $_FilteredNumSchems
 						}
 
@@ -383,13 +410,19 @@ function GetNumSchms
 						{
 							#numbering schemes are available for items and files specificly; 
 							#for folders we use the file numbering schemes and filter to these, that have a corresponding name in folder categories
-							$_FolderCats = $vault.CategoryService.GetCategoriesByEntityClassId("FLDR", $true)
+							# $_FolderCats = $vault.CategoryService.GetCategoriesByEntityClassId("FLDR", $true)
 							$_FilteredNumSchems = @()
-							Foreach ($item in $_FolderCats) 
-							{
-								$_temp = $numSchems | Where { $_.Name -eq $item.Name}
-								$_FilteredNumSchems += ($_temp)
+
+							$_FilteredNumSchems += $numSchems | Where-Object {
+								@("Nash Contract Number", "Nash Order Number") -contains $_.Name
 							}
+
+							# $dsdiag.trace("NumSchm Count: " + $_FilteredNumSchems.Count)
+							# Foreach ($item in $_FolderCats) 
+							# {
+							# 	$_temp = $numSchems | Where { $_.Name -eq $item.Name}
+							# 	$_FilteredNumSchems += ($_temp)
+							# }
 							#we need an option to unselect a previosly selected numbering; to achieve that we add a virtual one, named "None"
 							$noneNumSchm = New-Object 'Autodesk.Connectivity.WebServices.NumSchm'
 							$noneNumSchm.Name = "None"
@@ -540,22 +573,29 @@ function m_CategoryChanged
 
 		"FolderWindow" 
 		{
-			$dsWindow.FindName("NumSchms").SelectedItem = $null
-			$dsWindow.FindName("NumSchms").Visibility = "Collapsed"
-			$dsWindow.FindName("DSNumSchmsCtrl").Visibility = "Collapsed"
-			$dsWindow.FindName("FOLDERNAME").Visibility = "Visible"
+			# $dsWindow.FindName("NumSchms").SelectedItem = $null
+			# $dsWindow.FindName("NumSchms").Visibility = "Collapsed"
+			# $dsWindow.FindName("DSNumSchmsCtrl").Visibility = "Collapsed"
+			# $dsWindow.FindName("FOLDERNAME").Visibility = "Visible"
 					
-			$Prop["_NumSchm"].Value = $Prop["_Category"].Value
-			IF ($dsWindow.FindName("DSNumSchmsCtrl").Scheme.Name -eq $Prop["_Category"].Value) 
-			{
-				$dsWindow.FindName("DSNumSchmsCtrl").Visibility = "Visible"
-				$dsWindow.FindName("FOLDERNAME").Visibility = "Collapsed"
-			}
-			Else
-			{
-				$Prop["_NumSchm"].Value = "None" #we need to reset in case a user switches back from existing numbering scheme to manual input
-			}
+			# $Prop["_NumSchm"].Value = $Prop["_Category"].Value
+			# IF ($dsWindow.FindName("DSNumSchmsCtrl").Scheme.Name -eq $Prop["_Category"].Value) 
+			# {
+			# 	$dsWindow.FindName("DSNumSchmsCtrl").Visibility = "Visible"
+			# 	$dsWindow.FindName("FOLDERNAME").Visibility = "Collapsed"
+			# }
+			# Else
+			# {
+			# 	$Prop["_NumSchm"].Value = "None" #we need to reset in case a user switches back from existing numbering scheme to manual input
+			# }
 			
+			switch ($Prop["_Category"].Value)
+			{
+				"Order" { $Prop["_NumSchm"].Value = "Nash Order Number" }
+				"Contract" { $Prop["_NumSchm"].Value = "Nash Contract Number" }
+				default { $Prop["_NumSchm"].Value = "None" }
+			}
+
 			#set the start date = today for project category
 			If ($Prop["_Category"].Value -eq $UIString["CAT6"] -and $Prop["_XLTN_DATESTART"] )		
 			{

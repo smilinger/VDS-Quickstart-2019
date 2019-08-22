@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DynamicProperties>
-<DynamicPropertiesCategory Category="3D Component" Type="File">
+  <DynamicPropertiesCategory Category="3D Component" Type="File">
     <DynamicProperty>Title</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
@@ -241,5 +241,11 @@
     <DynamicProperty>Scale</DynamicProperty>
     <DynamicProperty>Sheet</DynamicProperty>
     <DynamicProperty>Source File</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Order" Type="Folder">
+    <DynamicProperty>Order Number</DynamicProperty>
+  </DynamicPropertiesCategory>
+  <DynamicPropertiesCategory Category="Contract" Type="Folder">
+    <DynamicProperty>Order Number</DynamicProperty>
   </DynamicPropertiesCategory>
 </DynamicProperties>
