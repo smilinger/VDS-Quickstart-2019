@@ -958,7 +958,7 @@ function AutoFillNumSchmFields
     {
         $numSchmCtrl = $dsWindow.FindName("DSNumSchmsCtrl")
 
-        if ($numSchmCtrl.Scheme.Name -in "无", "None", $null)
+        if (@("无", "None", $null) -contains $numSchmCtrl.Scheme.Name)
         {
             return
         }
