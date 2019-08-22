@@ -25,6 +25,33 @@ function InitializeWindow
 	{
 		"InventorWindow"
 		{
+			$Prop["Folder"].add_PropertyChanged({
+				if ($_.PropertyName -eq "Value")
+				{
+					if ($Prop["Folder"].Value -like "Orders\*")
+					{
+						$Prop["_NumSchm"].Value = "Nash Document Number For Order"
+					}
+					elseif ($Prop["Folder"].Value -like "Contracts\*")
+					{
+						$Prop["_NumSchm"].Value = "Sequential"
+					}
+
+					mGetProjectFolderPropToCADFile "Order Number" "Order Number"
+					mGetProjectFolderPropToCADFile "Project Name" "Project Name"
+
+					if ($Prop["_NumSchm"].Value -eq "Nash Document Number For Order")
+					{
+						# [System.Windows.MessageBox]::Show($Prop["Order Number"].Value)
+						ForceUpdateNumSchmFields
+					}
+				}
+			})
+
+			$dsWindow.FindName("NumSchms").add_SelectionChanged({
+				AutoFillNumSchmFields
+			})
+
 			InitializeBreadCrumb
 			#	there are some custom functions to enhance functionality:
 			[System.Reflection.Assembly]::LoadFrom($Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard" + '\Vault.Custom\addinVault\QuickstartUtilityLibrary.dll')
@@ -40,7 +67,7 @@ function InitializeWindow
 			if ($mInvDocuFileTypes -contains $Prop["_FileExt"].Value) {
 				$global:mIsInvDocumentationFile = $true
 				$dsWindow.FindName("chkBxIsInvDocuFileType").IsChecked = $true
-				If ($global:mIsInvDocumentationFile-eq $true -and $global:mGFN4Special -eq $false) #IDW/DWG, IPN - Don't generate new document number
+				If ($global:mIsInvDocumentationFile -eq $true -and $global:mGFN4Special -eq $false) #IDW/DWG, IPN - Don't generate new document number
 				{ 
 					$dsWindow.FindName("BreadCrumb").IsEnabled = $false
 					$dsWindow.FindName("GroupFolder").Visibility = "Collapsed"
@@ -57,6 +84,7 @@ function InitializeWindow
 					$Prop["Part Number"].Value = "" #reset the part number for new files as Inventor writes the file name (no extension) as a default.
 					#$dsDiag.Trace(">> CreateMode Section executes...")
 					# set the category: VDS Quickstart 2019 supports extended category differentiation for 3D components
+
 					InitializeInventorCategory
 					InitializeInventorNumSchm
 					If($dsWindow.FindName("lstBoxShortCuts"))
@@ -149,6 +177,8 @@ function InitializeWindow
 							$Prop["Title"].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Title")
 							$Prop["Description"].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Description")
 							$Prop["Part Number"].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Part Number") 
+							$Prop["Model Number"].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Model Number") 
+							$Prop["Tag No."].Value = $_mInvHelpers.m_GetMainViewModelPropValue($Application, $_ModelFullFileName,"Tag No.") 
 						}
 
 						if ($Prop["_FileExt"].Value -eq ".IPN") 
@@ -356,6 +386,11 @@ function InitializeInventorNumSchm
 	{
 		$Prop["_NumSchm"].Value = $UIString["LBL77"]
 	}
+
+	if ($Prop["_FileExt"].Value -eq ".IDW")
+	{
+		$Prop["_NumSchm"].Value = "Nash Drawing Number"
+	}
 }
 
 function InitializeInventorCategory
@@ -366,7 +401,7 @@ function InitializeInventorCategory
 	{
 		'12291' #assembly
 		{ 
-			$mCatName = GetCategories | Where {$_.Name -eq $UIString["MSDCE_CAT10"]} #assembly, available in Quickstart Advanced, e.g. INV-Samples Vault
+			$mCatName = GetCategories | Where-Object {$_.Name -eq $UIString["MSDCE_CAT10"]} #assembly, available in Quickstart Advanced, e.g. INV-Samples Vault
 			IF ($mCatName) 
 			{ 
 				$Prop["_Category"].Value = $UIString["MSDCE_CAT10"]
@@ -471,32 +506,42 @@ function GetNumSchms
 		if (-Not $Prop["_EditMode"].Value)
         {
             #quickstart - there is the use case that we don't need a number: IDW/DWG, IPN and Option Generate new file number = off
-			If ($global:mIsInvDocumentationFile-eq $true -and $global:mGFN4Special -eq $false) 
+			If ($global:mIsInvDocumentationFile -eq $true -and $global:mGFN4Special -eq $false) 
 			{ 
 				return
 			}
 			[System.Collections.ArrayList]$numSchems = @($vault.DocumentService.GetNumberingSchemesByType('Activated'))
 			$_FilteredNumSchems = @()
-			$_Default = $numSchems | Where { $_.IsDflt -eq $true}
-			$_FilteredNumSchems += ($_Default)
-			if ($Prop["_NumSchm"].Value) { $Prop["_NumSchm"].Value = $_FilteredNumSchems[0].Name} #note - functional dialogs don't have the property _NumSchm, therefore we conditionally set the value
+			# $_Default = $numSchems | Where { $_.IsDflt -eq $true}
+			# $_FilteredNumSchems += ($_Default)
+
+			$_FilteredNumSchems += $numSchems | Where-Object {
+				@("Sequential", "Nash Drawing Number", "Nash Document Number For Order") -contains $_.Name
+			}
+
+			if ($Prop["_NumSchm"])
+			{
+				# $Prop["_NumSchm"].Value = $_FilteredNumSchems | Where-Object { $_.IsDflt }
+			} #note - functional dialogs don't have the property _NumSchm, therefore we conditionally set the value
+
 			$dsWindow.FindName("NumSchms").IsEnabled = $true
+
 			$noneNumSchm = New-Object 'Autodesk.Connectivity.WebServices.NumSchm'
 			$noneNumSchm.Name = $UIString["LBL77"] # None 
 			$_FilteredNumSchems += $noneNumSchm
 
 			#reverse order for these cases; none is added latest; reverse the list, if None is pre-set to index = 0
 
-			If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Assembly*" -and $Prop["_FileExt"].Value -eq ".iam") #you might find better criteria based on then numbering scheme
-			{
-				$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
-				return $_FilteredNumSchems
-			}
-			If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Part*" -and $Prop["_FileExt"].Value -eq ".ipt") #you might find better criteria based on then numbering scheme
-			{
-				$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
-				return $_FilteredNumSchems
-			}
+			# If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Assembly*" -and $Prop["_FileExt"].Value -eq ".iam") #you might find better criteria based on then numbering scheme
+			# {
+			# 	$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
+			# 	return $_FilteredNumSchems
+			# }
+			# If($dsWindow.Name-eq "InventorWindow" -and $Prop["DocNumber"].Value -notlike "Part*" -and $Prop["_FileExt"].Value -eq ".ipt") #you might find better criteria based on then numbering scheme
+			# {
+			# 	$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
+			# 	return $_FilteredNumSchems
+			# }
 			If($dsWindow.Name-eq "InventorFrameWindow")
 			{ 
 				#None is not supported by multi-select dialogs
@@ -906,3 +951,49 @@ function mInitializeCHContext {
 		 }
 }
 #endregion functional dialogs
+
+function AutoFillNumSchmFields
+{
+    try
+    {
+        $numSchmCtrl = $dsWindow.FindName("DSNumSchmsCtrl")
+
+        if ($numSchmCtrl.Scheme.Name -in "无", "None", $null)
+        {
+            return
+        }
+
+        if ($Prop["_NumSchm"].Value -eq "Nash Document Number For Order" -and $Prop["Order Number"].Value)
+        {
+            ForceUpdateNumSchmFields
+        }
+    }
+    catch
+    {
+        [System.Windows.MessageBox]::Show($error, "AutoFillNumSchmFields")
+    }
+}
+
+function ForceUpdateNumSchmFields
+{
+    #$dsDiag.Trace("Update fields start.")
+
+    $NumSchmFields = $dsWindow.DataContext.NumSchemeCtrlViewModel.NumSchmFields
+    if (-not $NumSchmFields) { return }
+
+	$field = $NumSchmFields[0]
+	# [system.windows.messagebox]::show($Prop["Order Number"].Value)
+	if ($Prop["Order Number"].Value)
+	{
+		$field.Value = $Prop["Order Number"].Value.SubString(2)
+	}
+	else
+	{
+		$field.Value = "0000000"
+	}
+    $NumSchmFields.RemoveAt(0)
+
+    $NumSchmFields.Insert(0, $field)
+
+    #$dsDiag.Trace("Update fields end.")
+}

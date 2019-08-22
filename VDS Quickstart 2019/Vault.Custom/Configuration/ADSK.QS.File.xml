@@ -2,34 +2,34 @@
 <DocTypeData xmlns="">
   <DocTypeInfo>
     <DocName>Inventor</DocName>
-    <Path>$/Templates/Inventor</Path>
-  </DocTypeInfo>
-  <DocTypeInfo>
-    <DocName>AutoCAD Mechanical</DocName>
-    <Path>$/Templates/Mechanical</Path>
-  </DocTypeInfo>
-  <DocTypeInfo>
-    <DocName>Office</DocName>
-    <Path>$/Templates/Office</Path>
-  </DocTypeInfo>
-  <DocTypeInfo>
-    <DocName>Electrical Drawing</DocName>
-    <Path>$/Templates/Electrical</Path>
-  </DocTypeInfo>
-  <DocTypeInfo>
-    <DocName>Electrical Project</DocName>
-    <Path>$/Templates/Electrical/WDP</Path>
+    <Path>$/Admin/Templates/Inventor</Path>
   </DocTypeInfo>
   <DocTypeInfo>
     <DocName>AutoCAD</DocName>
-    <Path>$/Templates/AutoCAD</Path>
+    <Path>$/Admin/Templates/AutoCAD</Path>
   </DocTypeInfo>
   <DocTypeInfo>
-    <DocName>AutoCAD Sheet Set</DocName>
-    <Path>$/Templates/AutoCAD/Sheet Set</Path>
+    <DocName>AutoCAD Mechanical</DocName>
+    <Path>$/Admin/Templates/Mechanical</Path>
+  </DocTypeInfo>
+  <!-- <DocTypeInfo>
+    <DocName>Office</DocName>
+    <Path>$/Admin/Templates/Office</Path>
+  </DocTypeInfo> -->
+  <DocTypeInfo>
+    <DocName>Excel</DocName>
+    <Path>$/Admin/Templates/Office/Excel</Path>
   </DocTypeInfo>
   <DocTypeInfo>
-    <DocName>Mechanical Sheet Set Drawing</DocName>
-    <Path>$/Templates/Mechanical/Sheet Set Drawing</Path>
+    <DocName>Word</DocName>
+    <Path>$/Admin/Templates/Office/Word</Path>
+  </DocTypeInfo>
+  <DocTypeInfo>
+    <DocName>Electrical Drawing</DocName>
+    <Path>$/Admin/Templates/Electrical</Path>
+  </DocTypeInfo>
+  <DocTypeInfo>
+    <DocName>Electrical Project</DocName>
+    <Path>$/Admin/Templates/Electrical/WDP</Path>
   </DocTypeInfo>
 </DocTypeData>

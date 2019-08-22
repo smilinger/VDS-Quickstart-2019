@@ -124,23 +124,28 @@
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Engineering">
     <DynamicProperty>Title</DynamicProperty>
-    <DynamicProperty>Subject</DynamicProperty>
     <DynamicProperty>Description</DynamicProperty>
+    <DynamicProperty>Model Number</DynamicProperty>
+    <DynamicProperty>Tag No.</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Project</DynamicProperty>
+    <DynamicProperty>Stock Number</DynamicProperty>
     <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Designer</DynamicProperty>
     <DynamicProperty>Checked by</DynamicProperty>
     <DynamicProperty>Engr Approved by</DynamicProperty>
-    <DynamicProperty>Mfg Approved by</DynamicProperty>
-    <DynamicProperty>Engineer</DynamicProperty>
-    <DynamicProperty>Stock Number</DynamicProperty>
-    <DynamicProperty>Cost</DynamicProperty>
-    <DynamicProperty>Designer</DynamicProperty>
-    <DynamicProperty>Author</DynamicProperty>
-    <DynamicProperty>Manager</DynamicProperty>
-    <DynamicProperty>Company</DynamicProperty>
-    <DynamicProperty>Comments</DynamicProperty>
-    <DynamicProperty>Keywords</DynamicProperty>
+    <DynamicProperty Hidden="True">Mfg Approved by</DynamicProperty>
+    <DynamicProperty Hidden="True">Engineer</DynamicProperty>
+    <DynamicProperty Hidden="True">Cost</DynamicProperty>
+    <DynamicProperty Hidden="True">Author</DynamicProperty>
+    <DynamicProperty Hidden="True">Manager</DynamicProperty>
+    <DynamicProperty Hidden="True">Comments</DynamicProperty>
+    <DynamicProperty Hidden="True">Keywords</DynamicProperty>
+    <DynamicProperty Hidden="True">LastUpdatedWith</DynamicProperty>
+    <DynamicProperty Hidden="True">Project Name</DynamicProperty>
+    <DynamicProperty Hidden="True">Order Number</DynamicProperty>
+    <DynamicProperty Hidden="True">Company</DynamicProperty>
+    <DynamicProperty Hidden="True">Subject</DynamicProperty>
+    <DynamicProperty Hidden="True">Project</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Drawing Inventor">
     <DynamicProperty Hidden="True">Ident Number</DynamicProperty>

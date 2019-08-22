@@ -8,6 +8,7 @@
                 x:Name="FolderWindow"
                 Background="#F0F0F0" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style x:Key="DynamicDataGridCellStyle" TargetType="{x:Type DataGridCell}">
             <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
             <Setter Property="Template">
@@ -153,21 +154,56 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="NumSchmCtrlStyle" TargetType="{x:Type WPF:DSNumSchemeCtrl}">
-            <Setter Property="Height" Value="Auto" />
+        <Style TargetType="{x:Type WPF:DSNumSchemeCtrl}">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="MinWidth" Value="80" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="-1,-1,0,0" />
+            <Setter Property="ToolTip" Value="{Binding UIString[MSDCE_TT28]}"/>
             <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
             <Setter Property="BorderBrush" Value="Gray" />
-            <Setter Property="BorderThickness" Value="0,1,1,0" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Visibility" Value="{Binding CreateMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="ToolTip" Value="{Binding Name, TargetNullValue=Delimiter}"/>
+                    <Setter Property="BorderThickness" Value="1,0"/>
+                    <Style.Resources>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="Padding" Value="2,1,2,1"/>
+                        </Style>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Value}" Value="-">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Value}" Padding="0,0,0,2" Margin="0" Height="Auto" />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Name}" Value="图纸类型标识">
+                            <Setter Property="ToolTip" Value="{Binding DataContext.PsVal[GetPredefListFieldTooltip 图纸类型标识], RelativeSource={RelativeSource AncestorType={x:Type WPF:DSNumSchemeCtrl}}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Name}" Value="图纸来源标识">
+                            <Setter Property="ToolTip" Value="{Binding DataContext.PsVal[GetPredefListFieldTooltip 图纸来源标识], RelativeSource={RelativeSource AncestorType={x:Type WPF:DSNumSchemeCtrl}}}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Style.Resources>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding EditMode}" Value="True">
-                    <Setter Property="Visibility" Value="Collapsed" />
+                <DataTrigger Binding="{Binding Prop[_NumSchm].Value}" Value="00-无方案">
+                    <Setter Property="BorderBrush" Value="Red"/>
+                    <Setter Property="BorderThickness" Value="1"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="ButtonGridStyle" TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="0,15,2,5" />
         </Style>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     <WPF:MainWindow.InputBindings>
         <KeyBinding Key="F1" Command="{Binding PsCmd[mHelp(600)]}"/>
@@ -196,7 +232,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="120" />
-                        <ColumnDefinition MinWidth="140" MaxWidth="220" />
+                        <ColumnDefinition MinWidth="140" MaxWidth="280" />
                     </Grid.ColumnDefinitions>
                     <Label Content="{Binding UIString[LBL8], FallbackValue=Categories}" Grid.Row="0" Grid.Column="0" />
                     <ComboBox x:Name="Categories" Grid.Row="0" Grid.Column="1"
@@ -215,7 +251,7 @@
                     Visibility="{Binding NotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     <Label x:Name="lblProjectNumber" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"
                     Grid.Row="2" Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" Height="Auto" />
-                    <WPF:DSNumSchemeCtrl x:Name="DSNumSchmsCtrl" Style="{StaticResource NumSchmCtrlStyle}"
+                    <WPF:DSNumSchemeCtrl x:Name="DSNumSchmsCtrl"
                     IsEnabled="{Binding IsEnabled, ElementName=NumSchms}"
                     Scheme="{Binding SelectedItem, ElementName=NumSchms}"
                     Visibility="{Binding CreateMode, Converter={StaticResource BooleanToVisibilityConverter}}"

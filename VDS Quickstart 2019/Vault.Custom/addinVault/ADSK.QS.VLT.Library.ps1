@@ -307,13 +307,13 @@ function mGetProjectFolderPropToVaultFile ([String] $mFolderSourcePropertyName, 
 	$mPath = $Prop["_FilePath"].Value
 	$mFld = $vault.DocumentService.GetFolderByPath($mPath)
 
-	IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $Global:mProjectFound = $true}
+	IF ($mFld.Cat.CatName -eq "Order") { $Global:mProjectFound = $true}
 	ElseIf ($mPath -ne "$"){
 		Do {
 			$mParID = $mFld.ParID
 			$mFld = $vault.DocumentService.GetFolderByID($mParID)
-			IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $Global:mProjectFound = $true}
-		} Until (($mFld.Cat.CatName -eq $UIString["CAT6"]) -or ($mFld.FullName -eq "$"))
+			IF ($mFld.Cat.CatName -eq "Order") { $Global:mProjectFound = $true}
+		} Until (($mFld.Cat.CatName -eq "Order") -or ($mFld.FullName -eq "$"))
 	}
 
 	If ($mProjectFound -eq $true) {

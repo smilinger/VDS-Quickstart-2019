@@ -138,24 +138,30 @@
     <DynamicProperty>Project</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Engineering" Type="File">
-    <DynamicProperty>Author</DynamicProperty>
-    <DynamicProperty>Manager</DynamicProperty>
-    <DynamicProperty>Engr Approved By</DynamicProperty>
-    <DynamicProperty>Engineer</DynamicProperty>
-    <DynamicProperty>Designer</DynamicProperty>
+    <DynamicProperty Hidden="True">Author</DynamicProperty>
+    <DynamicProperty Hidden="True">Manager</DynamicProperty>
+    <DynamicProperty Hidden="True">Engr Approved By</DynamicProperty>
+    <DynamicProperty Hidden="True">Engineer</DynamicProperty>
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
     <DynamicProperty>Stock Number</DynamicProperty>
     <DynamicProperty>Part Number</DynamicProperty>
-    <DynamicProperty>Material</DynamicProperty>
-    <DynamicProperty>Description</DynamicProperty>
-    <DynamicProperty>Cost</DynamicProperty>
+    <DynamicProperty>Model Number</DynamicProperty>
+    <DynamicProperty>Tag No.</DynamicProperty>
+    <DynamicProperty>Designer</DynamicProperty>
+    <DynamicProperty Hidden="True">Material</DynamicProperty>
+    <DynamicProperty Hidden="True">Cost</DynamicProperty>
     <DynamicProperty>Checked By</DynamicProperty>
-    <DynamicProperty>Company</DynamicProperty>
-    <DynamicProperty>Title</DynamicProperty>
-    <DynamicProperty>Subject</DynamicProperty>
-    <DynamicProperty>Keywords</DynamicProperty>
-    <DynamicProperty>Comments</DynamicProperty>
+    <DynamicProperty Hidden="True">Company</DynamicProperty>
+    <DynamicProperty Hidden="True">Subject</DynamicProperty>
+    <DynamicProperty Hidden="True">Keywords</DynamicProperty>
     <DynamicProperty>Mfg Approved By</DynamicProperty>
-    <DynamicProperty>Project</DynamicProperty>
+    <DynamicProperty Hidden="True">Project</DynamicProperty>
+    <DynamicProperty Hidden="True">Project Name</DynamicProperty>
+    <DynamicProperty Hidden="True">Order Number</DynamicProperty>
+    <DynamicProperty Hidden="True">DWG Type</DynamicProperty>
+    <DynamicProperty Hidden="True">Application Version</DynamicProperty>
+    <DynamicProperty>Comments</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Standard" Type="File">
     <DynamicProperty>Author</DynamicProperty>
@@ -244,6 +250,13 @@
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Order" Type="Folder">
     <DynamicProperty>Order Number</DynamicProperty>
+    <DynamicProperty>Project Name</DynamicProperty>
+    <DynamicProperty>Contract Number</DynamicProperty>
+    <DynamicProperty>Project Type</DynamicProperty>
+    <DynamicProperty>Product Category</DynamicProperty>
+    <DynamicProperty>Application Industry</DynamicProperty>
+    <DynamicProperty>Client Name</DynamicProperty>
+    <DynamicProperty>End User</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Contract" Type="Folder">
     <DynamicProperty>Order Number</DynamicProperty>

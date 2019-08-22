@@ -78,15 +78,16 @@ function mGetProjectFolderPropToCADFile ([String] $mFolderSourcePropertyName, [S
 		$mPath = $mPath.Replace(".\","")
 		$mPath = $mPath.Replace("\", "/")
 		$mFld = $vault.DocumentService.GetFolderByPath($mPath)
+		# [System.Windows.Messagebox]::Show($mPath)
 		#the loop to get the next parent project category folder; skip if you don't look for projects
-		IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $mProjectFound = $true}
+		IF ($mFld.Cat.CatName -eq "Order") { $mProjectFound = $true}
 		ElseIf ($mPath -ne "$/"){
 			Do {
 				$mParID = $mFld.ParID
 				$mFld = $vault.DocumentService.GetFolderByID($mParID)
-				IF ($mFld.Cat.CatName -eq $UIString["CAT6"]) { $mProjectFound = $true}
+				IF ($mFld.Cat.CatName -eq "Order") { $mProjectFound = $true}
 			} 
-			Until (($mFld.Cat.CatName -eq $UIString["CAT6"]) -or ($mFld.FullName -eq "$"))
+			Until (($mFld.Cat.CatName -eq "Order") -or ($mFld.FullName -eq "$"))
 		}	
 	}
 	catch { 
