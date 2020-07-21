@@ -162,6 +162,8 @@
     <DynamicProperty Hidden="True">DWG Type</DynamicProperty>
     <DynamicProperty Hidden="True">Application Version</DynamicProperty>
     <DynamicProperty>Comments</DynamicProperty>
+    <DynamicProperty>Contract Number</DynamicProperty>
+    <DynamicProperty>Client Name</DynamicProperty>
   </DynamicPropertiesCategory>
   <DynamicPropertiesCategory Category="Standard" Type="File">
     <DynamicProperty>Author</DynamicProperty>

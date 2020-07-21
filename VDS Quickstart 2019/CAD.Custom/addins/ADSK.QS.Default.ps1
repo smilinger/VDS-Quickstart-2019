@@ -21,37 +21,38 @@ function InitializeWindow
 	#endregion rules applying commonly
 
 	$mWindowName = $dsWindow.Name
+
+	$Prop["Folder"].add_PropertyChanged({
+		if ($_.PropertyName -eq "Value")
+		{
+			if ($Prop["Folder"].Value -like "Orders\*")
+			{
+				$Prop["_NumSchm"].Value = "Nash Document Number For Order"
+			}
+			elseif ($Prop["Folder"].Value -like "Contracts\*")
+			{
+				$Prop["_NumSchm"].Value = "Sequential"
+			}
+
+			mGetProjectFolderPropToCADFile "Order Number" "Order Number"
+			mGetProjectFolderPropToCADFile "Project Name" "Project Name"
+
+			if ($Prop["_NumSchm"].Value -eq "Nash Document Number For Order")
+			{
+				# [System.Windows.MessageBox]::Show($Prop["Order Number"].Value)
+				ForceUpdateNumSchmFields
+			}
+		}
+	})
+
+	$dsWindow.FindName("NumSchms").add_SelectionChanged({
+		AutoFillNumSchmFields
+	})
+
 	switch($mWindowName)
 	{
 		"InventorWindow"
 		{
-			$Prop["Folder"].add_PropertyChanged({
-				if ($_.PropertyName -eq "Value")
-				{
-					if ($Prop["Folder"].Value -like "Orders\*")
-					{
-						$Prop["_NumSchm"].Value = "Nash Document Number For Order"
-					}
-					elseif ($Prop["Folder"].Value -like "Contracts\*")
-					{
-						$Prop["_NumSchm"].Value = "Sequential"
-					}
-
-					mGetProjectFolderPropToCADFile "Order Number" "Order Number"
-					mGetProjectFolderPropToCADFile "Project Name" "Project Name"
-
-					if ($Prop["_NumSchm"].Value -eq "Nash Document Number For Order")
-					{
-						# [System.Windows.MessageBox]::Show($Prop["Order Number"].Value)
-						ForceUpdateNumSchmFields
-					}
-				}
-			})
-
-			$dsWindow.FindName("NumSchms").add_SelectionChanged({
-				AutoFillNumSchmFields
-			})
-
 			InitializeBreadCrumb
 			#	there are some custom functions to enhance functionality:
 			[System.Reflection.Assembly]::LoadFrom($Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard" + '\Vault.Custom\addinVault\QuickstartUtilityLibrary.dll')
@@ -542,26 +543,26 @@ function GetNumSchms
 			# 	$_FilteredNumSchems = $_FilteredNumSchems | Sort-Object -Descending
 			# 	return $_FilteredNumSchems
 			# }
-			If($dsWindow.Name-eq "InventorFrameWindow")
-			{ 
-				#None is not supported by multi-select dialogs
-				return $_Default
-			}
-			If($dsWindow.Name-eq "InventorHarnessWindow")
-			{ 
-				#None is not supported by multi-select dialogs
-				return $_Default
-			}
-			If($dsWindow.Name-eq "InventorPipingWindow")
-			{ 
-				#None is not supported by multi-select dialogs
-				return $_Default
-			}
-			If($dsWindow.Name-eq "InventorDesignAcceleratorWindow")
-			{ 
-				#None is not supported by multi-select dialogs
-				return $_Default
-			}
+			# If($dsWindow.Name-eq "InventorFrameWindow")
+			# { 
+			# 	#None is not supported by multi-select dialogs
+			# 	return $_Default
+			# }
+			# If($dsWindow.Name-eq "InventorHarnessWindow")
+			# { 
+			# 	#None is not supported by multi-select dialogs
+			# 	return $_Default
+			# }
+			# If($dsWindow.Name-eq "InventorPipingWindow")
+			# { 
+			# 	#None is not supported by multi-select dialogs
+			# 	return $_Default
+			# }
+			# If($dsWindow.Name-eq "InventorDesignAcceleratorWindow")
+			# { 
+			# 	#None is not supported by multi-select dialogs
+			# 	return $_Default
+			# }
 	
 			return $_FilteredNumSchems
         }
@@ -621,31 +622,31 @@ function OnPostCloseDialog
 function mHelp ([Int] $mHContext) {
 	try
 	{
-		switch ($mHContext){
-			100 {
-				$mHPage = "C.2Inventor.html";
-			}
-			110 {
-				$mHPage = "C.2.11FrameGenerator.html";
-			}
-			120 {
-				$mHPage = "C.2.13DesignAccelerator.html";
-			}
-			130 {
-				$mHPage = "C.2.12TubeandPipe.html";
-			}
-			140 {
-				$mHPage = "C.2.14CableandHarness.html";
-			}
-			200 {
-				$mHPage = "C.3AutoCADAutoCAD.html";
-			}
-			Default {
-				$mHPage = "Index.html";
-			}
-		}
-		$mHelpTarget = $Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard\HelpFiles\"+$mHPage
-		$mhelpfile = Invoke-Item $mHelpTarget 
+		# switch ($mHContext){
+		# 	100 {
+		# 		$mHPage = "C.2Inventor.html";
+		# 	}
+		# 	110 {
+		# 		$mHPage = "C.2.11FrameGenerator.html";
+		# 	}
+		# 	120 {
+		# 		$mHPage = "C.2.13DesignAccelerator.html";
+		# 	}
+		# 	130 {
+		# 		$mHPage = "C.2.12TubeandPipe.html";
+		# 	}
+		# 	140 {
+		# 		$mHPage = "C.2.14CableandHarness.html";
+		# 	}
+		# 	200 {
+		# 		$mHPage = "C.3AutoCADAutoCAD.html";
+		# 	}
+		# 	Default {
+		# 		$mHPage = "Index.html";
+		# 	}
+		# }
+		# $mHelpTarget = $Env:ProgramData + "\Autodesk\Vault 2019\Extensions\DataStandard\HelpFiles\"+$mHPage
+		# $mhelpfile = Invoke-Item $mHelpTarget 
 	}
 	catch
 	{
@@ -895,39 +896,39 @@ function mInitializeDAContext {
 }
 
 function mInitializeTPContext {
-$mRunAssys = @()
-$mRunAssys = $dsWindow.DataContext.RunAssemblies
-$mRunAssys | ForEach-Object {
+	$mRunAssys = @()
+	$mRunAssys = $dsWindow.DataContext.RunAssemblies
+	$mRunAssys | ForEach-Object {
 		$mRunAssyProps = $_.Properties.Properties
-		$mTitleProp = $mRunAssyProps | Where-Object { $_.Name -eq "Title"} 
+		$mTitleProp = $mRunAssyProps | Where-Object { $_.Name -eq "Title" } 
 		$mTitleProp.Value = $UIString["LBL41"]
-		$mPartNumProp = $mRunAssyProps | Where-Object { $_.Name -eq "Part Number"}
+		$mPartNumProp = $mRunAssyProps | Where-Object { $_.Name -eq "Part Number" }
 		$mPartNumProp.Value = "" #delete the value to get the new number
-		$mProp = $mRunAssyProps | Where-Object { $_.Name -eq "Description"}
+		$mProp = $mRunAssyProps | Where-Object { $_.Name -eq "Description" }
 		$mProp.Value = $UIString["MSDCE_BOMType_01"] + " " + $UIString["MSDCE_TubePipe_01"]
-	 }
+	}
 	$mRouteParts = @()
 	$mRouteParts = $dsWindow.DataContext.RouteParts
 	$mRouteParts | ForEach-Object {
 		$mRouteProps = $_.Properties.Properties
-		$mTitleProp = $mRouteProps | Where-Object { $_.Name -eq "Title"}
+		$mTitleProp = $mRouteProps | Where-Object { $_.Name -eq "Title" }
 		$mTitleProp.Value = $UIString["LBL42"]
-		$mPartNumProp = $mRouteProps | Where-Object { $_.Name -eq "Part Number"}
+		$mPartNumProp = $mRouteProps | Where-Object { $_.Name -eq "Part Number" }
 		$mPartNumProp.Value = "" #delete the value to get the new number
-		$mProp = $mRouteProps | Where-Object { $_.Name -eq "Description"}
+		$mProp = $mRouteProps | Where-Object { $_.Name -eq "Description" }
 		$mProp.Value = $UIString["MSDCE_BOMType_00"] + " " + $UIString["LBL42"]
-	 }
+	}
 	$mRunComponents = @()
 	$mRunComponents = $dsWindow.DataContext.RunComponents
 	$mRunComponents | ForEach-Object {
 		$mRunCompProps = $_.Properties.Properties
-		$mTitleProp = $mRunCompProps | Where-Object { $_.Name -eq "Title"}
-		$m_StockProp = $mRunCompProps | Where-Object { $_.Name -eq "Stock Number"}
+		$mTitleProp = $mRunCompProps | Where-Object { $_.Name -eq "Title" }
+		$m_StockProp = $mRunCompProps | Where-Object { $_.Name -eq "Stock Number" }
 		$mTitleProp.Value = $UIString["LBL43"]
-		$mPartNumProp = $mRunCompProps | Where-Object { $_.Name -eq "Part Number"}
-		$m_PL = $mRunCompProps | Where-Object { $_.Name -eq "PL"}
+		$mPartNumProp = $mRunCompProps | Where-Object { $_.Name -eq "Part Number" }
+		$m_PL = $mRunCompProps | Where-Object { $_.Name -eq "PL" }
 		$mPartNumProp.Value = $m_StockProp.Value + " - " + $m_PL.Value
-	 }
+	}
 }
 
 function mInitializeCHContext {

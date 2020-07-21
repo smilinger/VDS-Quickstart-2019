@@ -5,22 +5,24 @@
     <Folder Name="03 Documents and Comments"/>
     <Folder Name="04 ITP"/>
     <Folder Name="05 Meeting MOM and Review Records"/>
-    <Folder Name="06 Drawings"/>
-    <Folder Name="07 Purchased Parts">
-        <Folder Name="Motor"/>
-        <Folder Name="Heat Exchanger"/>
-        <Folder Name="Separator"/>
-        <Folder Name="Ejector"/>
-        <Folder Name="Roots Pump"/>
-        <Folder Name="Screw Dry Vacuum Pump"/>
-        <Folder Name="Condenser"/>
-        <Folder Name="Others"/>
+    <Folder Name="06 Deliver Documents"/>
+    <Folder Name="07 Welding and Painting Specification"/>
+    <Folder Name="08 Project Schedule"/>
+    <Folder Name="10-">
+        <Folder Name="01 Drawings"/>
+        <Folder Name="02 Purchased Parts">
+            <Folder Name="Motor"/>
+            <Folder Name="Heat Exchanger"/>
+            <Folder Name="Separator"/>
+            <Folder Name="Ejector"/>
+            <Folder Name="Roots Pump"/>
+            <Folder Name="Screw Dry Vacuum Pump"/>
+            <Folder Name="Condenser"/>
+            <Folder Name="Others"/>
+        </Folder>
+        <Folder Name="03 BOM"/>
+        <Folder Name="04 Instruments"/>
+        <Folder Name="05 Packing"/>
+        <Folder Name="06 Test Report"/>
     </Folder>
-    <Folder Name="08 BOM"/>
-    <Folder Name="09 Instruments"/>
-    <Folder Name="10 Packing"/>
-    <Folder Name="11 Deliver Documents"/>
-    <Folder Name="12 Welding and Painting Specification"/>
-    <Folder Name="13 Test Report"/>
-    <Folder Name="14 Project Schedule"/>
 </Folder>
